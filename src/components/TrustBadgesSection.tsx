@@ -1,41 +1,45 @@
-import logoNahb from "@/assets/logo-nahb.png";
-import logoHomeadvisor from "@/assets/logo-homeadvisor-elite.png";
-import logoQualifiedRemodeler from "@/assets/logo-qualified-remodeler.png";
-import logoInstallationMasters from "@/assets/logo-installation-masters.png";
-import logoEnergyStar from "@/assets/logo-energy-star.png";
 import logoBbb from "@/assets/logo-bbb.png";
+import logoHomeadvisor from "@/assets/logo-homeadvisor-elite.png";
 
 const TrustBadgesSection = () => {
-  const logos = [
-    { src: logoNahb, alt: "NAHB Member" },
-    { src: logoHomeadvisor, alt: "HomeAdvisor Elite Service" },
-    { src: logoBbb, alt: "BBB A+ Rated" },
-    { src: logoQualifiedRemodeler, alt: "Qualified Remodeler Top 500 2025" },
-    { src: logoInstallationMasters, alt: "Installation Masters" },
-    { src: logoEnergyStar, alt: "Energy Star Partner" },
+  // Mix of real logo images and text-based badges for painting industry
+  const badges = [
+    { type: "image", src: logoBbb, alt: "BBB A+ Rated" },
+    { type: "text", label: "★★★★★ Google Reviews" },
+    { type: "text", label: "Sherwin-Williams" },
+    { type: "text", label: "Benjamin Moore" },
+    { type: "text", label: "Angi Certified" },
+    { type: "image", src: logoHomeadvisor, alt: "HomeAdvisor Elite Service" },
+    { type: "text", label: "Licensed Colorado Contractor" },
   ];
 
-  // Double the logos for seamless loop
-  const allLogos = [...logos, ...logos];
+  // Double the badges for seamless loop
+  const allBadges = [...badges, ...badges];
 
   return (
-    <section className="py-6 bg-gray-50/80 border-y border-gray-100 overflow-hidden">
+    <section className="py-6 bg-muted/80 border-y border-border overflow-hidden">
       <p className="text-center text-xs text-muted-foreground uppercase tracking-widest mb-4 font-medium">
         Trusted & Certified
       </p>
       <div className="flex w-max animate-scroll">
-        {allLogos.map((logo, index) => (
+        {allBadges.map((badge, index) => (
           <div
-            key={`${logo.alt}-${index}`}
+            key={`${badge.type === "image" ? badge.alt : badge.label}-${index}`}
             className="flex-shrink-0 flex items-center justify-center px-8 sm:px-12 min-w-[140px] sm:min-w-[180px]"
           >
-            <img
-              src={logo.src}
-              alt={logo.alt}
-              className="h-14 sm:h-18 w-auto object-contain opacity-80 hover:opacity-100 transition-opacity duration-300"
-              loading="lazy"
-              decoding="async"
-            />
+            {badge.type === "image" ? (
+              <img
+                src={badge.src}
+                alt={badge.alt}
+                className="h-14 sm:h-18 w-auto object-contain opacity-80 hover:opacity-100 transition-opacity duration-300"
+                loading="lazy"
+                decoding="async"
+              />
+            ) : (
+              <span className="text-sm sm:text-base font-semibold text-muted-foreground/70 hover:text-muted-foreground transition-colors duration-300 whitespace-nowrap">
+                {badge.label}
+              </span>
+            )}
           </div>
         ))}
       </div>

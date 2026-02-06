@@ -1,12 +1,27 @@
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Link } from "react-router-dom";
-import { 
-  MapPin, ChefHat, Bath, Home, HelpCircle, 
-  Zap, Calendar, CalendarClock, Clock,
-  ArrowRight, ArrowLeft, CheckCircle2, Shield, Phone,
-  User, Mail, Loader2, Star, Check, Gem, DollarSign,
-  Bookmark, ExternalLink, Images, MessageSquare
+import {
+  MapPin,
+  Home,
+  Building,
+  ArrowLeftRight,
+  HelpCircle,
+  Zap,
+  Calendar,
+  CalendarClock,
+  Clock,
+  ArrowRight,
+  ArrowLeft,
+  CheckCircle2,
+  Shield,
+  Phone,
+  User,
+  Mail,
+  Loader2,
+  Check,
+  Bookmark,
+  MessageSquare,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -16,7 +31,6 @@ type QuizStep = 1 | 2 | 3 | 4;
 interface QuizData {
   projectType: string;
   timeline: string;
-  budgetRange: string;
   zipCode: string;
   firstName: string;
   phone: string;
@@ -24,7 +38,7 @@ interface QuizData {
 }
 
 const formatPhoneNumber = (value: string): string => {
-  const digits = value.replace(/\D/g, '');
+  const digits = value.replace(/\D/g, "");
   if (digits.length <= 3) return digits;
   if (digits.length <= 6) return `(${digits.slice(0, 3)}) ${digits.slice(3)}`;
   return `(${digits.slice(0, 3)}) ${digits.slice(3, 6)}-${digits.slice(6, 10)}`;
@@ -32,47 +46,44 @@ const formatPhoneNumber = (value: string): string => {
 
 // Colorado ZIP code validation - covers ALL Colorado addresses
 const isColoradoZipCode = (zip: string): boolean => {
-  // Must be exactly 5 digits
   if (zip.length !== 5 || !/^\d{5}$/.test(zip)) {
     return false;
   }
-  // Colorado's official USPS range: 80001-81658
   const zipNum = parseInt(zip, 10);
   return zipNum >= 80001 && zipNum <= 81658;
 };
 
-// Phone number validation - simplified to allow more numbers through
-const isValidPhoneNumber = (phone: string): { valid: boolean; error?: string } => {
-  const digits = phone.replace(/\D/g, '');
-  
-  // Must be exactly 10 digits
+// Phone number validation
+const isValidPhoneNumber = (
+  phone: string
+): { valid: boolean; error?: string } => {
+  const digits = phone.replace(/\D/g, "");
+
   if (digits.length !== 10) {
     return { valid: false, error: "Enter a valid 10-digit phone number" };
   }
-  
-  // Area code (first 3 digits) cannot start with 0 or 1 - US phone standard
+
   const areaCode = digits.substring(0, 3);
-  if (areaCode[0] === '0' || areaCode[0] === '1') {
+  if (areaCode[0] === "0" || areaCode[0] === "1") {
     return { valid: false, error: "Please enter a valid US phone number" };
   }
-  
-  // Exchange code (digits 4-6) cannot start with 0 or 1 - US phone standard
+
   const exchangeCode = digits.substring(3, 6);
-  if (exchangeCode[0] === '0' || exchangeCode[0] === '1') {
+  if (exchangeCode[0] === "0" || exchangeCode[0] === "1") {
     return { valid: false, error: "Please enter a valid US phone number" };
   }
-  
+
   return { valid: true };
 };
 
-// Rotating messages for ZIP verification
+// Rotating messages for ZIP verification - painting specific
 const CheckingMessages = ({ zipCode }: { zipCode: string }) => {
   const [messageIndex, setMessageIndex] = useState(0);
-  
+
   const messages = [
     `Checking availability in ${zipCode}...`,
     "Verifying service coverage...",
-    "Reviewing contractor schedules...",
+    "Reviewing painter schedules...",
     "Confirming project capacity...",
     "Finalizing availability check...",
   ];
@@ -81,7 +92,7 @@ const CheckingMessages = ({ zipCode }: { zipCode: string }) => {
     const interval = setInterval(() => {
       setMessageIndex((prev) => (prev + 1) % messages.length);
     }, 1800);
-    
+
     return () => clearInterval(interval);
   }, []);
 
@@ -112,14 +123,18 @@ const Quiz = ({ onStart }: QuizProps) => {
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isDisqualified, setIsDisqualified] = useState(false);
-  const [needsTimelineClarification, setNeedsTimelineClarification] = useState(false);
+  const [needsTimelineClarification, setNeedsTimelineClarification] =
+    useState(false);
   const [timelineDisqualified, setTimelineDisqualified] = useState(false);
-  const [errors, setErrors] = useState<{ firstName?: string; phone?: string; email?: string }>({});
+  const [errors, setErrors] = useState<{
+    firstName?: string;
+    phone?: string;
+    email?: string;
+  }>({});
   const [isCheckingZip, setIsCheckingZip] = useState(false);
   const [data, setData] = useState<QuizData>({
     projectType: "",
     timeline: "",
-    budgetRange: "",
     zipCode: "",
     firstName: "",
     phone: "",
@@ -127,7 +142,6 @@ const Quiz = ({ onStart }: QuizProps) => {
   });
 
   const handleTileSelect = (field: string, value: string) => {
-    // Trigger onStart callback when user first interacts (step 1, no project selected yet)
     if (step === 1 && !data.projectType && onStart) {
       onStart();
     }
@@ -143,25 +157,21 @@ const Quiz = ({ onStart }: QuizProps) => {
 
   useEffect(() => {
     if (step === 2 && data.timeline && !needsTimelineClarification) {
-      // Check if they selected "Not sure yet"
       if (data.timeline === "not-sure") {
         setTimeout(() => setNeedsTimelineClarification(true), 300);
       } else {
-        // Skip budget - go directly to ZIP (step 3)
         setTimeout(() => setStep(3), 300);
       }
     }
   }, [data.timeline, step, needsTimelineClarification]);
-
-  // Budget step removed - no auto-advance needed for it
 
   const handleNext = () => {
     if (step === 3 && data.zipCode.length >= 5 && !isCheckingZip) {
       if (isColoradoZipCode(data.zipCode)) {
         setIsDisqualified(false);
         setIsCheckingZip(true);
-        
-        // Show loading for 8 seconds, then advance
+
+        // 8-second loading animation
         setTimeout(() => {
           setIsCheckingZip(false);
           setStep(4);
@@ -180,41 +190,43 @@ const Quiz = ({ onStart }: QuizProps) => {
 
   const getProjectTypeLabel = (type: string): string => {
     switch (type) {
-      case "kitchen": return "Kitchen remodel";
-      case "bathroom": return "Bathroom remodel";
-      case "both": return "Kitchen AND bathroom";
-      case "other": return "Other remodeling project";
-      default: return "";
+      case "interior":
+        return "Interior painting";
+      case "exterior":
+        return "Exterior painting";
+      case "both":
+        return "Both interior & exterior";
+      case "not-sure":
+        return "Not sure yet";
+      default:
+        return "";
     }
   };
 
   const getTimelineLabel = (timeline: string): string => {
     switch (timeline) {
-      case "asap": return "ASAP";
-      case "1-2-weeks": return "1-2 weeks";
-      case "1-2-months": return "1-2 months";
-      case "not-sure": return "Not sure yet";
-      default: return "";
-    }
-  };
-  const getBudgetLabel = (budget: string): string => {
-    switch (budget) {
-      case "5-10k": return "$5,000 - $10,000";
-      case "10-20k": return "$10,000 - $20,000";
-      case "20-30k": return "$20,000 - $30,000";
-      case "40k+": return "$40,000+";
-      default: return "";
+      case "asap":
+        return "Right away";
+      case "30-days":
+        return "Within 30 days";
+      case "1-3-months":
+        return "1 to 3 months";
+      case "not-sure":
+        return "Not sure yet";
+      default:
+        return "";
     }
   };
 
   const validateForm = (): boolean => {
-    const newErrors: { firstName?: string; phone?: string; email?: string } = {};
-    
+    const newErrors: { firstName?: string; phone?: string; email?: string } =
+      {};
+
     if (!data.firstName.trim()) {
       newErrors.firstName = "Name is required";
     }
-    
-    const phoneDigits = data.phone.replace(/\D/g, '');
+
+    const phoneDigits = data.phone.replace(/\D/g, "");
     if (!phoneDigits) {
       newErrors.phone = "Phone is required";
     } else {
@@ -223,23 +235,23 @@ const Quiz = ({ onStart }: QuizProps) => {
         newErrors.phone = phoneValidation.error || "Enter a valid phone number";
       }
     }
-    
+
     if (!data.email.trim()) {
       newErrors.email = "Email is required";
     } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(data.email)) {
       newErrors.email = "Enter a valid email address";
     }
-    
+
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
   };
 
   const handleSubmit = async () => {
     if (!validateForm()) return;
-    
+
     setIsSubmitting(true);
 
-    const phoneDigits = data.phone.replace(/\D/g, '');
+    const phoneDigits = data.phone.replace(/\D/g, "");
 
     const payload = {
       "contact.first_name": data.firstName,
@@ -248,26 +260,25 @@ const Quiz = ({ onStart }: QuizProps) => {
       "contact.zip_code": data.zipCode,
       "contact.project_type": getProjectTypeLabel(data.projectType),
       "contact.timeline": getTimelineLabel(data.timeline),
-      "contact.budget_range": getBudgetLabel(data.budgetRange),
       first_name: data.firstName,
       email: data.email || "",
       phone: phoneDigits,
       zip_code: data.zipCode,
       project_type: getProjectTypeLabel(data.projectType),
       timeline: getTimelineLabel(data.timeline),
-      budget_range: getBudgetLabel(data.budgetRange),
     };
 
-    console.log("Remodeling Quiz payload:", payload);
+    console.log("Emerald Paints Quiz payload:", payload);
 
     setIsSubmitted(true);
     setIsSubmitting(false);
 
-    if (typeof window !== 'undefined' && (window as any).fbq) {
-      (window as any).fbq('track', 'Lead');
+    // Fire Facebook Pixel Lead event
+    if (typeof window !== "undefined" && (window as any).fbq) {
+      (window as any).fbq("track", "Lead");
     }
 
-    const webhookUrl = "https://services.leadconnectorhq.com/hooks/AUs946zIT71gT6ZZInpO/webhook-trigger/4303b213-285a-4588-88df-5909a8baed41";
+    const webhookUrl = "REPLACE_WITH_GHL_WEBHOOK_URL";
 
     fetch(webhookUrl, {
       method: "POST",
@@ -276,7 +287,11 @@ const Quiz = ({ onStart }: QuizProps) => {
       keepalive: true,
     })
       .then((response) => {
-        console.log("GHL webhook response:", response.status, response.ok ? "OK" : "FAILED");
+        console.log(
+          "GHL webhook response:",
+          response.status,
+          response.ok ? "OK" : "FAILED"
+        );
       })
       .catch((err) => {
         console.error("GHL webhook error:", err);
@@ -284,97 +299,56 @@ const Quiz = ({ onStart }: QuizProps) => {
   };
 
   // OptionCard with vertical layout
-  const OptionCard = ({ 
-    icon: Icon, 
-    label, 
-    selected, 
+  const OptionCard = ({
+    icon: Icon,
+    label,
+    selected,
     onClick,
     accentColor = "text-primary",
-    badge
-  }: { 
-    icon: React.ElementType; 
-    label: string; 
-    selected: boolean; 
+  }: {
+    icon: React.ElementType;
+    label: string;
+    selected: boolean;
     onClick: () => void;
     accentColor?: string;
-    badge?: string;
   }) => (
     <button
       onClick={onClick}
       className={`relative flex flex-col items-center justify-center gap-1.5 p-3.5 sm:p-4 rounded-xl border-2 bg-white w-full min-h-[100px] transition-all duration-300 hover:scale-[1.02] hover:shadow-lg active:scale-[0.98] group ${
-        selected 
-          ? "border-primary bg-gradient-to-r from-primary/10 to-primary/5 shadow-md" 
-          : "border-slate-200 hover:border-primary/50 shadow-sm"
+        selected
+          ? "border-primary bg-gradient-to-r from-primary/10 to-primary/5 shadow-md"
+          : "border-border hover:border-primary/50 shadow-sm"
       }`}
     >
-      {badge && (
-        <span className="absolute -top-2 right-2 bg-emerald-500 text-white text-[10px] font-bold px-2 py-0.5 rounded-full">
-          {badge}
-        </span>
-      )}
-      <div className={`w-10 h-10 sm:w-11 sm:h-11 rounded-full flex items-center justify-center flex-shrink-0 transition-all duration-300 ${
-        selected 
-          ? "bg-primary" 
-          : "bg-slate-100 group-hover:bg-slate-200"
-      }`}>
-        <Icon className={`w-5 h-5 transition-colors duration-200 ${
-          selected ? "text-primary-foreground" : accentColor
-        }`} />
+      <div
+        className={`w-10 h-10 sm:w-11 sm:h-11 rounded-full flex items-center justify-center flex-shrink-0 transition-all duration-300 ${
+          selected ? "bg-primary" : "bg-muted group-hover:bg-muted/80"
+        }`}
+      >
+        <Icon
+          className={`w-5 h-5 transition-colors duration-200 ${
+            selected ? "text-primary-foreground" : accentColor
+          }`}
+        />
       </div>
 
-      <span className={`text-sm font-normal text-center leading-tight transition-colors duration-200 ${
-        selected ? "text-primary font-medium" : "text-foreground"
-      }`}>
+      <span
+        className={`text-sm font-normal text-center leading-tight transition-colors duration-200 ${
+          selected ? "text-primary font-medium" : "text-foreground"
+        }`}
+      >
         {label}
       </span>
-      
+
       {selected && (
-        <div className="absolute top-2 right-2 w-5 h-5 rounded-full bg-emerald-500 flex items-center justify-center">
+        <div className="absolute top-2 right-2 w-5 h-5 rounded-full bg-tertiary flex items-center justify-center">
           <Check className="w-3 h-3 text-white" />
         </div>
       )}
     </button>
   );
 
-  // BudgetOptionCard - for budget ranges
-  const BudgetOptionCard = ({ 
-    icon: Icon, 
-    label, 
-    selected, 
-    onClick 
-  }: { 
-    icon: React.ElementType;
-    label: string;
-    selected: boolean; 
-    onClick: () => void;
-  }) => (
-    <button
-      onClick={onClick}
-      className={`relative flex items-center gap-3 p-4 rounded-xl border-2 bg-white w-full min-h-[60px] transition-all duration-300 hover:scale-[1.02] hover:shadow-lg active:scale-[0.98] group ${
-        selected 
-          ? "border-primary bg-gradient-to-r from-primary/10 to-primary/5 shadow-md" 
-          : "border-slate-200 hover:border-primary/50 shadow-sm"
-      }`}
-    >
-      <div className={`w-10 h-10 rounded-full flex items-center justify-center flex-shrink-0 transition-all duration-300 ${
-        selected ? "bg-primary" : "bg-slate-100 group-hover:bg-slate-200"
-      }`}>
-        <Icon className={`w-5 h-5 transition-colors duration-200 ${
-          selected ? "text-primary-foreground" : "text-primary"
-        }`} />
-      </div>
-      <span className={`text-sm font-medium ${selected ? "text-primary" : "text-foreground"}`}>
-        {label}
-      </span>
-      {selected && (
-        <div className="absolute top-3 right-3 w-5 h-5 rounded-full bg-emerald-500 flex items-center justify-center">
-          <Check className="w-3 h-3 text-white" />
-        </div>
-      )}
-    </button>
-  );
-
-  // Animation variants - y-axis slide with scale
+  // Animation variants
   const cardVariants = {
     enter: { opacity: 0, y: 20, scale: 0.95 },
     center: { opacity: 1, y: 0, scale: 1 },
@@ -385,7 +359,6 @@ const Quiz = ({ onStart }: QuizProps) => {
     <div className="w-full max-w-lg">
       {/* Quiz Card */}
       <div className="quiz-card-glass rounded-2xl shadow-quiz-glow p-5 sm:p-6 w-full border border-primary/20">
-        
         {/* Progress Dots - Inside card */}
         {!isSubmitted && !isDisqualified && !timelineDisqualified && (
           <div className="flex justify-center gap-2 mb-4">
@@ -393,9 +366,7 @@ const Quiz = ({ onStart }: QuizProps) => {
               <div
                 key={dotStep}
                 className={`w-2.5 h-2.5 rounded-full transition-all duration-300 ${
-                  dotStep <= step 
-                    ? "bg-primary" 
-                    : "bg-slate-300"
+                  dotStep <= step ? "bg-primary" : "bg-muted"
                 }`}
               />
             ))}
@@ -403,7 +374,7 @@ const Quiz = ({ onStart }: QuizProps) => {
         )}
 
         <AnimatePresence mode="wait">
-          {/* Step 1: Project Type */}
+          {/* Step 1: Project Type - Painting specific */}
           {step === 1 && !isSubmitted && (
             <motion.div
               key="step1"
@@ -414,168 +385,183 @@ const Quiz = ({ onStart }: QuizProps) => {
               transition={{ duration: 0.25 }}
             >
               <h3 className="text-base sm:text-lg font-medium text-foreground mb-4 text-center leading-tight">
-                Which project are you planning?
+                What kind of painting project are you planning?
               </h3>
               <div className="grid grid-cols-2 gap-2 sm:gap-3">
                 <OptionCard
-                  icon={ChefHat}
-                  label="Kitchen remodel"
-                  selected={data.projectType === "kitchen"}
-                  onClick={() => handleTileSelect("projectType", "kitchen")}
-                  accentColor="text-orange-600"
-                />
-                <OptionCard
-                  icon={Bath}
-                  label="Bathroom remodel"
-                  selected={data.projectType === "bathroom"}
-                  onClick={() => handleTileSelect("projectType", "bathroom")}
-                  accentColor="text-cyan-600"
-                />
-                <OptionCard
                   icon={Home}
-                  label="Kitchen AND bathroom"
+                  label="Interior Painting"
+                  selected={data.projectType === "interior"}
+                  onClick={() => handleTileSelect("projectType", "interior")}
+                  accentColor="text-tertiary"
+                />
+                <OptionCard
+                  icon={Building}
+                  label="Exterior Painting"
+                  selected={data.projectType === "exterior"}
+                  onClick={() => handleTileSelect("projectType", "exterior")}
+                  accentColor="text-secondary"
+                />
+                <OptionCard
+                  icon={ArrowLeftRight}
+                  label="Both Interior & Exterior"
                   selected={data.projectType === "both"}
                   onClick={() => handleTileSelect("projectType", "both")}
-                  accentColor="text-violet-600"
+                  accentColor="text-primary"
                 />
                 <OptionCard
                   icon={HelpCircle}
-                  label="Other remodeling project"
-                  selected={data.projectType === "other"}
-                  onClick={() => handleTileSelect("projectType", "other")}
-                  accentColor="text-slate-600"
+                  label="Not Sure Yet"
+                  selected={data.projectType === "not-sure"}
+                  onClick={() => handleTileSelect("projectType", "not-sure")}
+                  accentColor="text-muted-foreground"
                 />
               </div>
             </motion.div>
           )}
 
           {/* Step 2: Timeline */}
-          {step === 2 && !isSubmitted && !needsTimelineClarification && !timelineDisqualified && (
-            <motion.div
-              key="step2"
-              variants={cardVariants}
-              initial="enter"
-              animate="center"
-              exit="exit"
-              transition={{ duration: 0.25 }}
-            >
-              <h3 className="text-base sm:text-lg font-medium text-foreground mb-4 text-center leading-tight">
-                When would you like to get started?
-              </h3>
-              <div className="grid grid-cols-2 gap-2 sm:gap-3 mb-4">
-                <OptionCard
-                  icon={Zap}
-                  label="ASAP"
-                  selected={data.timeline === "asap"}
-                  onClick={() => handleTileSelect("timeline", "asap")}
-                  accentColor="text-red-600"
-                />
-                <OptionCard
-                  icon={Calendar}
-                  label="1-2 weeks"
-                  selected={data.timeline === "1-2-weeks"}
-                  onClick={() => handleTileSelect("timeline", "1-2-weeks")}
-                  accentColor="text-orange-600"
-                />
-                <OptionCard
-                  icon={CalendarClock}
-                  label="1-2 months"
-                  selected={data.timeline === "1-2-months"}
-                  onClick={() => handleTileSelect("timeline", "1-2-months")}
-                  accentColor="text-teal-600"
-                />
-                <OptionCard
-                  icon={Clock}
-                  label="Not sure yet"
-                  selected={data.timeline === "not-sure"}
-                  onClick={() => handleTileSelect("timeline", "not-sure")}
-                  accentColor="text-slate-500"
-                />
-              </div>
-              <button
-                onClick={handleBack}
-                className="text-sm text-muted-foreground hover:text-foreground transition-colors flex items-center gap-1"
+          {step === 2 &&
+            !isSubmitted &&
+            !needsTimelineClarification &&
+            !timelineDisqualified && (
+              <motion.div
+                key="step2"
+                variants={cardVariants}
+                initial="enter"
+                animate="center"
+                exit="exit"
+                transition={{ duration: 0.25 }}
               >
-                <ArrowLeft className="w-4 h-4" />
-                Go back
-              </button>
-            </motion.div>
-          )}
-
-          {/* Timeline Clarification - Only shows if they selected "not-sure" */}
-          {step === 2 && needsTimelineClarification && !timelineDisqualified && !isSubmitted && (
-            <motion.div
-              key="timeline-clarification"
-              variants={cardVariants}
-              initial="enter"
-              animate="center"
-              exit="exit"
-              transition={{ duration: 0.25 }}
-            >
-              <div className="text-center mb-5">
-                <Clock className="w-10 h-10 text-primary mx-auto mb-3" />
-                <h3 className="text-base sm:text-lg font-semibold text-foreground mb-2">
-                  Quick Question
+                <h3 className="text-base sm:text-lg font-medium text-foreground mb-4 text-center leading-tight">
+                  When are you hoping to get started?
                 </h3>
-                <p className="text-sm text-muted-foreground">
-                  We're currently taking projects that can start within the next 60 days.
-                </p>
-                <p className="text-sm text-foreground font-medium mt-2">
-                  Does that work for your timeline?
-                </p>
-              </div>
+                <div className="grid grid-cols-2 gap-2 sm:gap-3 mb-4">
+                  <OptionCard
+                    icon={Zap}
+                    label="Right Away"
+                    selected={data.timeline === "asap"}
+                    onClick={() => handleTileSelect("timeline", "asap")}
+                    accentColor="text-red-600"
+                  />
+                  <OptionCard
+                    icon={Calendar}
+                    label="Within 30 Days"
+                    selected={data.timeline === "30-days"}
+                    onClick={() => handleTileSelect("timeline", "30-days")}
+                    accentColor="text-primary"
+                  />
+                  <OptionCard
+                    icon={CalendarClock}
+                    label="1 to 3 Months"
+                    selected={data.timeline === "1-3-months"}
+                    onClick={() => handleTileSelect("timeline", "1-3-months")}
+                    accentColor="text-tertiary"
+                  />
+                  <OptionCard
+                    icon={Clock}
+                    label="Not Sure Yet"
+                    selected={data.timeline === "not-sure"}
+                    onClick={() => handleTileSelect("timeline", "not-sure")}
+                    accentColor="text-muted-foreground"
+                  />
+                </div>
+                <button
+                  onClick={handleBack}
+                  className="text-sm text-muted-foreground hover:text-foreground transition-colors flex items-center gap-1 min-h-[44px]"
+                >
+                  <ArrowLeft className="w-4 h-4" />
+                  Go back
+                </button>
+              </motion.div>
+            )}
 
-              <div className="space-y-3 mb-4">
+          {/* Timeline Clarification - 60 day check */}
+          {step === 2 &&
+            needsTimelineClarification &&
+            !timelineDisqualified &&
+            !isSubmitted && (
+              <motion.div
+                key="timeline-clarification"
+                variants={cardVariants}
+                initial="enter"
+                animate="center"
+                exit="exit"
+                transition={{ duration: 0.25 }}
+              >
+                <div className="text-center mb-5">
+                  <Clock className="w-10 h-10 text-primary mx-auto mb-3" />
+                  <h3 className="text-base sm:text-lg font-semibold text-foreground mb-2">
+                    Quick Question
+                  </h3>
+                  <p className="text-base text-muted-foreground">
+                    We're currently taking projects that can start within the
+                    next 60 days.
+                  </p>
+                  <p className="text-base text-foreground font-medium mt-2">
+                    Does that work for your timeline?
+                  </p>
+                </div>
+
+                <div className="space-y-3 mb-4">
+                  <button
+                    onClick={() => {
+                      setNeedsTimelineClarification(false);
+                      setData({ ...data, timeline: "1-3-months" });
+                      setTimeout(() => setStep(3), 300);
+                    }}
+                    className="w-full p-4 rounded-xl border-2 border-primary bg-gradient-to-r from-primary/10 to-primary/5 hover:shadow-lg transition-all text-left min-h-[44px]"
+                  >
+                    <div className="flex items-center gap-3">
+                      <div className="w-10 h-10 rounded-full bg-primary flex items-center justify-center flex-shrink-0">
+                        <Check className="w-5 h-5 text-primary-foreground" />
+                      </div>
+                      <div>
+                        <p className="font-medium text-foreground">
+                          Yes, that works for me
+                        </p>
+                        <p className="text-xs text-muted-foreground">
+                          Continue to next step
+                        </p>
+                      </div>
+                    </div>
+                  </button>
+                  <button
+                    onClick={() => {
+                      setTimelineDisqualified(true);
+                    }}
+                    className="w-full p-4 rounded-xl border-2 border-border hover:border-muted-foreground/50 hover:shadow-md transition-all text-left min-h-[44px]"
+                  >
+                    <div className="flex items-center gap-3">
+                      <div className="w-10 h-10 rounded-full bg-muted flex items-center justify-center flex-shrink-0">
+                        <Calendar className="w-5 h-5 text-muted-foreground" />
+                      </div>
+                      <div>
+                        <p className="font-medium text-foreground">
+                          No, I need more time
+                        </p>
+                        <p className="text-xs text-muted-foreground">
+                          I'm planning further out
+                        </p>
+                      </div>
+                    </div>
+                  </button>
+                </div>
+
                 <button
                   onClick={() => {
                     setNeedsTimelineClarification(false);
-                    setData({ ...data, timeline: "1-2-months" }); // Set to acceptable timeline
-                    setTimeout(() => setStep(3), 300); // Continue to ZIP code
+                    setData({ ...data, timeline: "" });
                   }}
-                  className="w-full p-4 rounded-xl border-2 border-primary bg-gradient-to-r from-primary/10 to-primary/5 hover:shadow-lg transition-all text-left"
+                  className="w-full text-sm text-muted-foreground hover:text-foreground transition-colors flex items-center justify-center gap-1 min-h-[44px]"
                 >
-                  <div className="flex items-center gap-3">
-                    <div className="w-10 h-10 rounded-full bg-primary flex items-center justify-center flex-shrink-0">
-                      <Check className="w-5 h-5 text-primary-foreground" />
-                    </div>
-                    <div>
-                      <p className="font-medium text-foreground">Yes, that works for me</p>
-                      <p className="text-xs text-muted-foreground">Continue to next step</p>
-                    </div>
-                  </div>
+                  <ArrowLeft className="w-4 h-4" />
+                  Go back
                 </button>
-                <button
-                  onClick={() => {
-                    setTimelineDisqualified(true);
-                  }}
-                  className="w-full p-4 rounded-xl border-2 border-slate-200 hover:border-slate-300 hover:shadow-md transition-all text-left"
-                >
-                  <div className="flex items-center gap-3">
-                    <div className="w-10 h-10 rounded-full bg-slate-100 flex items-center justify-center flex-shrink-0">
-                      <Calendar className="w-5 h-5 text-slate-500" />
-                    </div>
-                    <div>
-                      <p className="font-medium text-foreground">No, I need more time</p>
-                      <p className="text-xs text-muted-foreground">I'm planning further out</p>
-                    </div>
-                  </div>
-                </button>
-              </div>
+              </motion.div>
+            )}
 
-              <button
-                onClick={() => {
-                  setNeedsTimelineClarification(false);
-                  setData({ ...data, timeline: "" }); // Reset timeline
-                }}
-                className="w-full text-sm text-muted-foreground hover:text-foreground transition-colors flex items-center justify-center gap-1"
-              >
-                <ArrowLeft className="w-4 h-4" />
-                Go back
-              </button>
-            </motion.div>
-          )}
-
-          {/* Timeline Disqualification - Planning too far out */}
+          {/* Timeline Disqualification Screen - FULL DETAILS */}
           {timelineDisqualified && !isSubmitted && (
             <motion.div
               key="timeline-disqualified"
@@ -586,7 +572,7 @@ const Quiz = ({ onStart }: QuizProps) => {
               transition={{ duration: 0.3 }}
               className="py-4 text-center"
             >
-              <motion.div 
+              <motion.div
                 initial={{ scale: 0 }}
                 animate={{ scale: 1 }}
                 transition={{ type: "spring", stiffness: 200, damping: 15 }}
@@ -594,25 +580,36 @@ const Quiz = ({ onStart }: QuizProps) => {
               >
                 <Calendar className="w-7 h-7 text-blue-600" />
               </motion.div>
-              
+
               <h3 className="text-base sm:text-lg font-semibold text-foreground mb-2 leading-snug">
                 Thanks For Your Interest!
               </h3>
-              
-              <p className="text-sm text-muted-foreground leading-relaxed mb-4 max-w-sm mx-auto">
-                We're focusing on projects starting within 60 days right now. We'd love to help when you're ready!
+
+              <p className="text-base text-muted-foreground leading-relaxed mb-4 max-w-sm mx-auto">
+                We're focusing on projects starting within 60 days right now.
+                We'd love to help when you're ready!
               </p>
 
-              <div className="bg-slate-50 rounded-xl p-4 mb-4 text-left">
-                <p className="text-xs font-semibold text-foreground mb-2">Here's what to do:</p>
+              <div className="bg-muted rounded-xl p-4 mb-4 text-left">
+                <p className="text-xs font-semibold text-foreground mb-2">
+                  Here's what to do:
+                </p>
                 <div className="space-y-2 text-xs text-muted-foreground">
                   <div className="flex items-center gap-2">
                     <Phone className="w-3.5 h-3.5 text-primary flex-shrink-0" />
-                    <span>Save our number: <strong className="text-foreground">(720) 989-9883</strong></span>
+                    <span>
+                      Save our number:{" "}
+                      <strong className="text-foreground">(720) 447-5654</strong>
+                    </span>
                   </div>
                   <div className="flex items-center gap-2">
                     <Bookmark className="w-3.5 h-3.5 text-primary flex-shrink-0" />
-                    <span>Bookmark: <strong className="text-foreground">14erenovations.com</strong></span>
+                    <span>
+                      Bookmark:{" "}
+                      <strong className="text-foreground">
+                        emeraldpaints.com
+                      </strong>
+                    </span>
                   </div>
                   <div className="flex items-center gap-2">
                     <MessageSquare className="w-3.5 h-3.5 text-primary flex-shrink-0" />
@@ -621,10 +618,9 @@ const Quiz = ({ onStart }: QuizProps) => {
                 </div>
               </div>
 
-              {/* Single Back to Home button */}
-              <Link 
+              <Link
                 to="/"
-                className="w-full inline-flex items-center justify-center gap-1.5 px-4 py-3 bg-primary text-primary-foreground text-sm font-medium rounded-lg hover:bg-primary/90 transition-colors"
+                className="w-full inline-flex items-center justify-center gap-1.5 px-4 py-3 bg-primary text-primary-foreground text-sm font-medium rounded-lg hover:bg-primary/90 transition-colors min-h-[44px]"
               >
                 <ArrowLeft className="w-4 h-4" />
                 Back to Home
@@ -635,7 +631,7 @@ const Quiz = ({ onStart }: QuizProps) => {
           {/* Step 3: ZIP Code */}
           {step === 3 && !isSubmitted && !isCheckingZip && !isDisqualified && (
             <motion.div
-              key="step4"
+              key="step3"
               variants={cardVariants}
               initial="enter"
               animate="center"
@@ -654,7 +650,12 @@ const Quiz = ({ onStart }: QuizProps) => {
                     pattern="[0-9]*"
                     placeholder="Enter ZIP code"
                     value={data.zipCode}
-                    onChange={(e) => setData({ ...data, zipCode: e.target.value.replace(/\D/g, '') })}
+                    onChange={(e) =>
+                      setData({
+                        ...data,
+                        zipCode: e.target.value.replace(/\D/g, ""),
+                      })
+                    }
                     className="pl-10 h-12 text-base rounded-xl border-2 focus:border-primary"
                     maxLength={5}
                   />
@@ -663,7 +664,7 @@ const Quiz = ({ onStart }: QuizProps) => {
               <div className="flex items-center justify-between">
                 <button
                   onClick={handleBack}
-                  className="text-sm text-muted-foreground hover:text-foreground transition-colors flex items-center gap-1"
+                  className="text-sm text-muted-foreground hover:text-foreground transition-colors flex items-center gap-1 min-h-[44px]"
                 >
                   <ArrowLeft className="w-4 h-4" />
                   Go back
@@ -673,7 +674,7 @@ const Quiz = ({ onStart }: QuizProps) => {
                   disabled={data.zipCode.length < 5}
                   variant="default"
                   size="lg"
-                  className="px-6 h-12"
+                  className="px-6 h-12 min-h-[44px]"
                 >
                   Continue <ArrowRight className="w-4 h-4 ml-1" />
                 </Button>
@@ -681,7 +682,7 @@ const Quiz = ({ onStart }: QuizProps) => {
             </motion.div>
           )}
 
-          {/* ZIP Code Checking Loader */}
+          {/* ZIP Code Checking Loader - 8 second animation */}
           {isCheckingZip && !isSubmitted && !isDisqualified && (
             <motion.div
               key="checking-zip"
@@ -697,10 +698,54 @@ const Quiz = ({ onStart }: QuizProps) => {
                 transition={{ duration: 1, repeat: Infinity, ease: "linear" }}
                 className="w-16 h-16 mx-auto mb-6"
               >
-                <div className="w-full h-full rounded-full border-4 border-slate-200 border-t-primary" />
+                <div className="w-full h-full rounded-full border-4 border-muted border-t-primary" />
               </motion.div>
-              
+
               <CheckingMessages zipCode={data.zipCode} />
+            </motion.div>
+          )}
+
+          {/* ZIP Code Disqualification Screen - FULL DETAILS */}
+          {isDisqualified && !isSubmitted && (
+            <motion.div
+              key="disqualified"
+              variants={cardVariants}
+              initial="enter"
+              animate="center"
+              exit="exit"
+              transition={{ duration: 0.3 }}
+              className="py-4 text-center"
+            >
+              <motion.div
+                initial={{ scale: 0 }}
+                animate={{ scale: 1 }}
+                transition={{ type: "spring", stiffness: 200, damping: 15 }}
+                className="w-14 h-14 mx-auto mb-4 rounded-full bg-primary/20 flex items-center justify-center"
+              >
+                <MapPin className="w-7 h-7 text-primary" />
+              </motion.div>
+
+              <h3 className="text-base sm:text-lg font-semibold text-foreground mb-2 leading-snug">
+                We Only Serve Colorado
+              </h3>
+
+              <p className="text-base text-muted-foreground leading-relaxed mb-4 max-w-sm mx-auto">
+                Thank you for your interest in Emerald Paints! Unfortunately, we
+                currently only serve homeowners in Colorado.
+              </p>
+
+              <p className="text-sm text-muted-foreground mb-4">
+                Think this is an error? Your ZIP code was:{" "}
+                <strong className="text-foreground">{data.zipCode}</strong>
+              </p>
+
+              <Link
+                to="/"
+                className="w-full inline-flex items-center justify-center gap-1.5 px-4 py-3 bg-primary text-primary-foreground text-sm font-medium rounded-lg hover:bg-primary/90 transition-colors min-h-[44px]"
+              >
+                <ArrowLeft className="w-4 h-4" />
+                Back to Home
+              </Link>
             </motion.div>
           )}
 
@@ -718,14 +763,15 @@ const Quiz = ({ onStart }: QuizProps) => {
               <div className="text-center mb-4">
                 <span className="text-2xl mb-1 block">🎉</span>
                 <h3 className="text-base sm:text-lg font-semibold text-foreground mb-2">
-                  Congrats! Your Area ({data.zipCode}) Qualifies!
+                  Congrats! Your Area ({data.zipCode}) Qualifies For The Home
+                  Refresh Program!
                 </h3>
-                <p className="text-sm text-muted-foreground leading-snug max-w-sm mx-auto">
-                  Enter your info below to claim your free consultation and lock in your $2,000 discount.
+                <p className="text-base text-muted-foreground leading-snug max-w-sm mx-auto">
+                  Enter your info below to claim your free estimate and lock in
+                  your 25% discount.
                 </p>
               </div>
 
-              
               {/* Form Fields */}
               <div className="space-y-2.5 mb-4">
                 <div>
@@ -736,19 +782,27 @@ const Quiz = ({ onStart }: QuizProps) => {
                       placeholder="Name"
                       value={data.firstName}
                       onChange={(e) => {
-                        setData(prev => ({ ...prev, firstName: e.target.value }));
-                        if (errors.firstName) setErrors({ ...errors, firstName: undefined });
+                        setData((prev) => ({
+                          ...prev,
+                          firstName: e.target.value,
+                        }));
+                        if (errors.firstName)
+                          setErrors({ ...errors, firstName: undefined });
                       }}
                       className={`pl-10 h-12 text-base rounded-xl border-2 transition-all ${
-                        errors.firstName ? 'border-red-500 focus:border-red-500' : 'focus:border-primary'
+                        errors.firstName
+                          ? "border-red-500 focus:border-red-500"
+                          : "focus:border-primary"
                       }`}
                     />
                   </div>
                   {errors.firstName && (
-                    <p className="text-xs text-red-500 mt-1 pl-1">{errors.firstName}</p>
+                    <p className="text-xs text-red-500 mt-1 pl-1">
+                      {errors.firstName}
+                    </p>
                   )}
                 </div>
-                
+
                 <div>
                   <div className="relative">
                     <Phone className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
@@ -758,27 +812,34 @@ const Quiz = ({ onStart }: QuizProps) => {
                       placeholder="(555) 123-4567"
                       value={data.phone}
                       onChange={(e) => {
-                        setData(prev => ({ ...prev, phone: formatPhoneNumber(e.target.value) }));
-                        if (errors.phone) setErrors({ ...errors, phone: undefined });
+                        setData((prev) => ({
+                          ...prev,
+                          phone: formatPhoneNumber(e.target.value),
+                        }));
+                        if (errors.phone)
+                          setErrors({ ...errors, phone: undefined });
                       }}
                       className={`pl-10 pr-10 h-12 text-base rounded-xl border-2 transition-all ${
-                        errors.phone ? 'border-red-500 focus:border-red-500' : 'focus:border-primary'
+                        errors.phone
+                          ? "border-red-500 focus:border-red-500"
+                          : "focus:border-primary"
                       }`}
                       maxLength={14}
                     />
-                    {/* Green checkmark when valid */}
-                    {data.phone.replace(/\D/g, '').length === 10 && 
-                     isValidPhoneNumber(data.phone).valid && (
-                      <div className="absolute right-3 top-1/2 -translate-y-1/2 w-5 h-5 rounded-full bg-emerald-100 flex items-center justify-center">
-                        <Check className="w-3 h-3 text-emerald-600" />
-                      </div>
-                    )}
+                    {data.phone.replace(/\D/g, "").length === 10 &&
+                      isValidPhoneNumber(data.phone).valid && (
+                        <div className="absolute right-3 top-1/2 -translate-y-1/2 w-5 h-5 rounded-full bg-tertiary/20 flex items-center justify-center">
+                          <Check className="w-3 h-3 text-tertiary" />
+                        </div>
+                      )}
                   </div>
                   {errors.phone ? (
-                    <p className="text-xs text-red-500 mt-1 pl-1">{errors.phone}</p>
-                  ) : data.phone.replace(/\D/g, '').length === 10 && 
-                      isValidPhoneNumber(data.phone).valid ? (
-                    <p className="text-[10px] text-emerald-600 mt-1 pl-1">
+                    <p className="text-xs text-red-500 mt-1 pl-1">
+                      {errors.phone}
+                    </p>
+                  ) : data.phone.replace(/\D/g, "").length === 10 &&
+                    isValidPhoneNumber(data.phone).valid ? (
+                    <p className="text-[10px] text-tertiary mt-1 pl-1">
                       ✓ Looks good!
                     </p>
                   ) : (
@@ -787,7 +848,7 @@ const Quiz = ({ onStart }: QuizProps) => {
                     </p>
                   )}
                 </div>
-                
+
                 <div>
                   <div className="relative">
                     <Mail className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
@@ -796,25 +857,30 @@ const Quiz = ({ onStart }: QuizProps) => {
                       placeholder="Email"
                       value={data.email}
                       onChange={(e) => {
-                        setData(prev => ({ ...prev, email: e.target.value }));
-                        if (errors.email) setErrors({ ...errors, email: undefined });
+                        setData((prev) => ({ ...prev, email: e.target.value }));
+                        if (errors.email)
+                          setErrors({ ...errors, email: undefined });
                       }}
                       className={`pl-10 h-12 text-base rounded-xl border-2 transition-all ${
-                        errors.email ? 'border-red-500 focus:border-red-500' : 'focus:border-primary'
+                        errors.email
+                          ? "border-red-500 focus:border-red-500"
+                          : "focus:border-primary"
                       }`}
                     />
                   </div>
                   {errors.email && (
-                    <p className="text-xs text-red-500 mt-1 pl-1">{errors.email}</p>
+                    <p className="text-xs text-red-500 mt-1 pl-1">
+                      {errors.email}
+                    </p>
                   )}
                 </div>
               </div>
 
-              {/* Submit Button - Orange Gradient */}
+              {/* Submit Button - Full width on mobile */}
               <Button
                 onClick={handleSubmit}
                 disabled={isSubmitting}
-                className="w-full h-12 text-[15px] font-semibold bg-gradient-to-r from-primary to-orange-500 hover:from-primary/90 hover:to-orange-500/90 text-white rounded-xl shadow-lg"
+                className="w-full h-12 text-[15px] font-semibold bg-gradient-to-r from-primary to-amber-500 hover:from-primary/90 hover:to-amber-500/90 text-white rounded-xl shadow-lg min-h-[44px]"
               >
                 {isSubmitting ? (
                   <>
@@ -822,23 +888,26 @@ const Quiz = ({ onStart }: QuizProps) => {
                     Submitting...
                   </>
                 ) : (
-                  "Get My Free Consultation"
+                  "Get My Free Estimate"
                 )}
               </Button>
 
               {/* Subtle Testimonial */}
               <div className="mt-3">
                 <p className="text-xs text-muted-foreground/80 italic text-center leading-relaxed">
-                  "Just finished our kitchen remodel with 14er—would definitely recommend!"
-                  <span className="text-muted-foreground/60 not-italic ml-1">- Michael R., Denver</span>
+                  "Just finished our exterior with Emerald Paints — would
+                  definitely recommend!"
+                  <span className="text-muted-foreground/60 not-italic ml-1">
+                    — Carlos M., Westminster
+                  </span>
                 </p>
               </div>
 
-              {/* Trust Footer - Enhanced */}
+              {/* Trust Footer */}
               <div className="flex flex-wrap items-center justify-center gap-x-1.5 text-[10px] text-muted-foreground pt-4 mt-4 border-t border-border/50">
                 <span className="flex items-center gap-1">
-                  <div className="w-4 h-4 rounded-full bg-emerald-100 flex items-center justify-center">
-                    <Shield className="w-2.5 h-2.5 text-emerald-600" />
+                  <div className="w-4 h-4 rounded-full bg-tertiary/20 flex items-center justify-center">
+                    <Shield className="w-2.5 h-2.5 text-tertiary" />
                   </div>
                   Secure
                 </span>
@@ -861,73 +930,41 @@ const Quiz = ({ onStart }: QuizProps) => {
               transition={{ duration: 0.3 }}
               className="py-6 text-center"
             >
-              <motion.div 
+              <motion.div
                 initial={{ scale: 0 }}
                 animate={{ scale: 1 }}
                 transition={{ type: "spring", stiffness: 200, damping: 15 }}
-                className="w-16 h-16 mx-auto mb-5 rounded-full bg-emerald-100 flex items-center justify-center"
+                className="w-16 h-16 mx-auto mb-5 rounded-full bg-tertiary/20 flex items-center justify-center"
               >
-                <CheckCircle2 className="w-8 h-8 text-emerald-600" />
+                <CheckCircle2 className="w-8 h-8 text-tertiary" />
               </motion.div>
-              
+
               <h3 className="text-base sm:text-lg font-semibold text-foreground mb-3 leading-snug">
-                Awesome, {data.firstName.split(' ')[0]}—you're all set! 🎉
+                Awesome, {data.firstName.split(" ")[0]}—you're all set! 🎉
               </h3>
-              
-              <p className="text-sm sm:text-base text-muted-foreground leading-relaxed mb-4 max-w-sm mx-auto">
-                We'll be reaching out very soon to get more details on your project and schedule your free consultation. Talk soon!
+
+              <p className="text-base text-muted-foreground leading-relaxed mb-4 max-w-sm mx-auto">
+                We'll be reaching out very soon to get more details on your
+                project and schedule your free estimate. Talk soon!
               </p>
-              
-              <p className="text-xs sm:text-sm text-muted-foreground mb-6">
-                In the meantime, feel free to check out our website:{' '}
-                <a 
-                  href="https://14erenovations.com/home" 
-                  target="_blank" 
+
+              <p className="text-base text-muted-foreground mb-6">
+                In the meantime, feel free to check out our website:{" "}
+                <a
+                  href="https://emeraldpaints.com"
+                  target="_blank"
                   rel="noopener noreferrer"
                   className="text-primary hover:underline font-medium"
                 >
-                  14erenovations.com
+                  emeraldpaints.com
                 </a>
               </p>
-              
-              <div className="flex items-center justify-center gap-2 text-xs sm:text-sm text-muted-foreground pt-3 border-t border-border/50">
-                <Shield className="w-4 h-4" />
-                <span>Your information is secure</span>
-              </div>
-            </motion.div>
-          )}
 
-          {/* Disqualification Screen - Out of State */}
-          {isDisqualified && !isSubmitted && (
-            <motion.div
-              key="disqualified"
-              variants={cardVariants}
-              initial="enter"
-              animate="center"
-              exit="exit"
-              transition={{ duration: 0.3 }}
-              className="py-6 text-center"
-            >
-              <motion.div 
-                initial={{ scale: 0 }}
-                animate={{ scale: 1 }}
-                transition={{ type: "spring", stiffness: 200, damping: 15 }}
-                className="w-16 h-16 mx-auto mb-5 rounded-full bg-amber-100 flex items-center justify-center"
-              >
-                <MapPin className="w-8 h-8 text-amber-600" />
-              </motion.div>
-              
-              <h3 className="text-base sm:text-lg font-semibold text-foreground mb-3 leading-snug">
-                We Only Serve Colorado
-              </h3>
-              
-              <p className="text-sm sm:text-base text-muted-foreground leading-relaxed mb-6 max-w-sm mx-auto">
-                Thank you for your interest in 14er Renovation! Unfortunately, we currently only serve homeowners in Colorado.
-              </p>
-              
-              <p className="text-xs text-muted-foreground/70 italic">
-                Think this is an error? Your ZIP code was: <strong>{data.zipCode}</strong>
-              </p>
+              {/* Trust Footer */}
+              <div className="flex items-center justify-center gap-2 text-xs text-muted-foreground pt-4 border-t border-border/50">
+                <Shield className="w-3.5 h-3.5 text-tertiary" />
+                Your information is secure
+              </div>
             </motion.div>
           )}
         </AnimatePresence>
