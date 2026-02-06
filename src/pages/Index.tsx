@@ -1,18 +1,21 @@
 import { lazy, Suspense } from "react";
 import HeroSection from "@/components/HeroSection";
+import FloatingCTA from "@/components/FloatingCTA";
 
 // Lazy load below-the-fold sections for faster initial load
 const TrustBadgesSection = lazy(() => import("@/components/TrustBadgesSection"));
 const GallerySection = lazy(() => import("@/components/GallerySection"));
 const ReviewsSection = lazy(() => import("@/components/ReviewsSection"));
+const ProcessSection = lazy(() => import("@/components/ProcessSection"));
 const FAQSection = lazy(() => import("@/components/FAQSection"));
+const FinalCTASection = lazy(() => import("@/components/FinalCTASection"));
 const Footer = lazy(() => import("@/components/Footer"));
 
 const Index = () => {
   return (
     <main className="min-h-screen">
       <HeroSection />
-      <Suspense fallback={<div className="h-24 bg-gray-50" />}>
+      <Suspense fallback={<div className="h-24 bg-muted/50" />}>
         <TrustBadgesSection />
       </Suspense>
       <Suspense fallback={<div className="h-96 bg-muted" />}>
@@ -21,12 +24,19 @@ const Index = () => {
       <Suspense fallback={<div className="h-96 section-gradient-dark" />}>
         <ReviewsSection />
       </Suspense>
+      <Suspense fallback={<div className="h-64 section-gradient-dark" />}>
+        <ProcessSection />
+      </Suspense>
       <Suspense fallback={<div className="h-64 bg-muted/50" />}>
         <FAQSection />
+      </Suspense>
+      <Suspense fallback={<div className="h-64 section-gradient-dark" />}>
+        <FinalCTASection />
       </Suspense>
       <Suspense fallback={null}>
         <Footer />
       </Suspense>
+      <FloatingCTA />
     </main>
   );
 };

@@ -1,4 +1,4 @@
-import { MessageSquare, CalendarCheck, FileText, Hammer } from "lucide-react";
+import { MessageSquare, CalendarCheck, FileText, Paintbrush } from "lucide-react";
 
 const ProcessSection = () => {
   const steps = [
@@ -6,30 +6,30 @@ const ProcessSection = () => {
       icon: MessageSquare,
       number: "1",
       title: "Answer Quick Questions",
-      description: "Tell us about your remodeling project so we can prepare the right consultation.",
+      description: "Tell us about your painting project so we can prepare the right consultation.",
     },
     {
       icon: CalendarCheck,
       number: "2",
-      title: "Free In-Home Consultation",
-      description: "A remodeling expert visits your home to discuss options, design ideas, and materials.",
+      title: "Free In-Home Estimate",
+      description: "Miguel comes to your home to walk through the project, discuss colors, and assess what's needed.",
     },
     {
       icon: FileText,
       number: "3",
       title: "Clear, Upfront Price",
-      description: "No pressure, no hidden fees. You know exactly what to expect before we start.",
+      description: "No hidden fees, no surprises. You know exactly what to expect before any work begins.",
     },
     {
-      icon: Hammer,
+      icon: Paintbrush,
       number: "4",
       title: "We Handle Everything",
-      description: "Love your quote? We schedule a time and handle demolition, construction, and finishing touches.",
+      description: "Love your quote? We handle all the prep, painting, and cleanup. You just enjoy the results.",
     },
   ];
 
   return (
-    <section className="py-16 lg:py-24 bg-gradient-to-br from-slate-800 to-slate-900 text-white">
+    <section className="py-16 lg:py-24 section-gradient-dark text-hero-foreground">
       <div className="container mx-auto px-4">
         <div className="text-center mb-12">
           <span className="inline-block text-primary font-semibold text-sm uppercase tracking-wider mb-3">
@@ -59,7 +59,7 @@ const ProcessSection = () => {
                   </div>
                   
                   <h3 className="text-lg font-semibold mb-2">{step.title}</h3>
-                  <p className="text-sm text-white/70 max-w-xs">{step.description}</p>
+                  <p className="text-base text-white/70 max-w-xs">{step.description}</p>
                 </div>
               </div>
             ))}

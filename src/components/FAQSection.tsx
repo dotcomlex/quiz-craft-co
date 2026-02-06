@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { ArrowRight, MessageCircle } from "lucide-react";
+import { ArrowRight, HelpCircle } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { motion } from "framer-motion";
 import {
@@ -11,47 +11,57 @@ import {
 
 const faqs = [
   {
-    question: "What types of remodeling projects do you handle?",
+    question: "What types of painting projects do you handle?",
     answer:
-      "We specialize in kitchens, bathrooms, basements, home additions, and whole-home remodels. Whether it's a single room refresh or a complete transformation, we handle projects of all sizes.",
+      "We handle interior painting, exterior painting, wood staining, deck and fence finishing, vinyl and aluminum painting, commercial projects, and specialty finishes. Whether it's a single accent wall or a full exterior transformation, we've got you covered.",
   },
   {
-    question: "What does the free in-home consultation include?",
+    question: "What does the free estimate include?",
     answer:
-      "Your free in-home consultation includes an on-site walkthrough, detailed project discussion, design recommendations, material options, and a clear upfront quote. There's no obligation and no pressure.",
+      "Miguel will come to your home, walk through the project with you, assess surface conditions, discuss color options, and provide a detailed quote with no hidden fees. It's completely free, no pressure, and no obligation.",
   },
   {
     question: "Are you licensed and insured?",
     answer:
-      "Yes. We are fully licensed and insured, including liability and workers' compensation. This protects you, your property, and ensures all work meets local building codes and requirements.",
+      "Yes. Emerald Paints is fully licensed and insured in Colorado, including liability and workers' compensation. Your home and property are completely protected.",
   },
   {
     question: "What areas do you serve?",
     answer:
-      "We serve major cities throughout Colorado including Denver, Boulder, Fort Collins, Colorado Springs, Aurora, Lakewood, Arvada, and surrounding areas. If you're located in Colorado, we can likely help - just enter your zip code in our qualification form to confirm.",
+      "We serve Denver and all surrounding areas within 50 miles, including Aurora, Lakewood, Arvada, Westminster, Thornton, Littleton, Centennial, Commerce City, Brighton, and more. Enter your zip code in our qualification form to confirm coverage.",
   },
   {
-    question: "Can you help with design and material selection?",
+    question: "What paint brands do you use?",
     answer:
-      "Absolutely! During your free consultation, we'll provide design recommendations, show you material samples, and help you choose options that fit your style and budget. We can also create mockup designs so you can see exactly how your project will look before we start. We'll guide you through every decision to ensure you love the final result.",
+      "We typically use premium brands like Sherwin-Williams and Benjamin Moore. During your free estimate, we'll discuss the best options for your specific project based on surface type, durability needs, and budget.",
+  },
+  {
+    question: "How long does a typical paint job take?",
+    answer:
+      "It depends on the scope. A single room can be done in a day. A full interior usually takes 3 to 5 days. Full exteriors typically take 3 to 7 days depending on size and prep work needed. Miguel will give you a clear timeline during the estimate.",
+  },
+  {
+    question: "Can you help with color selection?",
+    answer:
+      "Absolutely. Miguel offers a free color consultation as part of the estimate. He'll bring samples, test them on your walls with different lighting, and help you pick shades that work perfectly for your space.",
   },
 ];
 
 const FAQSection = () => {
   return (
-    <section className="py-16 lg:py-24 bg-gradient-to-b from-white to-slate-50">
+    <section className="py-16 lg:py-24 section-gradient-slate">
       <div className="container max-w-4xl px-4">
         {/* Header */}
         <div className="text-center mb-10 lg:mb-14">
           <div className="inline-flex items-center gap-2 bg-primary/10 text-primary px-4 py-2 rounded-full text-sm font-semibold mb-4">
-            <MessageCircle className="w-4 h-4" />
+            <HelpCircle className="w-4 h-4" />
             Common Questions
           </div>
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-slate-900 mb-4">
+          <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-foreground mb-4">
             Frequently Asked Questions
           </h2>
-          <p className="text-lg text-slate-600 max-w-2xl mx-auto">
-            Everything you need to know about working with 14er Renovation
+          <p className="text-base text-muted-foreground max-w-2xl mx-auto">
+            Everything you need to know about working with Emerald Paints
           </p>
         </div>
 
@@ -61,12 +71,12 @@ const FAQSection = () => {
             <AccordionItem
               key={index}
               value={`item-${index}`}
-              className="bg-white rounded-xl shadow-sm border border-slate-100 px-6 transition-shadow hover:shadow-md"
+              className="bg-card rounded-xl shadow-sm border border-border px-6 transition-shadow hover:shadow-md"
             >
-              <AccordionTrigger className="text-left text-base sm:text-lg font-semibold text-slate-800 hover:text-primary hover:no-underline py-5">
+              <AccordionTrigger className="text-left text-base font-semibold text-foreground hover:text-primary hover:no-underline py-5">
                 {faq.question}
               </AccordionTrigger>
-              <AccordionContent className="text-base text-slate-600 pb-5 leading-relaxed">
+              <AccordionContent className="text-base text-muted-foreground pb-5 leading-relaxed">
                 {faq.answer}
               </AccordionContent>
             </AccordionItem>
@@ -75,12 +85,12 @@ const FAQSection = () => {
 
         {/* Inline CTA - matches hero button style */}
         <div className="flex justify-center mt-10 sm:mt-12">
-          <motion.div className="animate-subtle-rock">
-            <Link to="/qualify">
-              <Button 
-                variant="cta" 
-                size="xl" 
-                className="group shadow-2xl text-lg px-8 py-6 animate-cta-glow"
+          <motion.div className="animate-subtle-rock w-full sm:w-auto">
+            <Link to="/qualify" className="block">
+              <Button
+                variant="cta"
+                size="xl"
+                className="group shadow-2xl text-lg px-8 py-6 animate-cta-glow w-full sm:w-auto min-h-[44px]"
               >
                 See If I Qualify Now
                 <ArrowRight className="ml-2 h-5 w-5 transition-transform group-hover:translate-x-1" />

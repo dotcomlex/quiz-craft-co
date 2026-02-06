@@ -4,13 +4,15 @@ import { Shield } from "lucide-react";
 import qualifyBgImage from "@/assets/14er-paper-mountain-bg.webp";
 
 const QualifyPage = () => {
-const [quizStarted, setQuizStarted] = useState(false);
-  const [liveViewers, setLiveViewers] = useState(() => Math.floor(Math.random() * (80 - 50 + 1)) + 50);
+  const [quizStarted, setQuizStarted] = useState(false);
+  const [liveViewers, setLiveViewers] = useState(() =>
+    Math.floor(Math.random() * (80 - 50 + 1)) + 50
+  );
 
   // Live viewers - fluctuates between 45-85
   useEffect(() => {
     const interval = setInterval(() => {
-      setLiveViewers(prev => {
+      setLiveViewers((prev) => {
         const change = Math.floor(Math.random() * 7) - 3; // -3 to +3
         const newCount = prev + change;
         return Math.max(45, Math.min(85, newCount));
@@ -24,9 +26,9 @@ const [quizStarted, setQuizStarted] = useState(false);
     <div className="min-h-screen relative">
       {/* Background Image - Fixed */}
       <div className="fixed inset-0 z-0">
-        <img 
-          src={qualifyBgImage} 
-          alt="" 
+        <img
+          src={qualifyBgImage}
+          alt=""
           className="w-full h-full object-cover"
         />
         {/* Dark overlay for better contrast */}
@@ -41,22 +43,23 @@ const [quizStarted, setQuizStarted] = useState(false);
             {/* Progress Text */}
             <div className="text-center mb-4">
               {/* Live Activity Indicator - ORANGE badge, ALWAYS visible */}
-              <div className="inline-flex items-center gap-2 text-white text-xs font-bold px-4 py-2 rounded-full mb-4 shadow-xl border-2 border-white/50 bg-orange-500">
+              <div className="inline-flex items-center gap-2 text-white text-xs font-bold px-4 py-2 rounded-full mb-4 shadow-xl border-2 border-white/50 bg-primary">
                 <span className="relative flex h-2 w-2">
                   <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-white opacity-75"></span>
                   <span className="relative inline-flex rounded-full h-2 w-2 bg-white"></span>
                 </span>
                 {liveViewers} people checking availability right now
               </div>
-              
+
               {/* Header - HIDES when quiz starts */}
               {!quizStarted && (
                 <>
-                  <h1 className="text-xl sm:text-2xl font-bold text-slate-900 mb-3 leading-relaxed">
-                    See If You Qualify for the<br />
-                    Winter Upgrade Program
+                  <h1 className="text-xl sm:text-2xl font-bold text-foreground mb-3 leading-relaxed">
+                    See If You Qualify for the
+                    <br />
+                    Home Refresh Program
                   </h1>
-                  <p className="text-sm text-slate-600">
+                  <p className="text-base text-muted-foreground">
                     Takes less than 30 seconds
                   </p>
                 </>
@@ -69,11 +72,12 @@ const [quizStarted, setQuizStarted] = useState(false);
         </main>
 
         {/* Simple Footer */}
-        <footer className="w-full py-4 px-4 bg-white/80 backdrop-blur-sm border-t border-slate-200">
+        <footer className="w-full py-4 px-4 bg-white/80 backdrop-blur-sm border-t border-border">
           <div className="container mx-auto">
             <div className="flex items-center justify-center gap-2 text-xs text-muted-foreground">
               <Shield className="w-3.5 h-3.5" />
-              Your information is secure and will only be used to contact you about your remodeling project
+              Your information is secure and will only be used to contact you
+              about your painting project
             </div>
           </div>
         </footer>

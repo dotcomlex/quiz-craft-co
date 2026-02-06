@@ -4,28 +4,28 @@ import { ChevronLeft, ChevronRight, ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { motion } from "framer-motion";
 
-// Gallery images - optimized webp before/after renovation photos
-import galleryKitchenModern from "@/assets/gallery-kitchen-modern.webp";
-import galleryKitchenNavy from "@/assets/gallery-kitchen-navy.webp";
-import galleryKitchenDark from "@/assets/gallery-kitchen-dark.webp";
-import galleryKitchenWhite from "@/assets/gallery-kitchen-white.webp";
-import galleryBathroomSpa from "@/assets/gallery-bathroom-spa.webp";
-import galleryBathModern from "@/assets/gallery-bath-modern.webp";
-import galleryBathDouble from "@/assets/gallery-bath-double.webp";
-import galleryBathWalnut from "@/assets/gallery-bath-walnut.webp";
+// Gallery images - painting before/after transformations
+import galleryPainting1 from "@/assets/gallery-painting-1.webp";
+import galleryPainting2 from "@/assets/gallery-painting-2.webp";
+import galleryPainting3 from "@/assets/gallery-painting-3.webp";
+import galleryPainting4 from "@/assets/gallery-painting-4.webp";
+import galleryPainting5 from "@/assets/gallery-painting-5.webp";
+import galleryPainting6 from "@/assets/gallery-painting-6.webp";
+import galleryPainting7 from "@/assets/gallery-painting-7.webp";
+import galleryPainting8 from "@/assets/gallery-painting-8.webp";
 
 const GallerySection = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
 
   const projects = [
-    { image: galleryKitchenModern, alt: "Kitchen renovation before and after with modern wood cabinets" },
-    { image: galleryKitchenNavy, alt: "Kitchen transformation with navy blue cabinets and marble backsplash" },
-    { image: galleryKitchenDark, alt: "Small kitchen remodel with dark modern cabinets" },
-    { image: galleryKitchenWhite, alt: "Full kitchen renovation with white shaker cabinets" },
-    { image: galleryBathroomSpa, alt: "Bathroom before and after with spa-like marble shower" },
-    { image: galleryBathModern, alt: "Bathroom renovation with modern floating vanity and walk-in shower" },
-    { image: galleryBathDouble, alt: "Bathroom transformation with double vanity and arched mirrors" },
-    { image: galleryBathWalnut, alt: "Bathroom remodel with walnut vanity and LED mirror" },
+    { image: galleryPainting1, alt: "Kitchen painting transformation with fresh colors" },
+    { image: galleryPainting2, alt: "Interior living room painting before and after" },
+    { image: galleryPainting3, alt: "Kitchen walls fresh paint makeover" },
+    { image: galleryPainting4, alt: "Bedroom accent wall painting" },
+    { image: galleryPainting5, alt: "Exterior home painting transformation" },
+    { image: galleryPainting6, alt: "Bathroom painting refresh" },
+    { image: galleryPainting7, alt: "Deck and fence staining before and after" },
+    { image: galleryPainting8, alt: "Exterior trim and siding painting" },
   ];
 
   const nextSlide = () => {
@@ -48,10 +48,10 @@ const GallerySection = () => {
             Our Work
           </span>
           <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-foreground mb-4">
-            See What's Possible - <span className="text-primary">Real Home Transformations</span>
+            See What's Possible — <span className="text-primary">Real Home Transformations</span>
           </h2>
           <p className="text-base text-muted-foreground max-w-xl mx-auto">
-            Whether you're dreaming of a new kitchen, spa-like bathroom, or finished basement—we've got you covered.
+            From single rooms to full exteriors, we deliver flawless results that transform your home.
           </p>
         </div>
 
@@ -73,7 +73,7 @@ const GallerySection = () => {
             variant="outline"
             size="icon"
             onClick={prevSlide}
-            className="absolute left-3 top-1/2 -translate-y-1/2 w-11 h-11 rounded-full bg-card/95 backdrop-blur-sm hover:bg-card shadow-lg border-0"
+            className="absolute left-3 top-1/2 -translate-y-1/2 w-11 h-11 rounded-full bg-card/95 backdrop-blur-sm hover:bg-card shadow-lg border-0 min-h-[44px]"
           >
             <ChevronLeft className="w-5 h-5" />
           </Button>
@@ -81,11 +81,10 @@ const GallerySection = () => {
             variant="outline"
             size="icon"
             onClick={nextSlide}
-            className="absolute right-3 top-1/2 -translate-y-1/2 w-11 h-11 rounded-full bg-card/95 backdrop-blur-sm hover:bg-card shadow-lg border-0"
+            className="absolute right-3 top-1/2 -translate-y-1/2 w-11 h-11 rounded-full bg-card/95 backdrop-blur-sm hover:bg-card shadow-lg border-0 min-h-[44px]"
           >
             <ChevronRight className="w-5 h-5" />
           </Button>
-
         </div>
 
         <div className="flex justify-center gap-2 sm:gap-3 mt-6 overflow-x-auto pb-2 hide-scrollbar">
@@ -93,7 +92,7 @@ const GallerySection = () => {
             <button
               key={index}
               onClick={() => goToSlide(index)}
-              className={`rounded-lg overflow-hidden transition-all duration-300 flex-shrink-0 bg-muted ${
+              className={`rounded-lg overflow-hidden transition-all duration-300 flex-shrink-0 bg-muted min-h-[44px] ${
                 index === currentIndex
                   ? "ring-2 ring-primary ring-offset-2"
                   : "opacity-50 hover:opacity-100"
@@ -114,12 +113,12 @@ const GallerySection = () => {
 
         {/* Inline CTA - matches hero button style */}
         <div className="flex justify-center mt-10 sm:mt-12">
-          <motion.div className="animate-subtle-rock">
-            <Link to="/qualify">
+          <motion.div className="animate-subtle-rock w-full sm:w-auto">
+            <Link to="/qualify" className="block">
               <Button 
                 variant="cta" 
                 size="xl" 
-                className="group shadow-2xl text-lg px-8 py-6 animate-cta-glow"
+                className="group shadow-2xl text-lg px-8 py-6 animate-cta-glow w-full sm:w-auto min-h-[44px]"
               >
                 See If I Qualify Now
                 <ArrowRight className="ml-2 h-5 w-5 transition-transform group-hover:translate-x-1" />

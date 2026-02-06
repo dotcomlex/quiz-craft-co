@@ -6,65 +6,65 @@
 
 @layer base {
   :root {
-    /* Core brand colors - premium neutral palette */
+    /* Core brand colors - Emerald Paints palette */
     --background: 0 0% 100%;
-    --foreground: 220 20% 15%;
+    --foreground: 215 30% 15%;
 
-    /* Hero dark section - deep slate */
-    --hero: 220 30% 10%;
+    /* Hero dark section - Deep Navy #0B2447 */
+    --hero: 215 60% 14%;
     --hero-foreground: 0 0% 98%;
 
-    /* Primary - Warm amber (used sparingly for CTAs only) */
-    --primary: 38 85% 50%;
+    /* Primary - Warm Gold CTA #D4920B */
+    --primary: 40 88% 44%;
     --primary-foreground: 0 0% 100%;
-    --primary-hover: 38 85% 42%;
+    --primary-hover: 40 88% 36%;
 
-    /* Secondary - Deep slate blue */
-    --secondary: 220 25% 22%;
+    /* Secondary - Deep Navy */
+    --secondary: 215 60% 14%;
     --secondary-foreground: 0 0% 98%;
 
-    /* Tertiary - Cool blue accent */
-    --tertiary: 210 50% 45%;
+    /* Tertiary - Emerald Green #1B6B3A */
+    --tertiary: 150 55% 28%;
     --tertiary-foreground: 0 0% 100%;
 
     /* Muted surfaces - neutral grays */
-    --muted: 220 12% 95%;
-    --muted-foreground: 220 10% 45%;
+    --muted: 215 15% 95%;
+    --muted-foreground: 215 12% 45%;
 
     /* Cards and popover */
     --card: 0 0% 100%;
-    --card-foreground: 220 20% 15%;
+    --card-foreground: 215 30% 15%;
     --popover: 0 0% 100%;
-    --popover-foreground: 220 20% 15%;
+    --popover-foreground: 215 30% 15%;
 
-    /* Accent - Very light warm tint */
-    --accent: 38 40% 97%;
-    --accent-foreground: 38 70% 35%;
+    /* Accent - Light emerald tint */
+    --accent: 150 30% 96%;
+    --accent-foreground: 150 55% 28%;
 
     /* Destructive */
     --destructive: 0 84% 60%;
     --destructive-foreground: 0 0% 98%;
 
     /* Borders and inputs */
-    --border: 220 13% 90%;
-    --input: 220 13% 90%;
-    --ring: 38 85% 50%;
+    --border: 215 15% 90%;
+    --input: 215 15% 90%;
+    --ring: 40 88% 44%;
 
     /* Radius */
     --radius: 0.75rem;
 
-    /* Custom tokens */
-    --success: 142 70% 38%;
+    /* Custom tokens - Success uses Emerald Green */
+    --success: 150 55% 28%;
     --success-foreground: 0 0% 100%;
     
-    /* Highlight - Bright yellow for key offers */
-    --highlight: 50 100% 60%;
-    --highlight-foreground: 220 20% 15%;
+    /* Highlight - Bright Gold #F5C518 for offers */
+    --highlight: 48 95% 52%;
+    --highlight-foreground: 215 30% 15%;
     
     /* Section backgrounds - premium transitions */
-    --section-warm: 30 30% 98%;
-    --section-slate: 220 20% 97%;
-    --section-dark: 220 30% 12%;
+    --section-warm: 150 20% 98%;
+    --section-slate: 215 20% 97%;
+    --section-dark: 215 60% 12%;
     
     /* Shadows */
     --shadow-sm: 0 1px 2px 0 hsl(0 0% 0% / 0.04);
@@ -79,8 +79,8 @@
     --sidebar-primary-foreground: 0 0% 98%;
     --sidebar-accent: 240 4.8% 95.9%;
     --sidebar-accent-foreground: 240 5.9% 10%;
-    --sidebar-border: 220 13% 91%;
-    --sidebar-ring: 217.2 91.2% 59.8%;
+    --sidebar-border: 215 15% 91%;
+    --sidebar-ring: 40 88% 44%;
   }
 
   .dark {
