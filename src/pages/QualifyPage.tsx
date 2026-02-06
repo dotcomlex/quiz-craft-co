@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import Quiz from "@/components/Quiz";
 import { Shield } from "lucide-react";
-import qualifyBgImage from "@/assets/14er-paper-mountain-bg.webp";
+import qualifyBgImage from "@/assets/qualify-bg-mountains.png";
 
 const QualifyPage = () => {
   const [quizStarted, setQuizStarted] = useState(false);

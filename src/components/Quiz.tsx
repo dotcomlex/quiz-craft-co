@@ -880,7 +880,7 @@ const Quiz = ({ onStart }: QuizProps) => {
               <Button
                 onClick={handleSubmit}
                 disabled={isSubmitting}
-                className="w-full h-12 text-[15px] font-semibold bg-gradient-to-r from-primary to-amber-500 hover:from-primary/90 hover:to-amber-500/90 text-white rounded-xl shadow-lg min-h-[44px]"
+                className="w-full h-12 text-[15px] font-semibold bg-gradient-to-r from-primary to-[#E5A30C] hover:from-primary/90 hover:to-[#E5A30C]/90 text-white rounded-xl shadow-lg min-h-[44px]"
               >
                 {isSubmitting ? (
                   <>

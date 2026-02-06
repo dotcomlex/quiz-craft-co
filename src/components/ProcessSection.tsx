@@ -6,30 +6,30 @@ const ProcessSection = () => {
       icon: MessageSquare,
       number: "1",
       title: "Answer Quick Questions",
-      description: "Tell us about your painting project so we can prepare the right consultation.",
+      description: "Tell us about your painting project so we can prepare the right estimate.",
     },
     {
       icon: CalendarCheck,
       number: "2",
       title: "Free In-Home Estimate",
-      description: "Miguel comes to your home to walk through the project, discuss colors, and assess what's needed.",
+      description: "Jose comes to your home to walk through the project, discuss colors, and answer questions.",
     },
     {
       icon: FileText,
       number: "3",
       title: "Clear, Upfront Price",
-      description: "No hidden fees, no surprises. You know exactly what to expect before any work begins.",
+      description: "No hidden fees, no surprises. You know exactly what to expect before we start.",
     },
     {
       icon: Paintbrush,
       number: "4",
       title: "We Handle Everything",
-      description: "Love your quote? We handle all the prep, painting, and cleanup. You just enjoy the results.",
+      description: "We handle all the prep, painting, and cleanup. You just enjoy the transformation.",
     },
   ];
 
   return (
-    <section className="py-16 lg:py-24 section-gradient-dark text-hero-foreground">
+    <section className="py-16 lg:py-24 bg-gradient-to-br from-[#0B2447] to-[#0A1D3B] text-white">
       <div className="container mx-auto px-4">
         <div className="text-center mb-12">
           <span className="inline-block text-primary font-semibold text-sm uppercase tracking-wider mb-3">

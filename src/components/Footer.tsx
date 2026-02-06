@@ -2,19 +2,17 @@ import logo from "@/assets/emerald-paints-logo.png";
 
 const Footer = () => {
   return (
-    <footer className="py-8 sm:py-10 bg-hero text-hero-foreground/60">
+    <footer className="py-8 sm:py-10 bg-white border-t border-border">
       <div className="container mx-auto px-4">
         <div className="flex flex-col md:flex-row justify-between items-center gap-4">
-          {/* Logo in white container on dark background */}
-          <div className="bg-white rounded-lg p-2">
-            <img
-              src={logo}
-              alt="Emerald Paints"
-              className="h-10 sm:h-12 w-auto"
-            />
-          </div>
+          {/* Logo sits naturally on white background - no container needed */}
+          <img
+            src={logo}
+            alt="Emerald Paints"
+            className="h-12 sm:h-14 w-auto"
+          />
 
-          <p className="text-xs sm:text-sm text-center md:text-left">
+          <p className="text-xs sm:text-sm text-muted-foreground text-center md:text-left">
             © {new Date().getFullYear()} Emerald Paints LLC. All rights
             reserved. Professional painting services for Colorado homeowners.
           </p>
