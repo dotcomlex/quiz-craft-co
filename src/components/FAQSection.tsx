@@ -18,7 +18,7 @@ const faqs = [
   {
     question: "What does the free estimate include?",
     answer:
-      "Miguel will come to your home, walk through the project with you, assess surface conditions, discuss color options, and provide a detailed quote with no hidden fees. It's completely free, no pressure, and no obligation.",
+      "Jose will come to your home, walk through the project with you, assess surface conditions, discuss color options, and provide a detailed quote with no hidden fees. It's completely free, no pressure, and no obligation.",
   },
   {
     question: "Are you licensed and insured?",
@@ -38,12 +38,12 @@ const faqs = [
   {
     question: "How long does a typical paint job take?",
     answer:
-      "It depends on the scope. A single room can be done in a day. A full interior usually takes 3 to 5 days. Full exteriors typically take 3 to 7 days depending on size and prep work needed. Miguel will give you a clear timeline during the estimate.",
+      "It depends on the scope. A single room can be done in a day. A full interior usually takes 3 to 5 days. Full exteriors typically take 3 to 7 days depending on size and prep work needed. Jose will give you a clear timeline during the estimate.",
   },
   {
     question: "Can you help with color selection?",
     answer:
-      "Absolutely. Miguel offers a free color consultation as part of the estimate. He'll bring samples, test them on your walls with different lighting, and help you pick shades that work perfectly for your space.",
+      "Absolutely. Jose offers a free color consultation as part of the estimate. He'll bring samples, test them on your walls with different lighting, and help you pick shades that work perfectly for your space.",
   },
 ];
 

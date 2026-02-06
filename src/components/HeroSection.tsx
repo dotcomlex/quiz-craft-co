@@ -26,20 +26,18 @@ const HeroSection = () => {
 
       {/* Content */}
       <div className="relative z-10 container mx-auto px-4 py-6 lg:py-12">
-        {/* Logo - centered with white container on dark background */}
+        {/* Logo - with subtle glow effect for visibility on dark background */}
         <motion.div
-          className="flex justify-center mb-2 lg:mb-3"
+          className="flex justify-center mb-4 lg:mb-6"
           initial={{ opacity: 0, scale: 0.9 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.5 }}
         >
-          <div className="bg-white rounded-xl p-3 shadow-lg">
-            <img
-              src={logo}
-              alt="Emerald Paints"
-              className="h-16 sm:h-20 lg:h-28 w-auto object-contain"
-            />
-          </div>
+          <img
+            src={logo}
+            alt="Emerald Paints"
+            className="h-20 sm:h-24 lg:h-32 w-auto object-contain drop-shadow-[0_0_20px_rgba(255,255,255,0.3)]"
+          />
         </motion.div>
 
         {/* Single centered column */}
@@ -51,17 +49,16 @@ const HeroSection = () => {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.2 }}
           >
-            <h1 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-white leading-snug hero-text-shadow-strong mb-8">
+            <h1 className="text-[22px] sm:text-3xl lg:text-4xl font-extrabold text-white leading-[1.3] sm:leading-snug hero-text-shadow-strong mb-6 sm:mb-8">
               Finally, A Way For Colorado Homeowners To Get{" "}
-              <span className="text-highlight">25% Off</span> Beautiful,
-              Professional Painting{" "}
-              <span className="hidden sm:inline">—</span>
-              <br className="sm:hidden" />
-              The <span className="text-highlight">Home Refresh Program</span> Is
-              Now Open
+              <span className="text-highlight">25% Off</span> Beautiful, Professional
+              Painting{" "}
+              <span className="block mt-1">
+                — The <span className="text-highlight">Home Refresh Program</span> Is Now Open
+              </span>
             </h1>
 
-            <p className="text-base sm:text-lg lg:text-xl text-white/95 leading-relaxed hero-text-shadow-strong max-w-2xl mx-auto">
+            <p className="text-[15px] sm:text-lg lg:text-xl text-white/90 leading-relaxed hero-text-shadow-strong max-w-2xl mx-auto">
               Spots are filling fast. Check if your area qualifies for a free
               no-pressure estimate and 25% off professional painting before this
               program closes.

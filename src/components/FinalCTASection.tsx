@@ -4,7 +4,7 @@ import { Gift, ArrowRight } from "lucide-react";
 
 const FinalCTASection = () => {
   return (
-    <section className="py-16 lg:py-24 cta-gradient text-hero-foreground">
+    <section className="py-16 lg:py-24 bg-gradient-to-br from-[#0B2447] to-[#0A1D3B] text-white">
       <div className="container mx-auto px-4 text-center">
         <div className="inline-flex items-center gap-2 bg-primary/20 backdrop-blur-sm text-primary px-4 py-2 rounded-full text-sm font-semibold mb-6">
           <Gift className="w-4 h-4" />
@@ -30,7 +30,7 @@ const FinalCTASection = () => {
         </Link>
 
         <p className="text-sm opacity-60 mt-6">
-          No obligations • Free in-home estimate • Satisfaction guaranteed
+          No obligations · Free in-home estimate · Satisfaction guaranteed
         </p>
       </div>
     </section>
