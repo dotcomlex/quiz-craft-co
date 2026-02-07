@@ -1,7 +1,6 @@
 import { lazy, Suspense } from "react";
 import HeroSection from "@/components/HeroSection";
 import FloatingCTA from "@/components/FloatingCTA";
-import StickyHeader from "@/components/StickyHeader";
 
 // Lazy load below-the-fold sections for faster initial load
 const TrustBadgesSection = lazy(() => import("@/components/TrustBadgesSection"));
@@ -14,7 +13,6 @@ const FinalCTASection = lazy(() => import("@/components/FinalCTASection"));
 const Index = () => {
   return (
     <main className="min-h-screen">
-      <StickyHeader />
       <HeroSection />
       <Suspense fallback={<div className="h-24 bg-white" />}>
         <TrustBadgesSection />

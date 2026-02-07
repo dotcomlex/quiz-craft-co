@@ -33,7 +33,7 @@ const FloatingCTA = () => {
               size="lg"
               className="w-full sm:w-auto shadow-premium text-sm sm:text-base font-semibold px-6 py-4 h-auto animate-cta-glow"
             >
-              See If You Qualify
+              Check My Eligibility
             </Button>
           </Link>
         </motion.div>

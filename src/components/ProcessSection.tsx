@@ -30,7 +30,7 @@ const ProcessSection = () => {
   ];
 
   return (
-    <section className="py-16 lg:py-24 texture-overlay" style={{ backgroundColor: '#FEFDFB' }}>
+    <section className="py-12 lg:py-20 texture-overlay" style={{ backgroundColor: '#FEFDFB' }}>
       <div className="container mx-auto px-4">
         <div className="text-center mb-12">
           <span 
@@ -41,7 +41,7 @@ const ProcessSection = () => {
           </span>
           <h2 
             className="text-2xl sm:text-3xl lg:text-4xl font-bold mb-4"
-            style={{ color: '#1E3A8A' }}
+            style={{ color: '#1E293B' }}
           >
             Your Path to a Beautiful Home
           </h2>
@@ -70,16 +70,16 @@ const ProcessSection = () => {
                     >
                       <step.icon className="w-8 h-8" style={{ color: '#1B6B3A' }} />
                     </div>
-                    {/* BRIGHT BLUE number badge */}
+                    {/* GREEN number badge */}
                     <div 
                       className="absolute -top-2 -right-2 w-7 h-7 rounded-full flex items-center justify-center text-sm font-bold shadow-lg"
-                      style={{ backgroundColor: '#2563EB', color: '#FFFFFF' }}
+                      style={{ backgroundColor: '#1B6B3A', color: '#FFFFFF' }}
                     >
                       {step.number}
                     </div>
                   </div>
                   
-                  <h3 className="text-lg font-semibold mb-2" style={{ color: '#1E3A8A' }}>{step.title}</h3>
+                  <h3 className="text-lg font-semibold mb-2" style={{ color: '#1E293B' }}>{step.title}</h3>
                   <p className="text-base max-w-xs" style={{ color: '#374151' }}>{step.description}</p>
                 </div>
               </div>

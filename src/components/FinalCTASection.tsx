@@ -5,7 +5,7 @@ import { Gift, ArrowRight } from "lucide-react";
 const FinalCTASection = () => {
   return (
     <section 
-      className="py-16 lg:py-24 text-white"
+      className="py-12 lg:py-20 text-white"
       style={{ background: 'linear-gradient(180deg, #0F172A 0%, #1E293B 100%)' }}
     >
       <div className="container mx-auto px-4 text-center">
@@ -25,8 +25,7 @@ const FinalCTASection = () => {
 
           <h2 className="text-2xl sm:text-3xl lg:text-5xl font-bold mb-6 max-w-3xl mx-auto leading-tight">
             Don't Wait — Lock In Your{" "}
-            <span style={{ color: '#F5C518' }}>25% Discount</span> Before The Home
-            Refresh Program Closes
+            <span style={{ color: '#F5C518' }}>25% Discount</span> Today
           </h2>
 
           <p className="text-base sm:text-lg lg:text-xl opacity-80 mb-8 max-w-2xl mx-auto">
@@ -38,7 +37,7 @@ const FinalCTASection = () => {
           <div className="animate-subtle-rock inline-block w-full sm:w-auto">
             <Link to="/qualify" className="block">
               <Button variant="cta" size="xl" className="group w-full sm:w-auto min-h-[44px] animate-cta-glow">
-                See If You Qualify
+                Check My Eligibility
                 <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
               </Button>
             </Link>

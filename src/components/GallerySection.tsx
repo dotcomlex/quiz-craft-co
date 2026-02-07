@@ -40,7 +40,7 @@ const GallerySection = () => {
   };
 
   return (
-    <section className="py-16 lg:py-24 texture-overlay" style={{ backgroundColor: '#FEFDFB' }}>
+    <section className="py-12 lg:py-20 texture-overlay" style={{ backgroundColor: '#FEFDFB' }}>
       <div className="container mx-auto px-4">
         <div className="text-center mb-10">
           <span 
@@ -51,7 +51,7 @@ const GallerySection = () => {
           </span>
           <h2 
             className="text-2xl sm:text-3xl lg:text-4xl font-bold mb-4"
-            style={{ color: '#1E3A8A' }}
+            style={{ color: '#1E293B' }}
           >
             See What's Possible — Real Home Transformations
           </h2>
@@ -92,7 +92,7 @@ const GallerySection = () => {
           </Button>
         </div>
 
-        {/* Carousel dots with BLUE selected ring */}
+        {/* Carousel dots with GREEN selected ring */}
         <div className="flex justify-center gap-2 sm:gap-3 mt-6 overflow-x-auto pb-2 hide-scrollbar">
           {projects.map((project, index) => (
             <button
@@ -100,7 +100,7 @@ const GallerySection = () => {
               onClick={() => goToSlide(index)}
               className={`rounded-lg overflow-hidden transition-all duration-300 flex-shrink-0 bg-muted min-h-[44px] border-2 ${
                 index === currentIndex
-                  ? "border-[#2563EB] ring-2 ring-[#2563EB] ring-offset-2 shadow-lg"
+                  ? "border-[#1B6B3A] ring-2 ring-[#1B6B3A] ring-offset-2 shadow-lg"
                   : "border-transparent opacity-50 hover:opacity-100"
               }`}
             >
@@ -126,7 +126,7 @@ const GallerySection = () => {
                 size="xl" 
                 className="group shadow-2xl text-lg px-8 py-6 animate-cta-glow w-full sm:w-auto min-h-[44px]"
               >
-                See If I Qualify Now
+                Check My Eligibility
                 <ArrowRight className="ml-2 h-5 w-5 transition-transform group-hover:translate-x-1" />
               </Button>
             </Link>
