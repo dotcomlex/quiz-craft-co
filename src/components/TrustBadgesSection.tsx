@@ -18,6 +18,9 @@ const TrustBadgesSection = () => {
 
   return (
     <section className="py-6 bg-white border-y border-border overflow-hidden">
+      {/* Section divider gradient at top */}
+      <div className="section-divider mb-4" />
+      
       <p className="text-center text-xs text-secondary uppercase tracking-widest mb-4 font-medium">
         Trusted & Certified
       </p>
@@ -31,7 +34,7 @@ const TrustBadgesSection = () => {
               <img
                 src={badge.src}
                 alt={badge.alt}
-                className="h-14 sm:h-18 w-auto object-contain opacity-80 hover:opacity-100 transition-opacity duration-300"
+                className="h-14 sm:h-18 w-auto object-contain grayscale opacity-70 hover:grayscale-0 hover:opacity-100 transition-all duration-300"
                 loading="lazy"
                 decoding="async"
               />

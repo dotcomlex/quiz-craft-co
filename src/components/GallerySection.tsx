@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { ChevronLeft, ChevronRight, ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { motion } from "framer-motion";
+import bgWatercolor from "@/assets/bg-watercolor-mountains.webp";
 
 // Gallery images - painting before/after transformations
 import galleryPainting1 from "@/assets/gallery-painting-1.webp";
@@ -41,22 +42,44 @@ const GallerySection = () => {
   };
 
   return (
-    <section className="py-16 lg:py-24 bg-white">
-      <div className="container mx-auto px-4">
-        <div className="text-center mb-10">
+    <section 
+      className="py-16 lg:py-24 relative"
+      style={{
+        backgroundImage: `url(${bgWatercolor})`,
+        backgroundSize: 'cover',
+        backgroundPosition: 'center',
+      }}
+    >
+      {/* Light overlay for readability */}
+      <div className="absolute inset-0 bg-white/85" />
+      
+      <div className="container mx-auto px-4 relative z-10">
+        <motion.div 
+          className="text-center mb-10"
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6 }}
+        >
           <span className="inline-block text-primary font-semibold text-sm uppercase tracking-wider mb-3">
             Our Work
           </span>
           <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-secondary mb-4">
-            See What's Possible — <span className="text-primary">Real Home Transformations</span>
+            See What's Possible — <span className="text-highlight">Real Home Transformations</span>
           </h2>
           <p className="text-base text-muted-foreground max-w-xl mx-auto">
             From single rooms to full exteriors, we deliver flawless results that transform your home.
           </p>
-        </div>
+        </motion.div>
 
-        <div className="relative max-w-3xl mx-auto">
-          <div className="relative rounded-2xl overflow-hidden shadow-elevated aspect-square bg-muted">
+        <motion.div 
+          className="relative max-w-3xl mx-auto"
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6, delay: 0.2 }}
+        >
+          <div className="relative rounded-2xl overflow-hidden shadow-xl aspect-square bg-muted">
             <img
               src={projects[currentIndex].image}
               alt={projects[currentIndex].alt}
@@ -85,18 +108,18 @@ const GallerySection = () => {
           >
             <ChevronRight className="w-5 h-5" />
           </Button>
-        </div>
+        </motion.div>
 
-        {/* Carousel dots - EMERALD GREEN */}
+        {/* Carousel dots with GOLD selected ring */}
         <div className="flex justify-center gap-2 sm:gap-3 mt-6 overflow-x-auto pb-2 hide-scrollbar">
           {projects.map((project, index) => (
             <button
               key={index}
               onClick={() => goToSlide(index)}
-              className={`rounded-lg overflow-hidden transition-all duration-300 flex-shrink-0 bg-muted min-h-[44px] ${
+              className={`rounded-lg overflow-hidden transition-all duration-300 flex-shrink-0 bg-muted min-h-[44px] border-2 ${
                 index === currentIndex
-                  ? "ring-2 ring-primary ring-offset-2"
-                  : "opacity-50 hover:opacity-100"
+                  ? "border-primary ring-2 ring-primary ring-offset-2 shadow-lg"
+                  : "border-transparent opacity-50 hover:opacity-100"
               }`}
             >
               <img
@@ -112,7 +135,10 @@ const GallerySection = () => {
           ))}
         </div>
 
-        {/* Inline CTA - EMERALD GREEN */}
+        {/* Section divider */}
+        <div className="section-divider mt-12 mb-8" />
+
+        {/* Inline CTA - GOLD */}
         <div className="flex justify-center mt-10 sm:mt-12">
           <motion.div className="animate-subtle-rock w-full sm:w-auto">
             <Link to="/qualify" className="block">
