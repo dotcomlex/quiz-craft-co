@@ -1,5 +1,5 @@
 import { MessageSquare, CalendarCheck, FileText, Paintbrush } from "lucide-react";
-import paintersActionShot from "@/assets/painters-action-shot.webp";
+import finishedHome from "@/assets/finished-colorado-home.webp";
 
 const ProcessSection = () => {
   const steps = [
@@ -70,10 +70,10 @@ const ProcessSection = () => {
                     >
                       <step.icon className="w-8 h-8" style={{ color: '#1B6B3A' }} />
                     </div>
-                    {/* GREEN number badge */}
+                    {/* RED number badge for contrast */}
                     <div 
                       className="absolute -top-2 -right-2 w-7 h-7 rounded-full flex items-center justify-center text-sm font-bold shadow-lg"
-                      style={{ backgroundColor: '#1B6B3A', color: '#FFFFFF' }}
+                      style={{ backgroundColor: '#DC2626', color: '#FFFFFF' }}
                     >
                       {step.number}
                     </div>
@@ -87,12 +87,12 @@ const ProcessSection = () => {
           </div>
         </div>
 
-        {/* Action shot image */}
+        {/* Finished home image */}
         <div className="max-w-4xl mx-auto mt-12">
           <img
-            src={paintersActionShot}
-            alt="Professional Emerald Paints crew at work on a Colorado home"
-            className="w-full rounded-2xl shadow-xl"
+            src={finishedHome}
+            alt="Beautiful finished Colorado home with fresh paint"
+            className="w-full aspect-square object-cover rounded-2xl shadow-xl"
             loading="lazy"
             decoding="async"
           />
