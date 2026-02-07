@@ -2,7 +2,6 @@ import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { Star, ChevronLeft, ChevronRight, Quote, ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { motion } from "framer-motion";
 import avatar1 from "@/assets/avatar-1.jpg";
 import avatar2 from "@/assets/avatar-2.jpg";
 import avatar3 from "@/assets/avatar-3.jpg";
@@ -94,44 +93,40 @@ const ReviewsSection = () => {
   const getVisibleReviews = () => reviews.slice(currentIndex, currentIndex + visibleCount);
 
   return (
-    <section className="py-12 sm:py-16 lg:py-24 bg-gradient-to-br from-[#0B2447] to-[#0A1D3B]">
+    <section 
+      className="py-12 sm:py-16 lg:py-24"
+      style={{ background: 'linear-gradient(180deg, #0F172A 0%, #1E293B 100%)' }}
+    >
       <div className="container mx-auto px-4">
-        <motion.div 
-          className="text-center mb-10"
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-        >
-          {/* Label - BRIGHT GOLD for visibility on dark */}
-          <span className="inline-block text-highlight font-semibold text-sm uppercase tracking-wider mb-3">
+        <div className="text-center mb-10">
+          {/* Label - GOLD for visibility on dark */}
+          <span 
+            className="inline-block font-semibold text-sm uppercase tracking-wider mb-3"
+            style={{ color: '#F5C518' }}
+          >
             Customer Reviews
           </span>
           <h2 className="text-xl sm:text-2xl lg:text-4xl font-bold text-white mb-3 sm:mb-4 leading-tight">
-            This Is Why Colorado Homeowners <span className="text-highlight">Trust Us</span>
+            This Is Why Colorado Homeowners <span style={{ color: '#F5C518' }}>Trust Us</span>
           </h2>
           <p className="text-sm sm:text-base text-white/70 max-w-xl mx-auto px-4">
             Real stories from real families who transformed their homes.
           </p>
-        </motion.div>
+        </div>
 
         <div className="relative max-w-5xl mx-auto">
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-5">
             {getVisibleReviews().map((review, index) => (
-              <motion.div
+              <div
                 key={currentIndex + index}
                 className="bg-white rounded-2xl p-5 sm:p-6 shadow-lg border border-border/30 h-full flex flex-col"
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: index * 0.1 }}
               >
                 <Quote className="w-6 h-6 sm:w-8 sm:h-8 text-primary/20 mb-3 sm:mb-4" />
                 <p className="text-foreground/90 mb-4 sm:mb-5 text-xs sm:text-sm leading-relaxed">"{review.text}"</p>
                 {/* Stars - GOLD color */}
                 <div className="flex gap-1 mb-3 sm:mb-4">
                   {[...Array(review.rating)].map((_, i) => (
-                    <Star key={i} className="w-3.5 h-3.5 sm:w-4 sm:h-4 fill-primary text-primary" />
+                    <Star key={i} className="w-3.5 h-3.5 sm:w-4 sm:h-4" style={{ fill: '#F5C518', color: '#F5C518' }} />
                   ))}
                 </div>
                 <div className="flex items-center gap-2.5 sm:gap-3 pt-3 sm:pt-4 border-t border-border/50 mt-auto">
@@ -157,7 +152,7 @@ const ReviewsSection = () => {
                   </svg>
                   <span>Verified Google Review</span>
                 </div>
-              </motion.div>
+              </div>
             ))}
           </div>
 
@@ -182,9 +177,9 @@ const ReviewsSection = () => {
             </Button>
           </div>
 
-          {/* Inline CTA - GOLD */}
+          {/* Inline CTA - GREEN */}
           <div className="flex justify-center mt-8 sm:mt-10">
-            <motion.div className="animate-subtle-rock w-full sm:w-auto">
+            <div className="animate-subtle-rock w-full sm:w-auto">
               <Link to="/qualify" className="block">
                 <Button 
                   variant="cta" 
@@ -195,7 +190,7 @@ const ReviewsSection = () => {
                   <ArrowRight className="ml-2 h-5 w-5 transition-transform group-hover:translate-x-1" />
                 </Button>
               </Link>
-            </motion.div>
+            </div>
           </div>
         </div>
       </div>

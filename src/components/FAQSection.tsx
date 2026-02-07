@@ -34,14 +34,20 @@ const faqs = [
 
 const FAQSection = () => {
   return (
-    <section className="py-16 lg:py-24" style={{ backgroundColor: '#FEFDFB' }}>
+    <section className="py-16 lg:py-24 texture-overlay" style={{ backgroundColor: '#FEFDFB' }}>
       <div className="container max-w-3xl px-4">
         {/* Header */}
         <div className="text-center mb-10">
-          <span className="inline-block text-secondary font-semibold text-sm uppercase tracking-wider mb-3">
+          <span 
+            className="inline-block font-semibold text-sm uppercase tracking-wider mb-3"
+            style={{ color: '#1B6B3A' }}
+          >
             Questions & Answers
           </span>
-          <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-secondary mb-4">
+          <h2 
+            className="text-2xl sm:text-3xl lg:text-4xl font-bold mb-4"
+            style={{ color: '#1E3A8A' }}
+          >
             Common Questions
           </h2>
         </div>
@@ -55,10 +61,13 @@ const FAQSection = () => {
                 value={`item-${index}`}
                 className="bg-card rounded-xl shadow-sm border border-border px-5 transition-shadow hover:shadow-md"
               >
-                <AccordionTrigger className="text-left text-base font-medium text-secondary hover:text-primary hover:no-underline py-4 [&[data-state=open]>svg]:text-primary">
+                <AccordionTrigger 
+                  className="text-left text-base font-medium hover:no-underline py-4"
+                  style={{ color: '#1E3A8A' }}
+                >
                   {faq.question}
                 </AccordionTrigger>
-                <AccordionContent className="text-base text-muted-foreground pb-4 leading-relaxed">
+                <AccordionContent className="text-base pb-4 leading-relaxed" style={{ color: '#374151' }}>
                   {faq.answer}
                 </AccordionContent>
               </AccordionItem>
@@ -66,7 +75,7 @@ const FAQSection = () => {
           </Accordion>
         </div>
 
-        {/* Inline CTA - GOLD */}
+        {/* Inline CTA - GREEN */}
         <div className="flex justify-center mt-10 sm:mt-12">
           <div className="animate-subtle-rock w-full sm:w-auto">
             <Link to="/qualify" className="block">

@@ -4,18 +4,28 @@ import { Gift, ArrowRight } from "lucide-react";
 
 const FinalCTASection = () => {
   return (
-    <section className="py-16 lg:py-24 bg-gradient-to-br from-[#0B2447] to-[#0B2447] text-white">
+    <section 
+      className="py-16 lg:py-24 text-white"
+      style={{ background: 'linear-gradient(180deg, #0F172A 0%, #1E293B 100%)' }}
+    >
       <div className="container mx-auto px-4 text-center">
         <div>
           {/* Badge - gold accent */}
-          <div className="inline-flex items-center gap-2 bg-primary/20 backdrop-blur-sm text-primary-foreground px-4 py-2 rounded-full text-sm font-semibold mb-6 border border-primary/30">
+          <div 
+            className="inline-flex items-center gap-2 px-4 py-2 rounded-full text-sm font-semibold mb-6"
+            style={{
+              backgroundColor: 'rgba(245, 197, 24, 0.15)',
+              color: '#F5C518',
+              border: '1px solid rgba(245, 197, 24, 0.3)'
+            }}
+          >
             <Gift className="w-4 h-4" />
             <span>Limited Spots Available</span>
           </div>
 
           <h2 className="text-2xl sm:text-3xl lg:text-5xl font-bold mb-6 max-w-3xl mx-auto leading-tight">
             Don't Wait — Lock In Your{" "}
-            <span className="text-highlight">25% Discount</span> Before The Home
+            <span style={{ color: '#F5C518' }}>25% Discount</span> Before The Home
             Refresh Program Closes
           </h2>
 
@@ -24,7 +34,7 @@ const FinalCTASection = () => {
             painting. Spots are filling fast.
           </p>
 
-          {/* CTA - GOLD */}
+          {/* CTA - GREEN */}
           <div className="animate-subtle-rock inline-block w-full sm:w-auto">
             <Link to="/qualify" className="block">
               <Button variant="cta" size="xl" className="group w-full sm:w-auto min-h-[44px] animate-cta-glow">
