@@ -40,16 +40,22 @@ const GallerySection = () => {
   };
 
   return (
-    <section className="py-16 lg:py-24" style={{ backgroundColor: '#FEFDFB' }}>
+    <section className="py-16 lg:py-24 texture-overlay" style={{ backgroundColor: '#FEFDFB' }}>
       <div className="container mx-auto px-4">
         <div className="text-center mb-10">
-          <span className="inline-block text-secondary font-semibold text-sm uppercase tracking-wider mb-3">
+          <span 
+            className="inline-block font-semibold text-sm uppercase tracking-wider mb-3"
+            style={{ color: '#1B6B3A' }}
+          >
             Our Work
           </span>
-          <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-secondary mb-4">
+          <h2 
+            className="text-2xl sm:text-3xl lg:text-4xl font-bold mb-4"
+            style={{ color: '#1E3A8A' }}
+          >
             See What's Possible — Real Home Transformations
           </h2>
-          <p className="text-base text-muted-foreground max-w-xl mx-auto">
+          <p className="text-base max-w-xl mx-auto" style={{ color: '#374151' }}>
             From single rooms to full exteriors, we deliver flawless results that transform your home.
           </p>
         </div>
@@ -86,7 +92,7 @@ const GallerySection = () => {
           </Button>
         </div>
 
-        {/* Carousel dots with GOLD selected ring */}
+        {/* Carousel dots with BLUE selected ring */}
         <div className="flex justify-center gap-2 sm:gap-3 mt-6 overflow-x-auto pb-2 hide-scrollbar">
           {projects.map((project, index) => (
             <button
@@ -94,7 +100,7 @@ const GallerySection = () => {
               onClick={() => goToSlide(index)}
               className={`rounded-lg overflow-hidden transition-all duration-300 flex-shrink-0 bg-muted min-h-[44px] border-2 ${
                 index === currentIndex
-                  ? "border-primary ring-2 ring-primary ring-offset-2 shadow-lg"
+                  ? "border-[#2563EB] ring-2 ring-[#2563EB] ring-offset-2 shadow-lg"
                   : "border-transparent opacity-50 hover:opacity-100"
               }`}
             >
@@ -111,7 +117,7 @@ const GallerySection = () => {
           ))}
         </div>
 
-        {/* Inline CTA - GOLD */}
+        {/* Inline CTA - GREEN */}
         <div className="flex justify-center mt-10 sm:mt-12">
           <div className="animate-subtle-rock w-full sm:w-auto">
             <Link to="/qualify" className="block">

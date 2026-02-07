@@ -30,13 +30,19 @@ const ProcessSection = () => {
   ];
 
   return (
-    <section className="py-16 lg:py-24" style={{ backgroundColor: '#FEFDFB' }}>
+    <section className="py-16 lg:py-24 texture-overlay" style={{ backgroundColor: '#FEFDFB' }}>
       <div className="container mx-auto px-4">
         <div className="text-center mb-12">
-          <span className="inline-block text-secondary font-semibold text-sm uppercase tracking-wider mb-3">
+          <span 
+            className="inline-block font-semibold text-sm uppercase tracking-wider mb-3"
+            style={{ color: '#1B6B3A' }}
+          >
             How It Works
           </span>
-          <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-secondary mb-4">
+          <h2 
+            className="text-2xl sm:text-3xl lg:text-4xl font-bold mb-4"
+            style={{ color: '#1E3A8A' }}
+          >
             Your Path to a Beautiful Home
           </h2>
         </div>
@@ -54,18 +60,27 @@ const ProcessSection = () => {
                 
                 <div className="relative inline-flex flex-col items-center">
                   <div className="relative mb-5">
-                    {/* Light container with emerald border */}
-                    <div className="w-16 h-16 rounded-xl bg-white border border-tertiary/20 flex items-center justify-center shadow-md">
-                      <step.icon className="w-8 h-8 text-tertiary" />
+                    {/* Light container with emerald tint */}
+                    <div 
+                      className="w-16 h-16 rounded-xl flex items-center justify-center shadow-md"
+                      style={{ 
+                        backgroundColor: 'rgba(27, 107, 58, 0.1)',
+                        border: '1px solid rgba(27, 107, 58, 0.2)'
+                      }}
+                    >
+                      <step.icon className="w-8 h-8" style={{ color: '#1B6B3A' }} />
                     </div>
-                    {/* GOLD number badge */}
-                    <div className="absolute -top-2 -right-2 w-7 h-7 rounded-full bg-primary text-primary-foreground flex items-center justify-center text-sm font-bold shadow-lg">
+                    {/* BRIGHT BLUE number badge */}
+                    <div 
+                      className="absolute -top-2 -right-2 w-7 h-7 rounded-full flex items-center justify-center text-sm font-bold shadow-lg"
+                      style={{ backgroundColor: '#2563EB', color: '#FFFFFF' }}
+                    >
                       {step.number}
                     </div>
                   </div>
                   
-                  <h3 className="text-lg font-semibold text-secondary mb-2">{step.title}</h3>
-                  <p className="text-base text-muted-foreground max-w-xs">{step.description}</p>
+                  <h3 className="text-lg font-semibold mb-2" style={{ color: '#1E3A8A' }}>{step.title}</h3>
+                  <p className="text-base max-w-xs" style={{ color: '#374151' }}>{step.description}</p>
                 </div>
               </div>
             ))}

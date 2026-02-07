@@ -6,77 +6,63 @@
 
 @layer base {
   :root {
-    /* Core brand colors - Emerald Paints with GOLD CTAs */
+    /* Core brand colors - 3-COLOR SYSTEM */
     --background: 210 20% 99%;
-    --foreground: 215 30% 15%;
+    --foreground: 220 13% 26%;
 
-    /* Hero DARK section with overlay */
-    --hero: 215 60% 14%;
-    --hero-foreground: 0 0% 98%;
-
-    /* Primary CTA - GOLD #D4920B */
-    --primary: 40 88% 44%;
+    /* Primary CTA - EMERALD GREEN (high-converting) */
+    --primary: 150 55% 26%;
     --primary-foreground: 0 0% 100%;
-    --primary-hover: 40 88% 36%;
+    --primary-hover: 150 55% 22%;
 
-    /* Secondary - Deep Navy #0B2447 */
-    --secondary: 215 60% 16%;
-    --secondary-foreground: 0 0% 98%;
+    /* Secondary - Dark Blue for headings */
+    --secondary: 226 71% 33%;
+    --secondary-foreground: 0 0% 100%;
 
-    /* Tertiary - Emerald Green #1B6B3A (for light bg accents) */
-    --tertiary: 150 55% 28%;
+    /* Tertiary - Bright Blue for accents */
+    --tertiary: 217 91% 53%;
     --tertiary-foreground: 0 0% 100%;
 
-    /* Accent Green - for accents on LIGHT backgrounds only */
-    --accent-green: 150 55% 28%;
+    /* Highlight - Gold for text highlights on dark backgrounds */
+    --highlight: 48 95% 52%;
+    --highlight-foreground: 220 13% 26%;
 
-    /* Muted surfaces - neutral grays */
+    /* Hero/dark sections */
+    --hero: 222 47% 11%;
+    --hero-foreground: 0 0% 98%;
+
+    /* Muted surfaces */
     --muted: 210 15% 96%;
-    --muted-foreground: 215 12% 45%;
+    --muted-foreground: 220 9% 46%;
 
-    /* Cards and popover */
+    /* Cards */
     --card: 0 0% 100%;
-    --card-foreground: 215 30% 15%;
+    --card-foreground: 220 13% 26%;
     --popover: 0 0% 100%;
-    --popover-foreground: 215 30% 15%;
+    --popover-foreground: 220 13% 26%;
 
-    /* Accent - Light gold tint */
-    --accent: 40 30% 96%;
-    --accent-foreground: 40 88% 44%;
+    /* Accent */
+    --accent: 210 40% 96%;
+    --accent-foreground: 217 91% 53%;
 
-    /* Destructive - Red for urgency */
+    /* Destructive */
     --destructive: 0 84% 60%;
     --destructive-foreground: 0 0% 98%;
 
-    /* Borders and inputs */
-    --border: 210 15% 90%;
-    --input: 210 15% 90%;
-    --ring: 40 88% 44%;
+    /* Borders */
+    --border: 214 32% 91%;
+    --input: 214 32% 91%;
+    --ring: 150 55% 26%;
 
-    /* Radius */
     --radius: 0.75rem;
 
-    /* Custom tokens - Success uses Emerald Green */
-    --success: 150 55% 28%;
+    /* Semantic tokens */
+    --success: 150 55% 26%;
     --success-foreground: 0 0% 100%;
-    
-    /* Highlight - Bright Gold #F5C518 for offers/headlines on dark */
-    --highlight: 48 95% 52%;
-    --highlight-foreground: 215 30% 15%;
-    
+
     /* Section backgrounds */
     --section-warm: 40 20% 98%;
-    --section-slate: 210 15% 97%;
-    --section-dark: 215 60% 12%;
-    
-    /* Off-white for textured sections */
-    --section-cream: 40 30% 99%;
-    
-    /* Shadows */
-    --shadow-sm: 0 1px 2px 0 hsl(0 0% 0% / 0.04);
-    --shadow-md: 0 4px 6px -1px hsl(0 0% 0% / 0.08), 0 2px 4px -2px hsl(0 0% 0% / 0.06);
-    --shadow-lg: 0 10px 15px -3px hsl(0 0% 0% / 0.08), 0 4px 6px -4px hsl(0 0% 0% / 0.06);
-    --shadow-xl: 0 20px 25px -5px hsl(0 0% 0% / 0.1), 0 8px 10px -6px hsl(0 0% 0% / 0.08);
+    --section-dark: 222 47% 11%;
 
     /* Sidebar defaults */
     --sidebar-background: 0 0% 98%;
@@ -85,8 +71,8 @@
     --sidebar-primary-foreground: 0 0% 98%;
     --sidebar-accent: 240 4.8% 95.9%;
     --sidebar-accent-foreground: 240 5.9% 10%;
-    --sidebar-border: 215 15% 91%;
-    --sidebar-ring: 40 88% 44%;
+    --sidebar-border: 214 32% 91%;
+    --sidebar-ring: 150 55% 26%;
   }
 
   .dark {
@@ -143,10 +129,10 @@
   .hero-overlay-dark {
     background: linear-gradient(
       to bottom,
-      rgba(11, 36, 71, 0.85) 0%,
-      rgba(11, 36, 71, 0.60) 30%,
-      rgba(11, 36, 71, 0.40) 60%,
-      rgba(11, 36, 71, 0.75) 100%
+      rgba(15, 23, 42, 0.85) 0%,
+      rgba(15, 23, 42, 0.60) 30%,
+      rgba(15, 23, 42, 0.40) 60%,
+      rgba(15, 23, 42, 0.70) 100%
     );
   }
 
@@ -337,18 +323,18 @@
   animation-play-state: paused;
 }
 
-/* Glowing pulse animation for CTA button - GOLD */
+/* Glowing pulse animation for CTA button - GREEN */
 @keyframes ctaGlow {
   0%, 100% {
     box-shadow: 
-      0 4px 20px rgba(212, 146, 11, 0.4),
-      0 0 40px rgba(212, 146, 11, 0.2),
+      0 4px 20px rgba(27, 107, 58, 0.4),
+      0 0 40px rgba(27, 107, 58, 0.2),
       0 20px 40px -10px rgba(0, 0, 0, 0.4);
   }
   50% {
     box-shadow: 
-      0 4px 30px rgba(212, 146, 11, 0.6),
-      0 0 60px rgba(212, 146, 11, 0.4),
+      0 4px 30px rgba(27, 107, 58, 0.6),
+      0 0 60px rgba(27, 107, 58, 0.4),
       0 20px 40px -10px rgba(0, 0, 0, 0.4);
   }
 }
@@ -392,7 +378,7 @@
 
 /* Premium shadow for floating CTA */
 .shadow-premium {
-  box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.15), 0 4px 20px rgba(212, 146, 11, 0.3);
+  box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.15), 0 4px 20px rgba(27, 107, 58, 0.3);
 }
 
 /* Section divider gradient */
