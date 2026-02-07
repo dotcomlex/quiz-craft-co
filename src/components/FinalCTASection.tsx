@@ -1,18 +1,12 @@
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Gift, ArrowRight } from "lucide-react";
-import { motion } from "framer-motion";
 
 const FinalCTASection = () => {
   return (
-    <section className="py-16 lg:py-24 bg-gradient-to-br from-[#0B2447] to-[#0A1D3B] text-white">
+    <section className="py-16 lg:py-24 bg-gradient-to-br from-[#0B2447] to-[#0B2447] text-white">
       <div className="container mx-auto px-4 text-center">
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-        >
+        <div>
           {/* Badge - gold accent */}
           <div className="inline-flex items-center gap-2 bg-primary/20 backdrop-blur-sm text-primary-foreground px-4 py-2 rounded-full text-sm font-semibold mb-6 border border-primary/30">
             <Gift className="w-4 h-4" />
@@ -31,14 +25,14 @@ const FinalCTASection = () => {
           </p>
 
           {/* CTA - GOLD */}
-          <motion.div className="animate-subtle-rock inline-block w-full sm:w-auto">
+          <div className="animate-subtle-rock inline-block w-full sm:w-auto">
             <Link to="/qualify" className="block">
               <Button variant="cta" size="xl" className="group w-full sm:w-auto min-h-[44px] animate-cta-glow">
                 See If You Qualify
                 <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
               </Button>
             </Link>
-          </motion.div>
+          </div>
 
           <p className="text-sm opacity-60 mt-6">
             No obligations · Free in-home estimate · Satisfaction guaranteed
@@ -48,7 +42,7 @@ const FinalCTASection = () => {
           <p className="text-xs opacity-40 mt-12 pt-8 border-t border-white/10">
             © {new Date().getFullYear()} Emerald Paints LLC. All rights reserved.
           </p>
-        </motion.div>
+        </div>
       </div>
     </section>
   );
