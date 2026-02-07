@@ -3,7 +3,6 @@ import { Link } from "react-router-dom";
 import { ChevronLeft, ChevronRight, ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { motion } from "framer-motion";
-import bgWatercolor from "@/assets/bg-watercolor-mountains.webp";
 
 // Gallery images - painting before/after transformations
 import galleryPainting1 from "@/assets/gallery-painting-1.webp";
@@ -42,18 +41,8 @@ const GallerySection = () => {
   };
 
   return (
-    <section 
-      className="py-16 lg:py-24 relative"
-      style={{
-        backgroundImage: `url(${bgWatercolor})`,
-        backgroundSize: 'cover',
-        backgroundPosition: 'center',
-      }}
-    >
-      {/* Light overlay for readability */}
-      <div className="absolute inset-0 bg-white/85" />
-      
-      <div className="container mx-auto px-4 relative z-10">
+    <section className="py-16 lg:py-24 bg-white">
+      <div className="container mx-auto px-4">
         <motion.div 
           className="text-center mb-10"
           initial={{ opacity: 0, y: 30 }}
@@ -61,11 +50,11 @@ const GallerySection = () => {
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
         >
-          <span className="inline-block text-primary font-semibold text-sm uppercase tracking-wider mb-3">
+          <span className="inline-block text-tertiary font-semibold text-sm uppercase tracking-wider mb-3">
             Our Work
           </span>
           <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-secondary mb-4">
-            See What's Possible — <span className="text-highlight">Real Home Transformations</span>
+            See What's Possible — Real Home Transformations
           </h2>
           <p className="text-base text-muted-foreground max-w-xl mx-auto">
             From single rooms to full exteriors, we deliver flawless results that transform your home.
@@ -134,9 +123,6 @@ const GallerySection = () => {
             </button>
           ))}
         </div>
-
-        {/* Section divider */}
-        <div className="section-divider mt-12 mb-8" />
 
         {/* Inline CTA - GOLD */}
         <div className="flex justify-center mt-10 sm:mt-12">

@@ -1,7 +1,6 @@
 import { MessageSquare, CalendarCheck, FileText, Paintbrush } from "lucide-react";
 import { motion } from "framer-motion";
 import paintersActionShot from "@/assets/painters-action-shot.webp";
-import bgWatercolor from "@/assets/bg-watercolor-mountains.webp";
 
 const ProcessSection = () => {
   const steps = [
@@ -32,18 +31,8 @@ const ProcessSection = () => {
   ];
 
   return (
-    <section 
-      className="py-16 lg:py-24 relative"
-      style={{
-        backgroundImage: `url(${bgWatercolor})`,
-        backgroundSize: 'cover',
-        backgroundPosition: 'center',
-      }}
-    >
-      {/* Light overlay for readability */}
-      <div className="absolute inset-0 bg-white/80" />
-      
-      <div className="container mx-auto px-4 relative z-10">
+    <section className="py-16 lg:py-24 bg-white">
+      <div className="container mx-auto px-4">
         <motion.div 
           className="text-center mb-12"
           initial={{ opacity: 0, y: 30 }}
@@ -51,7 +40,7 @@ const ProcessSection = () => {
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
         >
-          <span className="inline-block text-primary font-semibold text-sm uppercase tracking-wider mb-3">
+          <span className="inline-block text-tertiary font-semibold text-sm uppercase tracking-wider mb-3">
             How It Works
           </span>
           <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-secondary mb-4">
