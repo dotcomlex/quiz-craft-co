@@ -29,14 +29,14 @@ const ProcessSection = () => {
   ];
 
   return (
-    <section className="py-16 lg:py-24 bg-gradient-to-br from-[#0B2447] to-[#0A1D3B] text-white">
+    <section className="py-16 lg:py-24 bg-white">
       <div className="container mx-auto px-4">
         <div className="text-center mb-12">
           <span className="inline-block text-primary font-semibold text-sm uppercase tracking-wider mb-3">
-            Simple Process
-          </span>
-          <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold mb-4">
             How It Works
+          </span>
+          <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-secondary mb-4">
+            Your Path to a Beautiful Home
           </h2>
         </div>
 
@@ -45,24 +45,37 @@ const ProcessSection = () => {
             {steps.map((step, index) => (
               <div key={index} className="relative text-center">
                 {index < steps.length - 1 && (
-                  <div className="hidden lg:block absolute top-10 left-[60%] w-[80%] h-px bg-white/15" />
+                  <div className="hidden lg:block absolute top-10 left-[60%] w-[80%] h-px bg-border" />
                 )}
                 
                 <div className="relative inline-flex flex-col items-center">
                   <div className="relative mb-5">
-                    <div className="w-16 h-16 rounded-xl bg-white/10 flex items-center justify-center">
-                      <step.icon className="w-8 h-8 text-white" />
+                    {/* Light container with emerald border */}
+                    <div className="w-16 h-16 rounded-xl bg-accent border border-primary/20 flex items-center justify-center">
+                      <step.icon className="w-8 h-8 text-primary" />
                     </div>
+                    {/* Emerald green number badge */}
                     <div className="absolute -top-2 -right-2 w-7 h-7 rounded-full bg-primary text-primary-foreground flex items-center justify-center text-sm font-bold">
                       {step.number}
                     </div>
                   </div>
                   
-                  <h3 className="text-lg font-semibold mb-2">{step.title}</h3>
-                  <p className="text-base text-white/70 max-w-xs">{step.description}</p>
+                  <h3 className="text-lg font-semibold text-secondary mb-2">{step.title}</h3>
+                  <p className="text-base text-muted-foreground max-w-xs">{step.description}</p>
                 </div>
               </div>
             ))}
+          </div>
+        </div>
+
+        {/* Action shot placeholder */}
+        <div className="max-w-4xl mx-auto mt-12">
+          <div className="aspect-video rounded-2xl bg-accent border-2 border-dashed border-primary/30 flex items-center justify-center">
+            <div className="text-center p-8">
+              <Paintbrush className="w-12 h-12 text-primary/40 mx-auto mb-3" />
+              <p className="text-muted-foreground font-medium">Action shot: Professional painters at work</p>
+              <p className="text-sm text-muted-foreground/70 mt-1">Image coming soon</p>
+            </div>
           </div>
         </div>
       </div>

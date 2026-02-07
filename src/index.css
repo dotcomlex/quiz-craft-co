@@ -6,20 +6,20 @@
 
 @layer base {
   :root {
-    /* Core brand colors - Emerald Paints palette */
-    --background: 0 0% 100%;
+    /* Core brand colors - Emerald Paints BRIGHT palette */
+    --background: 210 20% 99%;
     --foreground: 215 30% 15%;
 
-    /* Hero dark section - Deep Navy #0B2447 */
-    --hero: 215 60% 14%;
-    --hero-foreground: 0 0% 98%;
+    /* Hero BRIGHT section - Light sky background */
+    --hero: 200 60% 96%;
+    --hero-foreground: 215 30% 15%;
 
-    /* Primary CTA - Warm Gold #D4920B */
-    --primary: 40 88% 44%;
+    /* Primary CTA - Emerald Green #1B6B3A */
+    --primary: 150 55% 28%;
     --primary-foreground: 0 0% 100%;
-    --primary-hover: 40 88% 36%;
+    --primary-hover: 150 55% 22%;
 
-    /* Secondary - Deep Navy */
+    /* Secondary - Deep Navy #0B2447 */
     --secondary: 215 60% 14%;
     --secondary-foreground: 0 0% 98%;
 
@@ -28,7 +28,7 @@
     --tertiary-foreground: 0 0% 100%;
 
     /* Muted surfaces - neutral grays */
-    --muted: 215 15% 95%;
+    --muted: 210 15% 96%;
     --muted-foreground: 215 12% 45%;
 
     /* Cards and popover */
@@ -46,9 +46,9 @@
     --destructive-foreground: 0 0% 98%;
 
     /* Borders and inputs */
-    --border: 215 15% 90%;
-    --input: 215 15% 90%;
-    --ring: 40 88% 44%;
+    --border: 210 15% 90%;
+    --input: 210 15% 90%;
+    --ring: 150 55% 28%;
 
     /* Radius */
     --radius: 0.75rem;
@@ -57,14 +57,18 @@
     --success: 150 55% 28%;
     --success-foreground: 0 0% 100%;
     
-    /* Highlight - Bright Gold #F5C518 for offers */
+    /* Highlight - Bright Gold #F5C518 for offers ONLY */
     --highlight: 48 95% 52%;
     --highlight-foreground: 215 30% 15%;
     
-    /* Section backgrounds - premium transitions */
-    --section-warm: 150 10% 98%;
-    --section-slate: 215 15% 97%;
+    /* Section backgrounds - BRIGHT transitions */
+    --section-warm: 150 20% 98%;
+    --section-slate: 210 15% 97%;
     --section-dark: 215 60% 12%;
+    
+    /* Light emerald tint for backgrounds */
+    --section-emerald: 150 30% 97%;
+    --section-sky: 200 40% 97%;
     
     /* Shadows */
     --shadow-sm: 0 1px 2px 0 hsl(0 0% 0% / 0.04);
@@ -80,7 +84,7 @@
     --sidebar-accent: 240 4.8% 95.9%;
     --sidebar-accent-foreground: 240 5.9% 10%;
     --sidebar-border: 215 15% 91%;
-    --sidebar-ring: 40 88% 44%;
+    --sidebar-ring: 150 55% 28%;
   }
 
   .dark {
@@ -92,19 +96,19 @@
     --card-foreground: 0 0% 98%;
     --popover: 222 20% 12%;
     --popover-foreground: 0 0% 98%;
-    --primary: 38 85% 50%;
+    --primary: 150 55% 35%;
     --primary-foreground: 0 0% 100%;
     --secondary: 220 20% 20%;
     --secondary-foreground: 0 0% 98%;
     --muted: 217 32% 17%;
     --muted-foreground: 215 20% 65%;
-    --accent: 38 40% 15%;
-    --accent-foreground: 38 85% 65%;
+    --accent: 150 40% 15%;
+    --accent-foreground: 150 55% 65%;
     --destructive: 0 62% 30%;
     --destructive-foreground: 0 0% 98%;
     --border: 217 32% 17%;
     --input: 217 32% 17%;
-    --ring: 38 85% 50%;
+    --ring: 150 55% 35%;
     --section-warm: 220 20% 10%;
     --section-slate: 222 20% 10%;
     --section-dark: 222 25% 6%;
@@ -133,15 +137,13 @@
     text-wrap: balance;
   }
 
-  /* Hero gradients */
+  /* Hero gradients - BRIGHT version */
   .hero-gradient {
-    background: linear-gradient(135deg, hsl(var(--hero)) 0%, hsl(220 30% 15%) 100%);
+    background: linear-gradient(135deg, hsl(var(--hero)) 0%, hsl(200 50% 95%) 100%);
   }
 
-  .hero-overlay {
-    background: 
-      linear-gradient(to bottom, hsl(var(--hero) / 0.7) 0%, hsl(var(--hero) / 0.5) 50%, hsl(var(--hero) / 0.85) 100%),
-      linear-gradient(to right, hsl(var(--hero) / 0.8) 0%, hsl(var(--hero) / 0.4) 100%);
+  .hero-overlay-light {
+    background: linear-gradient(to bottom, hsl(0 0% 100% / 0.1) 0%, hsl(0 0% 100% / 0.05) 50%, hsl(0 0% 100% / 0.15) 100%);
   }
 
   /* Quiz card - larger shadow for prominence */
@@ -170,7 +172,7 @@
       0 0 40px -10px hsl(var(--primary) / 0.3);
   }
 
-  /* Section gradients for premium transitions */
+  /* Section gradients for premium transitions - BRIGHT */
   .section-gradient-warm {
     background: linear-gradient(180deg, hsl(var(--section-warm)) 0%, hsl(var(--background)) 100%);
   }
@@ -181,6 +183,14 @@
 
   .section-gradient-dark {
     background: linear-gradient(180deg, hsl(var(--section-dark)) 0%, hsl(220 30% 15%) 100%);
+  }
+
+  .section-gradient-emerald {
+    background: linear-gradient(180deg, hsl(var(--section-emerald)) 0%, hsl(var(--background)) 100%);
+  }
+
+  .section-gradient-sky {
+    background: linear-gradient(180deg, hsl(var(--section-sky)) 0%, hsl(var(--background)) 100%);
   }
 
   .section-accent {
@@ -210,7 +220,12 @@
     @apply font-semibold text-foreground;
   }
 
-  /* Hero text shadow for contrast */
+  /* Hero text shadow for BRIGHT background - subtle white halo */
+  .hero-text-shadow-light {
+    text-shadow: 0 1px 3px rgba(255, 255, 255, 0.5), 0 2px 6px rgba(255, 255, 255, 0.3);
+  }
+
+  /* Hero text shadow for dark background */
   .hero-text-shadow {
     text-shadow: 0 2px 12px hsl(0 0% 0% / 0.7), 0 4px 24px hsl(0 0% 0% / 0.5);
   }
@@ -331,18 +346,18 @@
   animation-play-state: paused;
 }
 
-/* Glowing pulse animation for CTA button */
+/* Glowing pulse animation for CTA button - EMERALD GREEN */
 @keyframes ctaGlow {
   0%, 100% {
     box-shadow: 
-      0 0 20px rgba(251, 146, 60, 0.4),
-      0 0 40px rgba(251, 146, 60, 0.2),
+      0 0 20px rgba(27, 107, 58, 0.4),
+      0 0 40px rgba(27, 107, 58, 0.2),
       0 20px 40px -10px rgba(0, 0, 0, 0.4);
   }
   50% {
     box-shadow: 
-      0 0 30px rgba(251, 146, 60, 0.6),
-      0 0 60px rgba(251, 146, 60, 0.4),
+      0 0 30px rgba(27, 107, 58, 0.6),
+      0 0 60px rgba(27, 107, 58, 0.4),
       0 20px 40px -10px rgba(0, 0, 0, 0.4);
   }
 }

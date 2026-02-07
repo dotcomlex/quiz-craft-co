@@ -298,7 +298,7 @@ const Quiz = ({ onStart }: QuizProps) => {
       });
   };
 
-  // OptionCard with vertical layout
+  // OptionCard with vertical layout - EMERALD GREEN selected states
   const OptionCard = ({
     icon: Icon,
     label,
@@ -316,7 +316,7 @@ const Quiz = ({ onStart }: QuizProps) => {
       onClick={onClick}
       className={`relative flex flex-col items-center justify-center gap-1.5 p-3.5 sm:p-4 rounded-xl border-2 bg-white w-full min-h-[100px] transition-all duration-300 hover:scale-[1.02] hover:shadow-lg active:scale-[0.98] group ${
         selected
-          ? "border-primary bg-gradient-to-r from-primary/10 to-primary/5 shadow-md"
+          ? "border-primary bg-accent shadow-md"
           : "border-border hover:border-primary/50 shadow-sm"
       }`}
     >
@@ -341,7 +341,7 @@ const Quiz = ({ onStart }: QuizProps) => {
       </span>
 
       {selected && (
-        <div className="absolute top-2 right-2 w-5 h-5 rounded-full bg-tertiary flex items-center justify-center">
+        <div className="absolute top-2 right-2 w-5 h-5 rounded-full bg-primary flex items-center justify-center">
           <Check className="w-3 h-3 text-white" />
         </div>
       )}
@@ -357,16 +357,16 @@ const Quiz = ({ onStart }: QuizProps) => {
 
   return (
     <div className="w-full max-w-lg">
-      {/* Quiz Card */}
+      {/* Quiz Card - EMERALD GREEN border */}
       <div className="quiz-card-glass rounded-2xl shadow-quiz-glow p-5 sm:p-6 w-full border border-primary/20">
-        {/* Progress Dots - Inside card */}
+        {/* Progress Dots - Inside card - EMERALD GREEN */}
         {!isSubmitted && !isDisqualified && !timelineDisqualified && (
           <div className="flex justify-center gap-2 mb-4">
             {[1, 2, 3, 4].map((dotStep) => (
               <div
                 key={dotStep}
                 className={`w-2.5 h-2.5 rounded-full transition-all duration-300 ${
-                  dotStep <= step ? "bg-primary" : "bg-muted"
+                  dotStep <= step ? "bg-primary" : "bg-gray-200"
                 }`}
               />
             ))}
@@ -393,7 +393,7 @@ const Quiz = ({ onStart }: QuizProps) => {
                   label="Interior Painting"
                   selected={data.projectType === "interior"}
                   onClick={() => handleTileSelect("projectType", "interior")}
-                  accentColor="text-tertiary"
+                  accentColor="text-primary"
                 />
                 <OptionCard
                   icon={Building}
@@ -456,7 +456,7 @@ const Quiz = ({ onStart }: QuizProps) => {
                     label="1 to 3 Months"
                     selected={data.timeline === "1-3-months"}
                     onClick={() => handleTileSelect("timeline", "1-3-months")}
-                    accentColor="text-tertiary"
+                    accentColor="text-primary"
                   />
                   <OptionCard
                     icon={Clock}
@@ -510,7 +510,7 @@ const Quiz = ({ onStart }: QuizProps) => {
                       setData({ ...data, timeline: "1-3-months" });
                       setTimeout(() => setStep(3), 300);
                     }}
-                    className="w-full p-4 rounded-xl border-2 border-primary bg-gradient-to-r from-primary/10 to-primary/5 hover:shadow-lg transition-all text-left min-h-[44px]"
+                    className="w-full p-4 rounded-xl border-2 border-primary bg-accent hover:shadow-lg transition-all text-left min-h-[44px]"
                   >
                     <div className="flex items-center gap-3">
                       <div className="w-10 h-10 rounded-full bg-primary flex items-center justify-center flex-shrink-0">
@@ -643,7 +643,7 @@ const Quiz = ({ onStart }: QuizProps) => {
               </h3>
               <div className="mb-4">
                 <div className="relative">
-                  <MapPin className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
+                  <MapPin className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-primary" />
                   <Input
                     type="text"
                     inputMode="numeric"
@@ -682,7 +682,7 @@ const Quiz = ({ onStart }: QuizProps) => {
             </motion.div>
           )}
 
-          {/* ZIP Code Checking Loader - 8 second animation */}
+          {/* ZIP Code Checking Loader - 8 second animation - EMERALD GREEN */}
           {isCheckingZip && !isSubmitted && !isDisqualified && (
             <motion.div
               key="checking-zip"
@@ -698,7 +698,7 @@ const Quiz = ({ onStart }: QuizProps) => {
                 transition={{ duration: 1, repeat: Infinity, ease: "linear" }}
                 className="w-16 h-16 mx-auto mb-6"
               >
-                <div className="w-full h-full rounded-full border-4 border-muted border-t-primary" />
+                <div className="w-full h-full rounded-full border-4 border-gray-200 border-t-primary" />
               </motion.div>
 
               <CheckingMessages zipCode={data.zipCode} />
@@ -720,9 +720,9 @@ const Quiz = ({ onStart }: QuizProps) => {
                 initial={{ scale: 0 }}
                 animate={{ scale: 1 }}
                 transition={{ type: "spring", stiffness: 200, damping: 15 }}
-                className="w-14 h-14 mx-auto mb-4 rounded-full bg-primary/20 flex items-center justify-center"
+                className="w-14 h-14 mx-auto mb-4 rounded-full bg-amber-100 flex items-center justify-center"
               >
-                <MapPin className="w-7 h-7 text-primary" />
+                <MapPin className="w-7 h-7 text-amber-600" />
               </motion.div>
 
               <h3 className="text-base sm:text-lg font-semibold text-foreground mb-2 leading-snug">
@@ -828,8 +828,8 @@ const Quiz = ({ onStart }: QuizProps) => {
                     />
                     {data.phone.replace(/\D/g, "").length === 10 &&
                       isValidPhoneNumber(data.phone).valid && (
-                        <div className="absolute right-3 top-1/2 -translate-y-1/2 w-5 h-5 rounded-full bg-tertiary/20 flex items-center justify-center">
-                          <Check className="w-3 h-3 text-tertiary" />
+                        <div className="absolute right-3 top-1/2 -translate-y-1/2 w-5 h-5 rounded-full bg-primary/20 flex items-center justify-center">
+                          <Check className="w-3 h-3 text-primary" />
                         </div>
                       )}
                   </div>
@@ -839,7 +839,7 @@ const Quiz = ({ onStart }: QuizProps) => {
                     </p>
                   ) : data.phone.replace(/\D/g, "").length === 10 &&
                     isValidPhoneNumber(data.phone).valid ? (
-                    <p className="text-[10px] text-tertiary mt-1 pl-1">
+                    <p className="text-[10px] text-primary mt-1 pl-1">
                       ✓ Looks good!
                     </p>
                   ) : (
@@ -876,11 +876,11 @@ const Quiz = ({ onStart }: QuizProps) => {
                 </div>
               </div>
 
-              {/* Submit Button - Full width on mobile */}
+              {/* Submit Button - Full width, EMERALD GREEN */}
               <Button
                 onClick={handleSubmit}
                 disabled={isSubmitting}
-                className="w-full h-12 text-[15px] font-semibold bg-gradient-to-r from-primary to-[#E5A30C] hover:from-primary/90 hover:to-[#E5A30C]/90 text-white rounded-xl shadow-lg min-h-[44px]"
+                className="w-full h-12 text-[15px] font-semibold bg-primary hover:bg-primary/90 text-white rounded-xl shadow-lg min-h-[44px]"
               >
                 {isSubmitting ? (
                   <>
@@ -906,8 +906,8 @@ const Quiz = ({ onStart }: QuizProps) => {
               {/* Trust Footer */}
               <div className="flex flex-wrap items-center justify-center gap-x-1.5 text-[10px] text-muted-foreground pt-4 mt-4 border-t border-border/50">
                 <span className="flex items-center gap-1">
-                  <div className="w-4 h-4 rounded-full bg-tertiary/20 flex items-center justify-center">
-                    <Shield className="w-2.5 h-2.5 text-tertiary" />
+                  <div className="w-4 h-4 rounded-full bg-primary/20 flex items-center justify-center">
+                    <Shield className="w-2.5 h-2.5 text-primary" />
                   </div>
                   Secure
                 </span>
@@ -934,9 +934,9 @@ const Quiz = ({ onStart }: QuizProps) => {
                 initial={{ scale: 0 }}
                 animate={{ scale: 1 }}
                 transition={{ type: "spring", stiffness: 200, damping: 15 }}
-                className="w-16 h-16 mx-auto mb-5 rounded-full bg-tertiary/20 flex items-center justify-center"
+                className="w-16 h-16 mx-auto mb-5 rounded-full bg-primary/20 flex items-center justify-center"
               >
-                <CheckCircle2 className="w-8 h-8 text-tertiary" />
+                <CheckCircle2 className="w-8 h-8 text-primary" />
               </motion.div>
 
               <h3 className="text-base sm:text-lg font-semibold text-foreground mb-3 leading-snug">
@@ -962,7 +962,7 @@ const Quiz = ({ onStart }: QuizProps) => {
 
               {/* Trust Footer */}
               <div className="flex items-center justify-center gap-2 text-xs text-muted-foreground pt-4 border-t border-border/50">
-                <Shield className="w-3.5 h-3.5 text-tertiary" />
+                <Shield className="w-3.5 h-3.5 text-primary" />
                 Your information is secure
               </div>
             </motion.div>

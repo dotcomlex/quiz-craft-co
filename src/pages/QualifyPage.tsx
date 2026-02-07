@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import Quiz from "@/components/Quiz";
-import { Shield } from "lucide-react";
+import { Shield, Users } from "lucide-react";
 import qualifyBgImage from "@/assets/qualify-bg-mountains.png";
 
 const QualifyPage = () => {
@@ -31,8 +31,8 @@ const QualifyPage = () => {
           alt=""
           className="w-full h-full object-cover"
         />
-        {/* Dark overlay for better contrast */}
-        <div className="absolute inset-0 bg-gradient-to-b from-black/20 via-black/10 to-black/30" />
+        {/* Light overlay for better contrast */}
+        <div className="absolute inset-0 bg-gradient-to-b from-white/20 via-white/10 to-white/30" />
       </div>
 
       {/* Content */}
@@ -42,19 +42,20 @@ const QualifyPage = () => {
           <div className="w-full max-w-lg">
             {/* Progress Text */}
             <div className="text-center mb-4">
-              {/* Live Activity Indicator - ORANGE badge, ALWAYS visible */}
+              {/* Live Activity Indicator - EMERALD GREEN badge */}
               <div className="inline-flex items-center gap-2 text-white text-xs font-bold px-4 py-2 rounded-full mb-4 shadow-xl border-2 border-white/50 bg-primary">
                 <span className="relative flex h-2 w-2">
                   <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-white opacity-75"></span>
                   <span className="relative inline-flex rounded-full h-2 w-2 bg-white"></span>
                 </span>
+                <Users className="w-3.5 h-3.5" />
                 {liveViewers} people checking availability right now
               </div>
 
               {/* Header - HIDES when quiz starts */}
               {!quizStarted && (
                 <>
-                  <h1 className="text-xl sm:text-2xl font-bold text-foreground mb-3 leading-relaxed">
+                  <h1 className="text-xl sm:text-2xl font-bold text-secondary mb-3 leading-relaxed">
                     See If You Qualify for the
                     <br />
                     Home Refresh Program
@@ -75,7 +76,7 @@ const QualifyPage = () => {
         <footer className="w-full py-4 px-4 bg-white/80 backdrop-blur-sm border-t border-border">
           <div className="container mx-auto">
             <div className="flex items-center justify-center gap-2 text-xs text-muted-foreground">
-              <Shield className="w-3.5 h-3.5" />
+              <Shield className="w-3.5 h-3.5 text-primary" />
               Your information is secure and will only be used to contact you
               about your painting project
             </div>
