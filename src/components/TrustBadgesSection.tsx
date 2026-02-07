@@ -18,9 +18,6 @@ const TrustBadgesSection = () => {
 
   return (
     <section className="py-6 bg-white border-y border-border overflow-hidden">
-      {/* Section divider gradient at top */}
-      <div className="section-divider mb-4" />
-      
       <p className="text-center text-xs text-secondary uppercase tracking-widest mb-4 font-medium">
         Trusted & Certified
       </p>

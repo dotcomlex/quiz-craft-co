@@ -2,7 +2,6 @@ import { Link } from "react-router-dom";
 import { ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { motion } from "framer-motion";
-import bgWatercolor from "@/assets/bg-watercolor-mountains.webp";
 import {
   Accordion,
   AccordionContent,
@@ -36,18 +35,8 @@ const faqs = [
 
 const FAQSection = () => {
   return (
-    <section 
-      className="py-16 lg:py-24 relative"
-      style={{
-        backgroundImage: `url(${bgWatercolor})`,
-        backgroundSize: 'cover',
-        backgroundPosition: 'center',
-      }}
-    >
-      {/* Light overlay for readability */}
-      <div className="absolute inset-0 bg-white/85" />
-      
-      <div className="container max-w-3xl px-4 relative z-10">
+    <section className="py-16 lg:py-24 bg-white">
+      <div className="container max-w-3xl px-4">
         {/* Header */}
         <motion.div 
           className="text-center mb-10"
@@ -56,7 +45,7 @@ const FAQSection = () => {
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
         >
-          <span className="inline-block text-primary font-semibold text-sm uppercase tracking-wider mb-3">
+          <span className="inline-block text-tertiary font-semibold text-sm uppercase tracking-wider mb-3">
             Questions & Answers
           </span>
           <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-secondary mb-4">

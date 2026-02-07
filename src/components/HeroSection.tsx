@@ -2,7 +2,7 @@ import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import heroImage from "@/assets/hero-colorado-golden-hour.webp";
 import logo from "@/assets/emerald-paints-logo.png";
-import { Shield, CheckCircle, ArrowRight, Star } from "lucide-react";
+import { Shield, CheckCircle, ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 const HeroSection = () => {
@@ -23,18 +23,22 @@ const HeroSection = () => {
       </div>
 
       {/* Content */}
-      <div className="relative z-10 container mx-auto px-4 py-8 lg:py-16 min-h-screen flex flex-col justify-center">
-        {/* Logo at top - with glow for visibility on dark */}
+      <div className="relative z-10 container mx-auto px-4 py-4 lg:py-8 min-h-screen flex flex-col justify-center">
+        {/* Logo at top - with light halo for visibility on dark */}
         <motion.div
           className="flex justify-center mb-6 lg:mb-8"
           initial={{ opacity: 0, scale: 0.9 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.5 }}
+          style={{
+            background: "radial-gradient(ellipse at center, rgba(255,255,255,0.15) 0%, transparent 60%)",
+            padding: "20px",
+          }}
         >
           <img
             src={logo}
             alt="Emerald Paints"
-            className="h-16 sm:h-20 lg:h-28 w-auto object-contain"
+            className="h-24 sm:h-32 lg:h-40 w-auto object-contain"
             style={{
               filter: "drop-shadow(0 0 20px rgba(255,255,255,0.25)) drop-shadow(0 0 8px rgba(255,255,255,0.15))"
             }}
@@ -50,21 +54,16 @@ const HeroSection = () => {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.2 }}
           >
-            {/* Main headline */}
-            <h1 className="text-[22px] sm:text-3xl lg:text-5xl font-extrabold text-white leading-[1.2] sm:leading-tight mb-6 sm:mb-8 hero-text-shadow">
-              The <span className="text-highlight">Home Refresh Program</span> Is Helping Colorado Homeowners Save{" "}
-              <span className="text-highlight">25%</span> On Their Painting Project
+            {/* Main headline with enhanced text effect */}
+            <h1 className="text-[22px] sm:text-3xl lg:text-5xl font-extrabold text-white leading-[1.2] sm:leading-tight mb-6 sm:mb-8" style={{ textShadow: "0 2px 8px rgba(0,0,0,0.5), 0 0 30px rgba(0,0,0,0.3)" }}>
+              The <span className="text-highlight" style={{ textShadow: "0 0 20px rgba(245,197,24,0.4), 0 2px 8px rgba(0,0,0,0.5)" }}>Home Refresh Program</span> Is Helping Colorado Homeowners Save{" "}
+              <span className="text-highlight" style={{ textShadow: "0 0 20px rgba(245,197,24,0.4), 0 2px 8px rgba(0,0,0,0.5)" }}>25%</span> On Their Painting Project
             </h1>
 
-            {/* Subheadline with emphasis */}
-            <div className="space-y-2">
-              <p className="text-sm sm:text-base font-bold text-white uppercase tracking-wide hero-text-shadow">
-                LIMITED SPOTS AVAILABLE
-              </p>
-              <p className="text-[15px] sm:text-lg lg:text-xl text-white/90 leading-relaxed hero-text-shadow max-w-2xl mx-auto">
-                Click below to see if your zip code qualifies for a FREE estimate and 25% off your painting project.
-              </p>
-            </div>
+            {/* Subheadline - single cohesive paragraph */}
+            <p className="text-[15px] sm:text-lg lg:text-xl text-white/90 leading-relaxed max-w-2xl mx-auto" style={{ textShadow: "0 1px 4px rgba(0,0,0,0.4)" }}>
+              <span className="font-bold uppercase">Limited spots available.</span> Click below to see if your zip code qualifies for a FREE estimate and 25% off your painting project.
+            </p>
           </motion.div>
 
           {/* CTA Button - Gold with rocking animation */}
@@ -88,31 +87,19 @@ const HeroSection = () => {
               </Link>
             </motion.div>
 
-            {/* Trust Stack - 3 lines below CTA */}
-            <div className="mt-6 space-y-3 text-center">
-              {/* Line 1: Trusted by homeowners */}
-              <div className="flex items-center justify-center gap-2">
-                <Star className="w-4 h-4 text-highlight fill-highlight" />
-                <span className="text-sm sm:text-base font-medium text-white hero-text-shadow">
-                  Trusted By 100s Of Homeowners Across Colorado
+            {/* Trust indicators - Licensed & Guaranteed only */}
+            <div className="mt-6 flex items-center justify-center gap-6">
+              <div className="flex items-center gap-1.5">
+                <CheckCircle className="w-4 h-4 text-highlight flex-shrink-0" />
+                <span className="text-xs sm:text-sm font-medium text-white/90 whitespace-nowrap">
+                  Licensed & Insured
                 </span>
-                <Star className="w-4 h-4 text-highlight fill-highlight" />
               </div>
-
-              {/* Line 2: Licensed & Guaranteed */}
-              <div className="flex items-center justify-center gap-6">
-                <div className="flex items-center gap-1.5">
-                  <CheckCircle className="w-4 h-4 text-highlight flex-shrink-0" />
-                  <span className="text-xs sm:text-sm font-medium text-white/90 whitespace-nowrap">
-                    Licensed & Insured
-                  </span>
-                </div>
-                <div className="flex items-center gap-1.5">
-                  <Shield className="w-4 h-4 text-highlight flex-shrink-0" />
-                  <span className="text-xs sm:text-sm font-medium text-white/90 whitespace-nowrap">
-                    Satisfaction Guaranteed
-                  </span>
-                </div>
+              <div className="flex items-center gap-1.5">
+                <Shield className="w-4 h-4 text-highlight flex-shrink-0" />
+                <span className="text-xs sm:text-sm font-medium text-white/90 whitespace-nowrap">
+                  Satisfaction Guaranteed
+                </span>
               </div>
             </div>
           </motion.div>
