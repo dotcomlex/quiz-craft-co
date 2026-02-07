@@ -1,7 +1,6 @@
 import { Link } from "react-router-dom";
 import { ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { motion } from "framer-motion";
 import {
   Accordion,
   AccordionContent,
@@ -35,31 +34,20 @@ const faqs = [
 
 const FAQSection = () => {
   return (
-    <section className="py-16 lg:py-24 bg-white">
+    <section className="py-16 lg:py-24" style={{ backgroundColor: '#FEFDFB' }}>
       <div className="container max-w-3xl px-4">
         {/* Header */}
-        <motion.div 
-          className="text-center mb-10"
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-        >
-          <span className="inline-block text-tertiary font-semibold text-sm uppercase tracking-wider mb-3">
+        <div className="text-center mb-10">
+          <span className="inline-block text-secondary font-semibold text-sm uppercase tracking-wider mb-3">
             Questions & Answers
           </span>
           <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-secondary mb-4">
             Common Questions
           </h2>
-        </motion.div>
+        </div>
 
         {/* FAQ Accordion */}
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6, delay: 0.2 }}
-        >
+        <div>
           <Accordion type="single" collapsible className="space-y-3">
             {faqs.map((faq, index) => (
               <AccordionItem
@@ -76,11 +64,11 @@ const FAQSection = () => {
               </AccordionItem>
             ))}
           </Accordion>
-        </motion.div>
+        </div>
 
         {/* Inline CTA - GOLD */}
         <div className="flex justify-center mt-10 sm:mt-12">
-          <motion.div className="animate-subtle-rock w-full sm:w-auto">
+          <div className="animate-subtle-rock w-full sm:w-auto">
             <Link to="/qualify" className="block">
               <Button
                 variant="cta"
@@ -91,7 +79,7 @@ const FAQSection = () => {
                 <ArrowRight className="ml-2 h-5 w-5 transition-transform group-hover:translate-x-1" />
               </Button>
             </Link>
-          </motion.div>
+          </div>
         </div>
       </div>
     </section>

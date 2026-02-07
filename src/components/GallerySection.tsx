@@ -2,7 +2,6 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 import { ChevronLeft, ChevronRight, ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { motion } from "framer-motion";
 
 // Gallery images - painting before/after transformations
 import galleryPainting1 from "@/assets/gallery-painting-1.webp";
@@ -41,16 +40,10 @@ const GallerySection = () => {
   };
 
   return (
-    <section className="py-16 lg:py-24 bg-white">
+    <section className="py-16 lg:py-24" style={{ backgroundColor: '#FEFDFB' }}>
       <div className="container mx-auto px-4">
-        <motion.div 
-          className="text-center mb-10"
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-        >
-          <span className="inline-block text-tertiary font-semibold text-sm uppercase tracking-wider mb-3">
+        <div className="text-center mb-10">
+          <span className="inline-block text-secondary font-semibold text-sm uppercase tracking-wider mb-3">
             Our Work
           </span>
           <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-secondary mb-4">
@@ -59,15 +52,9 @@ const GallerySection = () => {
           <p className="text-base text-muted-foreground max-w-xl mx-auto">
             From single rooms to full exteriors, we deliver flawless results that transform your home.
           </p>
-        </motion.div>
+        </div>
 
-        <motion.div 
-          className="relative max-w-3xl mx-auto"
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6, delay: 0.2 }}
-        >
+        <div className="relative max-w-3xl mx-auto">
           <div className="relative rounded-2xl overflow-hidden shadow-xl aspect-square bg-muted">
             <img
               src={projects[currentIndex].image}
@@ -97,7 +84,7 @@ const GallerySection = () => {
           >
             <ChevronRight className="w-5 h-5" />
           </Button>
-        </motion.div>
+        </div>
 
         {/* Carousel dots with GOLD selected ring */}
         <div className="flex justify-center gap-2 sm:gap-3 mt-6 overflow-x-auto pb-2 hide-scrollbar">
@@ -126,7 +113,7 @@ const GallerySection = () => {
 
         {/* Inline CTA - GOLD */}
         <div className="flex justify-center mt-10 sm:mt-12">
-          <motion.div className="animate-subtle-rock w-full sm:w-auto">
+          <div className="animate-subtle-rock w-full sm:w-auto">
             <Link to="/qualify" className="block">
               <Button 
                 variant="cta" 
@@ -137,7 +124,7 @@ const GallerySection = () => {
                 <ArrowRight className="ml-2 h-5 w-5 transition-transform group-hover:translate-x-1" />
               </Button>
             </Link>
-          </motion.div>
+          </div>
         </div>
       </div>
     </section>
