@@ -1,432 +1,301 @@
 
 
-# Emerald Paints Complete Funnel Page Build
+# Emerald Paints Complete Aesthetic Overhaul
 
 ## Overview
 
-Transform the existing 14er Renovation funnel into a complete Emerald Paints LLC funnel landing page. This involves updating every component with new branding, colors, copy, images, and quiz flow tailored for a painting business serving Denver, Colorado (50-mile radius).
+This plan addresses 11 critical areas to transform the current bland funnel into a premium, high-converting lead generation page. The focus is on creating a warm, trustworthy, Colorado-themed aesthetic while fixing major usability issues like text contrast and CTA visibility.
 
 ---
 
-## Phase 1: Asset Setup and Brand Foundation
+## Phase 1: Hero Section Complete Rebuild
 
-### 1.1 Copy Uploaded Images to Project Assets
+### 1A: Generate New Hero Background Image
 
-| Source File | Destination |
-|-------------|-------------|
-| `logo_transparent.png` | `src/assets/emerald-paints-logo.png` |
-| `house_high_quality.webp` | `src/assets/hero-emerald-house.webp` |
-| 8 uploaded gallery images | `src/assets/gallery-painting-*.webp` |
+Use AI image generation to create a new hero background:
 
-### 1.2 Update CSS Variables (index.css)
+**Prompt**: "A stunning Colorado mountain landscape at golden hour. Rocky Mountain front range with snow-capped peaks in background, scattered pine trees in midground, a freshly-painted craftsman-style home in lower-right with warm interior lights glowing. Sky transitions from deep navy blue at top to warm golden-amber near horizon. Natural darkening/vignette at top so white text is readable. Colorado lifestyle magazine cover aesthetic. Photorealistic, cinematic lighting, wide-angle, 4K quality."
 
-Replace the 14er warm amber/slate palette with the Emerald Paints navy/emerald/gold palette:
+Save as: `src/assets/hero-colorado-golden-hour.webp`
 
+### 1B: Hero Section Component Updates
+
+**File**: `src/components/HeroSection.tsx`
+
+Changes:
+- Replace `hero-bright-home.webp` with new AI-generated image
+- Add dark overlay gradient for text readability:
 ```css
-:root {
-  --background: 0 0% 100%;
-  --foreground: 215 30% 15%;
-  --hero: 215 60% 14%;           /* Deep Navy #0B2447 */
-  --hero-foreground: 0 0% 98%;
-  --primary: 40 88% 44%;         /* Warm Gold CTA #D4920B */
-  --primary-foreground: 0 0% 100%;
-  --primary-hover: 40 88% 36%;
-  --secondary: 215 60% 14%;      /* Deep Navy */
-  --secondary-foreground: 0 0% 98%;
-  --tertiary: 150 55% 28%;       /* Emerald Green #1B6B3A */
-  --tertiary-foreground: 0 0% 100%;
-  --muted: 215 15% 95%;
-  --muted-foreground: 215 12% 45%;
-  --highlight: 48 95% 52%;       /* Bright Gold #F5C518 for offers */
-  --highlight-foreground: 215 30% 15%;
-  --success: 150 55% 28%;        /* Emerald for success states */
-  --success-foreground: 0 0% 100%;
-  /* ... other variables remain similar */
+background: linear-gradient(
+  to bottom,
+  rgba(11, 36, 71, 0.85) 0%,
+  rgba(11, 36, 71, 0.60) 30%,
+  rgba(11, 36, 71, 0.40) 60%,
+  rgba(11, 36, 71, 0.75) 100%
+);
+```
+- Move logo to top with larger size: `h-16 sm:h-20 lg:h-28`
+- Add logo glow: `filter: drop-shadow(0 0 20px rgba(255,255,255,0.25))`
+- Update headline to: "The Home Refresh Program Is Helping Colorado Homeowners Save 25% On Their Painting Project"
+- Change all text from dark to WHITE (since background is now dark)
+- Add text shadow for readability
+- Update subheadline with "LIMITED SPOTS AVAILABLE" emphasis
+- Add trust stack below CTA (3 lines: trusted homeowners, licensed, guaranteed)
+- Add subtle parallax effect with `background-attachment: fixed`
+
+### 1C: CTA Button Color Change (Gold)
+
+**All CTAs site-wide** change from emerald green to gold:
+
+**File**: `src/index.css`
+
+Update `--primary` to gold:
+```css
+--primary: 40 88% 44%;         /* Gold #D4920B */
+--primary-foreground: 0 0% 100%;
+--primary-hover: 40 88% 36%;
+```
+
+Update CTA glow animation:
+```css
+@keyframes ctaGlow {
+  0%, 100% {
+    box-shadow: 0 4px 20px rgba(212, 146, 11, 0.4);
+  }
+  50% {
+    box-shadow: 0 4px 30px rgba(212, 146, 11, 0.6), 0 0 40px rgba(212, 146, 11, 0.3);
+  }
 }
 ```
 
 ---
 
-## Phase 2: Mobile Optimization Requirements
-
-### Critical Mobile-First Standards (Applied Throughout)
-
-All components will follow these rules:
-
-| Requirement | Implementation |
-|-------------|----------------|
-| **Minimum text size** | All body text uses `text-base` (16px) minimum |
-| **Tap targets** | All buttons have `min-h-[44px]` and adequate padding |
-| **Full-width CTAs on mobile** | All CTA buttons use `w-full sm:w-auto` |
-| **Number keyboard on ZIP** | Input uses `inputMode="numeric"` pattern (already exists) |
-| **No horizontal scroll** | All sections use `overflow-hidden` where needed |
-| **Input fields** | All inputs have `h-12` (48px) minimum height |
-
----
-
-## Phase 3: Core Components Update
-
-### 3.1 HeroSection.tsx
-
-**Key Changes:**
-
-- **Logo:** Emerald Paints logo in a **white rounded container** on dark hero background (no mix-blend-mode)
-- **Hero image:** New Colorado painted home (`hero-emerald-house.webp`)
-- **Strong text shadow:** Keep `hero-text-shadow-strong` for readability
-- **Highlight treatment:** "25% Off" and "Home Refresh Program" use `text-highlight` class
-
-**Headline:**
-```
-Finally, A Way For Colorado Homeowners To Get 25% Off Beautiful, 
-Professional Painting — The Home Refresh Program Is Now Open
-```
-
-**Subheadline:**
-```
-Spots are filling fast. Check if your area qualifies for a free 
-no-pressure estimate and 25% off professional painting before 
-this program closes.
-```
-
-**Trust Indicators:**
-- Licensed & Insured (CheckCircle icon)
-- Satisfaction Guaranteed (Shield icon)
-
-**Mobile CTA:** Full-width button with `w-full sm:w-auto`
-
-### 3.2 TrustBadgesSection.tsx
-
-**Updated Badges (text-based where images unavailable):**
-- BBB (keep existing)
-- Google 5-Star Reviews
-- Sherwin-Williams
-- Benjamin Moore
-- Angi
-- HomeAdvisor (keep existing)
-- Licensed Colorado Contractor
-
-### 3.3 GallerySection.tsx
-
-**Header Updates:**
-- Label: "OUR WORK"
-- Title: "See What's Possible — Real Home Transformations"
-- Subtitle: "From single rooms to full exteriors, we deliver flawless results that transform your home."
-
-**Gallery Images (8 uploaded before/afters):**
-1. Kitchen sage green refresh
-2. Kitchen navy transformation
-3. Living room accent wall
-4. Bathroom painting
-5. Exterior home transformation
-6. Fence staining
-7. Deck staining
-8. Siding refresh
-
-### 3.4 ReviewsSection.tsx
-
-**Header Updates:**
-- Title: "This Is Why Colorado Homeowners Trust Us With Their Home"
-- Subtitle: "Real stories from real families who transformed their homes and their lives."
-
-**8 Painting Testimonials:**
-1. Alexa Y. — Denver (real from website)
-2. Morgan J. — Aurora (real from website)
-3. Robert D. — Lakewood (real from website)
-4. Sarah T. — Littleton
-5. James & Lisa K. — Thornton
-6. Carlos M. — Westminster
-7. Patricia W. — Arvada
-8. David R. — Centennial
-
-**Avatar handling:** Reuse existing avatar images (numbered avatars)
-
-### 3.5 ProcessSection.tsx (if exists) or FAQSection.tsx
-
-**Four Steps:**
-1. Answer Quick Questions — "Tell us about your painting project..."
-2. Free In-Home Estimate — "Miguel comes to your home to walk through the project..."
-3. Clear, Upfront Price — "No hidden fees, no surprises..."
-4. We Handle Everything — "We handle all the prep, painting, and cleanup..."
-
-### 3.6 FAQSection.tsx
-
-**7 Painting-Specific FAQs:**
-1. What types of painting projects do you handle?
-2. What does the free estimate include?
-3. Are you licensed and insured?
-4. What areas do you serve? (Denver + 50 miles)
-5. What paint brands do you use? (Sherwin-Williams, Benjamin Moore)
-6. How long does a typical paint job take?
-7. Can you help with color selection?
-
-### 3.7 FinalCTASection.tsx
-
-- Badge: "Limited Spots Available"
-- Title: "Don't Wait — Lock In Your **25% Discount** Before The Home Refresh Program Closes"
-- Subtitle: "Get your free no-pressure estimate and save 25% on professional painting."
-- CTA: "See If You Qualify"
-- Trust line: "No obligations - Free in-home estimate - Satisfaction guaranteed"
-
-### 3.8 Footer.tsx
-
-- Emerald Paints logo in white container on dark background
-- Copyright: "© 2025 Emerald Paints LLC. All rights reserved. Professional painting services for Colorado homeowners."
-
----
-
-## Phase 4: Quiz Flow (Quiz.tsx) — Critical Updates
-
-### 4.1 Step 1: Project Type (Painting Options)
-
-| Option | Icon | Value |
-|--------|------|-------|
-| Interior Painting | Paintbrush/Home | `interior` |
-| Exterior Painting | Building | `exterior` |
-| Both Interior & Exterior | ArrowLeftRight | `both` |
-| Not Sure Yet | HelpCircle | `not-sure` |
-
-### 4.2 Step 2: Timeline
-
-| Option | Icon | Value |
-|--------|------|-------|
-| Right Away | Zap | `asap` |
-| Within 30 Days | Calendar | `30-days` |
-| 1 to 3 Months | CalendarClock | `1-3-months` |
-| Not Sure Yet | Clock | `not-sure` |
-
-### 4.3 Timeline Clarification (60-day check)
-
-Same flow — if "Not Sure Yet" selected:
-- "We're currently taking projects that can start within the next 60 days. Does that work for your timeline?"
-- Option 1: "Yes, that works for me" → Continue
-- Option 2: "No, I need more time" → Timeline disqualification
-
-### 4.4 Timeline Disqualification Screen (FULL DETAILS)
-
-```text
-Header Icon: Calendar (blue)
-Title: "Thanks For Your Interest!"
-Body: "We're focusing on projects starting within 60 days right now. 
-       We'd love to help when you're ready!"
-
-Info Box:
-- Save our number: (720) 447-5654
-- Bookmark: emeraldpaints.com
-- Reach out when your timeline is closer!
-
-Button: "Back to Home" (links to /)
-```
-
-### 4.5 Step 3: Zip Code
-
-- Input: `inputMode="numeric"` for number keyboard on mobile
-- Validation: Colorado ZIP codes (80001-81658)
-- Input height: `h-12` (48px) minimum
-
-### 4.6 8-Second Loading Animation with Rotating Messages
-
-```javascript
-const messages = [
-  `Checking availability in ${zipCode}...`,
-  "Verifying service coverage...",
-  "Reviewing painter schedules...",
-  "Confirming project capacity...",
-  "Finalizing availability check...",
-];
-```
-
-Message rotation every 1.8 seconds (already set to 8 seconds total)
-
-### 4.7 ZIP Code Disqualification Screen (FULL DETAILS)
-
-```text
-Header Icon: MapPin (amber)
-Title: "We Only Serve Colorado"
-Body: "Thank you for your interest in Emerald Paints! Unfortunately, 
-       we currently only serve homeowners in Colorado."
-Footer: "Think this is an error? Your ZIP code was: {zipCode}"
-```
-
-### 4.8 Step 4: Contact Form
-
-**Header:**
-- Emoji: 🎉
-- Title: "Congrats! Your Area ({zipCode}) Qualifies For The Home Refresh Program!"
-- Subtitle: "Enter your info below to claim your free estimate and lock in your 25% discount."
-
-**Form Fields (all with min h-12):**
-- Name (User icon)
-- Phone with formatting (Phone icon, `inputMode="tel"`)
-- Email (Mail icon)
-
-**Submit Button:** "Get My Free Estimate" (orange gradient, full-width on mobile)
-
-**Testimonial:** 
-"Just finished our exterior with Emerald Paints — would definitely recommend!" — Carlos M., Westminster
-
-**Trust Footer:**
-- Shield icon + "Secure"
-- "Licensed & Insured"
-- "No spam"
-
-### 4.9 Success Screen
-
-- Green checkmark animation
-- Title: "Awesome, {firstName}—you're all set! 🎉"
-- Body: "We'll be reaching out very soon to get more details on your project and schedule your free estimate. Talk soon!"
-- Link: emeraldpaints.com
-- Trust footer: "Your information is secure"
-
-### 4.10 Helper Functions Update
-
-```typescript
-const getProjectTypeLabel = (type: string): string => {
-  switch (type) {
-    case "interior": return "Interior painting";
-    case "exterior": return "Exterior painting";
-    case "both": return "Both interior & exterior";
-    case "not-sure": return "Not sure yet";
-    default: return "";
-  }
-};
-
-const getTimelineLabel = (timeline: string): string => {
-  switch (timeline) {
-    case "asap": return "Right away";
-    case "30-days": return "Within 30 days";
-    case "1-3-months": return "1 to 3 months";
-    case "not-sure": return "Not sure yet";
-    default: return "";
-  }
-};
-```
-
-### 4.11 Webhook Payload
-
-**Webhook URL:** `REPLACE_WITH_GHL_WEBHOOK_URL` (placeholder)
-
-```javascript
-const payload = {
-  "contact.first_name": data.firstName,
-  "contact.email": data.email,
-  "contact.phone": phoneDigits,
-  "contact.zip_code": data.zipCode,
-  "contact.project_type": getProjectTypeLabel(data.projectType),
-  "contact.timeline": getTimelineLabel(data.timeline),
-  first_name: data.firstName,
-  email: data.email,
-  phone: phoneDigits,
-  zip_code: data.zipCode,
-  project_type: getProjectTypeLabel(data.projectType),
-  timeline: getTimelineLabel(data.timeline),
-};
-```
-
-Note: `budget_range` field removed (not applicable for painting)
-
-### 4.12 Facebook Pixel Lead Event
-
-```javascript
-// Fire on successful form submission
-if (typeof window !== 'undefined' && (window as any).fbq) {
-  (window as any).fbq('track', 'Lead');
+## Phase 2: Trust Logos Section
+
+### 2A: Add Actual Logo Images
+
+**File**: `src/components/TrustBadgesSection.tsx`
+
+Changes:
+- Replace text-based badges with actual logo images
+- Add new logo images (SVG/PNG):
+  - BBB (already exists: `logo-bbb.png`)
+  - HomeAdvisor (already exists: `logo-homeadvisor-elite.png`)
+  - Angi logo (need to add)
+  - Google Reviews badge (need to add)
+  - Yelp logo (need to add)
+  - Licensed & Insured shield badge (need to add)
+
+- Apply grayscale filter with color on hover:
+```css
+filter: grayscale(100%);
+opacity: 0.7;
+&:hover {
+  filter: grayscale(0%);
+  opacity: 1;
 }
 ```
 
----
-
-## Phase 5: QualifyPage.tsx Updates
-
-- Header: "See If You Qualify for the Home Refresh Program"
-- Live viewers indicator: Keep same 45-85 range
-- Background: Keep existing paper mountain background
+- Keep the auto-scrolling marquee animation (already working)
+- Ensure white/off-white background
 
 ---
 
-## Phase 6: Page Metadata (index.html)
+## Phase 3: Page Background Textures
 
-```html
-<title>Emerald Paints | 25% Off Professional Painting | Home Refresh Program | Denver Colorado</title>
-<meta name="description" content="Colorado homeowners: Get 25% off professional painting through the Home Refresh Program. Free in-home estimate, licensed & insured." />
-<meta name="author" content="Emerald Paints LLC" />
-<meta name="keywords" content="interior painting Denver, exterior painting Colorado, house painter Denver, painting contractor Commerce City, residential painting Aurora, Emerald Paints, Home Refresh Program" />
-<meta property="og:title" content="Emerald Paints | 25% Off Painting — Home Refresh Program" />
-<meta property="og:description" content="Colorado homeowners: Get 25% off professional painting..." />
-<link rel="canonical" href="https://emeraldpaints.com" />
-```
+### 3A: Generate Colorado Watercolor Texture
 
-**Pixel Placeholders:**
-```javascript
-fbq('init', 'REPLACE_WITH_PIXEL_ID');
-```
+Use AI image generation:
 
-**Lucky Orange:** Placeholder script tag
+**Prompt**: "Subtle watercolor-style background texture. Faintly visible Colorado Rocky Mountain peaks along top edge, soft watercolor pine trees along bottom edge. Center is very light cream/off-white (#FEFDFB) for text overlay. Mountains and trees at 15-20% opacity using muted greens, warm tans, soft grays. Warm, natural, premium feel like fine stationery. Should tile vertically. Watercolor style, NOT photorealistic. Subtle, elegant, sophisticated."
+
+Save as: `src/assets/bg-watercolor-mountains.webp`
+
+### 3B: Apply Texture to Sections
+
+Apply texture background to:
+- Process/How It Works section
+- FAQ section
+- Gallery section
+
+Sections to keep as-is:
+- Hero (has own background)
+- Reviews (dark navy)
+- Final CTA (dark navy)
 
 ---
 
-## Phase 7: Logo Handling (White Container Approach ONLY)
+## Phase 4: Reviews Section Text Contrast Fix
 
-On dark backgrounds (hero, footer, dark sections):
-```tsx
-<div className="bg-white rounded-lg p-2">
-  <img src={logo} alt="Emerald Paints" className="h-24 w-auto" />
-</div>
+**File**: `src/components/ReviewsSection.tsx`
+
+Current issue: "Customer Reviews" label uses `text-primary` (green) on dark navy background = invisible.
+
+Fixes:
+- Change section label from `text-primary` to `text-highlight` (bright gold #F5C518)
+- Change "Trust Us" from `text-primary` to `text-highlight` or white
+- Ensure all text on dark background is white or gold
+- Keep star ratings as gold (already correct)
+
+---
+
+## Phase 5: Quiz Page Urgency Bar (Green to Red)
+
+**File**: `src/pages/QualifyPage.tsx`
+
+Current: Urgency bar has green background (`bg-primary`)
+
+Change to red for urgency:
+```css
+background: linear-gradient(135deg, #DC2626 0%, #EF4444 100%);
 ```
 
-**NO mix-blend-mode** — use white container approach exclusively.
+Update the class from `bg-primary` to custom gradient class or inline style.
+
+---
+
+## Phase 6: Process Section Action Shot
+
+### 6A: Generate Painters Action Shot
+
+Use AI image generation:
+
+**Prompt**: "High-quality photorealistic photograph of a professional painting crew at work on a Colorado home. Two painters in clean white uniforms with emerald green logo patches, working on exterior of craftsman-style home. One on aluminum ladder cutting in trim with precision brush, other rolling warm gray paint on cedar siding at ground level. Canvas drop cloths on ground. Work van partially visible in background. Natural late-morning Colorado sunshine, Rocky Mountain foothills in soft background. Focused, professional poses, not posed. Clean premium equipment visible: Purdy brushes, Graco sprayer, Benjamin Moore paint cans. Competent, trustworthy, premium mood. Photorealistic, natural lighting, shallow depth of field, 4K."
+
+Save as: `src/assets/painters-action-shot.webp`
+
+### 6B: Update Process Section
+
+**File**: `src/components/ProcessSection.tsx`
+
+Changes:
+- Remove placeholder div with dashed border
+- Add actual image with rounded corners and shadow
+- Apply background texture to section
+
+---
+
+## Phase 7: Scroll Animations
+
+**File**: `src/index.css`
+
+Add section entrance animations:
+```css
+.section-animate {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+}
+.section-animate.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+```
+
+**Files**: All section components
+
+Add Intersection Observer to trigger animations when sections enter viewport. Use framer-motion's `whileInView` prop for easier implementation.
+
+Add staggered animations for How It Works cards (150ms delay between each).
+
+---
+
+## Phase 8: Gallery Section Polish
+
+**File**: `src/components/GallerySection.tsx`
+
+Changes:
+- Update "Real Home Transformations" to gold color (`text-highlight`) instead of green
+- Add subtle shadow/border to thumbnail strip
+- Change selected thumbnail indicator to gold ring
+- Apply background texture
+
+---
+
+## Phase 9: Floating Mobile CTA
+
+**File**: `src/components/FloatingCTA.tsx`
+
+Changes:
+- Update to gold gradient (will happen automatically when CSS variables change)
+- Add shadow: `box-shadow: 0 -4px 20px rgba(0,0,0,0.15)`
+
+---
+
+## Phase 10: Color Audit Throughout
+
+**File**: `src/index.css`
+
+Swap primary from emerald to gold throughout:
+```css
+/* OLD: Emerald Green */
+--primary: 150 55% 28%;  /* #1B6B3A */
+
+/* NEW: Warm Gold CTA */
+--primary: 40 88% 44%;   /* #D4920B */
+```
+
+Add new accent variable for emerald green accents on light backgrounds:
+```css
+--accent-green: 150 55% 28%;  /* Keep emerald for light bg accents */
+```
+
+Update all text-on-dark-background to use white or gold, never green.
+
+---
+
+## Phase 11: Section Dividers
+
+**File**: `src/index.css` and section components
+
+Add subtle gradient dividers between key sections:
+- Thin gradient line (1-2px)
+- OR soft wave SVG separator
+- Apply between: Hero/Trust logos, Gallery/Reviews
 
 ---
 
 ## Technical Implementation Summary
 
-### Files to Create
-
-| File | Description |
-|------|-------------|
-| `src/assets/emerald-paints-logo.png` | Copy from uploaded logo |
-| `src/assets/hero-emerald-house.webp` | Copy from uploaded hero image |
-| `src/assets/gallery-painting-*.webp` | 8 gallery images from uploads |
-
 ### Files to Modify
 
 | File | Changes |
 |------|---------|
-| `src/index.css` | Brand colors (navy/emerald/gold palette) |
-| `src/components/HeroSection.tsx` | Complete content + branding rewrite |
-| `src/components/TrustBadgesSection.tsx` | New painting industry badges |
-| `src/components/GallerySection.tsx` | New images + copy |
-| `src/components/ReviewsSection.tsx` | 8 new testimonials |
-| `src/components/FAQSection.tsx` | 7 painting-specific FAQs |
-| `src/components/FinalCTASection.tsx` | New copy (25% off, Home Refresh Program) |
-| `src/components/Footer.tsx` | Emerald Paints branding |
-| `src/components/Quiz.tsx` | Complete quiz flow rewrite |
-| `src/pages/QualifyPage.tsx` | Header text update |
-| `index.html` | Metadata + pixel placeholders |
+| `src/index.css` | Primary color gold, CTA glow gold, animations |
+| `src/components/HeroSection.tsx` | Complete rebuild: dark overlay, new copy, white text, gold CTA, trust stack |
+| `src/components/TrustBadgesSection.tsx` | Real logo images with grayscale hover |
+| `src/components/ReviewsSection.tsx` | Fix green-on-navy contrast - use gold/white |
+| `src/components/GallerySection.tsx` | Gold accents, thumbnail styling, texture |
+| `src/components/ProcessSection.tsx` | Replace placeholder with real image, texture |
+| `src/components/FAQSection.tsx` | Add texture background |
+| `src/components/FinalCTASection.tsx` | Verify gold CTA |
+| `src/components/FloatingCTA.tsx` | Verify gold styling |
+| `src/pages/QualifyPage.tsx` | Red urgency bar instead of green |
+| `src/components/Quiz.tsx` | Update any green accents to gold where appropriate |
 
----
+### Images to Generate
 
-## Mobile Optimization Checklist
+1. **Hero background**: Colorado mountains golden hour (dark sky top for white text)
+2. **Page texture**: Watercolor mountains/pine trees (subtle, tileable)
+3. **Action shot**: Professional painters at work
 
-- [ ] All text `text-base` (16px) minimum
-- [ ] All buttons `min-h-[44px]`
-- [ ] All inputs `h-12` (48px)
-- [ ] CTAs full-width on mobile (`w-full sm:w-auto`)
-- [ ] ZIP input uses `inputMode="numeric"`
-- [ ] No horizontal scroll on any section
-- [ ] Logo in white container on dark backgrounds
+### Color Reference
 
----
+```
+Navy (backgrounds, dark sections): #0B2447
+Gold (ALL CTAs, highlights on dark): #D4920B
+Bright Gold (offer text like "25%"): #F5C518
+Emerald Green (accents on LIGHT backgrounds only): #1B6B3A
+White: #FFFFFF
+Off-white: #FEFDFB
+```
 
-## Quiz Flow Screens Checklist
+### Critical Constraints
 
-- [ ] Step 1: Project Type (4 painting options)
-- [ ] Step 2: Timeline (4 options)
-- [ ] Timeline Clarification (60-day check)
-- [ ] Timeline Disqualification (full details with phone/website)
-- [ ] Step 3: ZIP Code (number keyboard)
-- [ ] 8-second loading with 5 rotating messages
-- [ ] ZIP Disqualification (out-of-state screen)
-- [ ] Step 4: Contact Form (Name/Phone/Email)
-- [ ] Success Screen (with emeraldpaints.com link)
-- [ ] `fbq('track', 'Lead')` fires on successful submission
+- All CTAs must be gold, not green
+- Never use green text on dark navy backgrounds
+- Hero text must be white with dark overlay behind
+- Trust badges must auto-scroll (don't break animation)
+- Urgency bar on quiz page must be red
+- 44px minimum touch targets maintained
 
