@@ -1,14 +1,20 @@
 import { useState } from "react";
 import Quiz from "@/components/Quiz";
 import { Shield } from "lucide-react";
+import GridBackground from "@/components/ui/grid-background";
 
 const QualifyPage = () => {
   const [quizStarted, setQuizStarted] = useState(false);
 
   return (
     <div className="min-h-screen relative">
-      {/* Background - Dark Slate */}
-      <div className="fixed inset-0 z-0" style={{ backgroundColor: '#0F172A' }} />
+      {/* Background - Darker slate for contrast */}
+      <div className="fixed inset-0 z-0" style={{ backgroundColor: '#020617' }} />
+      
+      {/* Grid + Emerald Glow overlay */}
+      <div className="fixed inset-0 z-0">
+        <GridBackground className="w-full h-full" />
+      </div>
 
       {/* Content */}
       <div className="relative z-10 min-h-screen flex flex-col">
@@ -20,12 +26,25 @@ const QualifyPage = () => {
               {/* Header - HIDES when quiz starts */}
               {!quizStarted && (
                 <>
-                  <h1 className="text-xl sm:text-2xl font-bold text-white mb-3 leading-relaxed">
+                  <h1 
+                    className="text-[28px] sm:text-3xl font-extrabold text-white mb-3 leading-tight"
+                    style={{ textShadow: '0 2px 4px rgba(0,0,0,0.5)' }}
+                  >
                     See If You Qualify for the
-                    <br />
-                    <span style={{ color: '#1B6B3A' }}>Home Refresh Program</span>
                   </h1>
-                  <p className="text-base text-white/70">
+                  <h2 
+                    className="text-[28px] sm:text-3xl font-extrabold mb-4 leading-tight"
+                    style={{ 
+                      color: '#F5C518',
+                      textShadow: '0 0 20px rgba(245, 197, 24, 0.5), 0 0 40px rgba(245, 197, 24, 0.3), 0 2px 4px rgba(0,0,0,0.3)'
+                    }}
+                  >
+                    Home Refresh Program
+                  </h2>
+                  <p 
+                    className="text-sm text-white/60 tracking-wide"
+                    style={{ textShadow: '0 1px 2px rgba(0,0,0,0.3)' }}
+                  >
                     Takes less than 30 seconds
                   </p>
                 </>
