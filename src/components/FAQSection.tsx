@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import { ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { motion } from "framer-motion";
+import bgWatercolor from "@/assets/bg-watercolor-mountains.webp";
 import {
   Accordion,
   AccordionContent,
@@ -35,37 +36,60 @@ const faqs = [
 
 const FAQSection = () => {
   return (
-    <section className="py-16 lg:py-24 bg-white">
-      <div className="container max-w-3xl px-4">
+    <section 
+      className="py-16 lg:py-24 relative"
+      style={{
+        backgroundImage: `url(${bgWatercolor})`,
+        backgroundSize: 'cover',
+        backgroundPosition: 'center',
+      }}
+    >
+      {/* Light overlay for readability */}
+      <div className="absolute inset-0 bg-white/85" />
+      
+      <div className="container max-w-3xl px-4 relative z-10">
         {/* Header */}
-        <div className="text-center mb-10">
+        <motion.div 
+          className="text-center mb-10"
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6 }}
+        >
           <span className="inline-block text-primary font-semibold text-sm uppercase tracking-wider mb-3">
             Questions & Answers
           </span>
           <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-secondary mb-4">
             Common Questions
           </h2>
-        </div>
+        </motion.div>
 
         {/* FAQ Accordion */}
-        <Accordion type="single" collapsible className="space-y-3">
-          {faqs.map((faq, index) => (
-            <AccordionItem
-              key={index}
-              value={`item-${index}`}
-              className="bg-card rounded-xl shadow-sm border border-border px-5 transition-shadow hover:shadow-md"
-            >
-              <AccordionTrigger className="text-left text-base font-medium text-secondary hover:text-primary hover:no-underline py-4 [&[data-state=open]>svg]:text-primary">
-                {faq.question}
-              </AccordionTrigger>
-              <AccordionContent className="text-base text-muted-foreground pb-4 leading-relaxed">
-                {faq.answer}
-              </AccordionContent>
-            </AccordionItem>
-          ))}
-        </Accordion>
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6, delay: 0.2 }}
+        >
+          <Accordion type="single" collapsible className="space-y-3">
+            {faqs.map((faq, index) => (
+              <AccordionItem
+                key={index}
+                value={`item-${index}`}
+                className="bg-card rounded-xl shadow-sm border border-border px-5 transition-shadow hover:shadow-md"
+              >
+                <AccordionTrigger className="text-left text-base font-medium text-secondary hover:text-primary hover:no-underline py-4 [&[data-state=open]>svg]:text-primary">
+                  {faq.question}
+                </AccordionTrigger>
+                <AccordionContent className="text-base text-muted-foreground pb-4 leading-relaxed">
+                  {faq.answer}
+                </AccordionContent>
+              </AccordionItem>
+            ))}
+          </Accordion>
+        </motion.div>
 
-        {/* Inline CTA */}
+        {/* Inline CTA - GOLD */}
         <div className="flex justify-center mt-10 sm:mt-12">
           <motion.div className="animate-subtle-rock w-full sm:w-auto">
             <Link to="/qualify" className="block">

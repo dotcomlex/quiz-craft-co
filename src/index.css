@@ -6,26 +6,29 @@
 
 @layer base {
   :root {
-    /* Core brand colors - Emerald Paints BRIGHT palette */
+    /* Core brand colors - Emerald Paints with GOLD CTAs */
     --background: 210 20% 99%;
     --foreground: 215 30% 15%;
 
-    /* Hero BRIGHT section - Light sky background */
-    --hero: 200 60% 96%;
-    --hero-foreground: 215 30% 15%;
+    /* Hero DARK section with overlay */
+    --hero: 215 60% 14%;
+    --hero-foreground: 0 0% 98%;
 
-    /* Primary CTA - Emerald Green #1B6B3A */
-    --primary: 150 55% 28%;
+    /* Primary CTA - GOLD #D4920B */
+    --primary: 40 88% 44%;
     --primary-foreground: 0 0% 100%;
-    --primary-hover: 150 55% 22%;
+    --primary-hover: 40 88% 36%;
 
     /* Secondary - Deep Navy #0B2447 */
-    --secondary: 215 60% 14%;
+    --secondary: 215 60% 16%;
     --secondary-foreground: 0 0% 98%;
 
-    /* Tertiary - Emerald Green #1B6B3A */
+    /* Tertiary - Emerald Green #1B6B3A (for light bg accents) */
     --tertiary: 150 55% 28%;
     --tertiary-foreground: 0 0% 100%;
+
+    /* Accent Green - for accents on LIGHT backgrounds only */
+    --accent-green: 150 55% 28%;
 
     /* Muted surfaces - neutral grays */
     --muted: 210 15% 96%;
@@ -37,18 +40,18 @@
     --popover: 0 0% 100%;
     --popover-foreground: 215 30% 15%;
 
-    /* Accent - Light emerald tint */
-    --accent: 150 30% 96%;
-    --accent-foreground: 150 55% 28%;
+    /* Accent - Light gold tint */
+    --accent: 40 30% 96%;
+    --accent-foreground: 40 88% 44%;
 
-    /* Destructive */
+    /* Destructive - Red for urgency */
     --destructive: 0 84% 60%;
     --destructive-foreground: 0 0% 98%;
 
     /* Borders and inputs */
     --border: 210 15% 90%;
     --input: 210 15% 90%;
-    --ring: 150 55% 28%;
+    --ring: 40 88% 44%;
 
     /* Radius */
     --radius: 0.75rem;
@@ -57,18 +60,17 @@
     --success: 150 55% 28%;
     --success-foreground: 0 0% 100%;
     
-    /* Highlight - Bright Gold #F5C518 for offers ONLY */
+    /* Highlight - Bright Gold #F5C518 for offers/headlines on dark */
     --highlight: 48 95% 52%;
     --highlight-foreground: 215 30% 15%;
     
-    /* Section backgrounds - BRIGHT transitions */
-    --section-warm: 150 20% 98%;
+    /* Section backgrounds */
+    --section-warm: 40 20% 98%;
     --section-slate: 210 15% 97%;
     --section-dark: 215 60% 12%;
     
-    /* Light emerald tint for backgrounds */
-    --section-emerald: 150 30% 97%;
-    --section-sky: 200 40% 97%;
+    /* Off-white for textured sections */
+    --section-cream: 40 30% 99%;
     
     /* Shadows */
     --shadow-sm: 0 1px 2px 0 hsl(0 0% 0% / 0.04);
@@ -84,7 +86,7 @@
     --sidebar-accent: 240 4.8% 95.9%;
     --sidebar-accent-foreground: 240 5.9% 10%;
     --sidebar-border: 215 15% 91%;
-    --sidebar-ring: 150 55% 28%;
+    --sidebar-ring: 40 88% 44%;
   }
 
   .dark {
@@ -96,19 +98,19 @@
     --card-foreground: 0 0% 98%;
     --popover: 222 20% 12%;
     --popover-foreground: 0 0% 98%;
-    --primary: 150 55% 35%;
+    --primary: 40 88% 50%;
     --primary-foreground: 0 0% 100%;
     --secondary: 220 20% 20%;
     --secondary-foreground: 0 0% 98%;
     --muted: 217 32% 17%;
     --muted-foreground: 215 20% 65%;
-    --accent: 150 40% 15%;
-    --accent-foreground: 150 55% 65%;
+    --accent: 40 40% 15%;
+    --accent-foreground: 40 88% 65%;
     --destructive: 0 62% 30%;
     --destructive-foreground: 0 0% 98%;
     --border: 217 32% 17%;
     --input: 217 32% 17%;
-    --ring: 150 55% 35%;
+    --ring: 40 88% 50%;
     --section-warm: 220 20% 10%;
     --section-slate: 222 20% 10%;
     --section-dark: 222 25% 6%;
@@ -137,13 +139,15 @@
     text-wrap: balance;
   }
 
-  /* Hero gradients - BRIGHT version */
-  .hero-gradient {
-    background: linear-gradient(135deg, hsl(var(--hero)) 0%, hsl(200 50% 95%) 100%);
-  }
-
-  .hero-overlay-light {
-    background: linear-gradient(to bottom, hsl(0 0% 100% / 0.1) 0%, hsl(0 0% 100% / 0.05) 50%, hsl(0 0% 100% / 0.15) 100%);
+  /* Hero overlay gradient for dark hero with image */
+  .hero-overlay-dark {
+    background: linear-gradient(
+      to bottom,
+      rgba(11, 36, 71, 0.85) 0%,
+      rgba(11, 36, 71, 0.60) 30%,
+      rgba(11, 36, 71, 0.40) 60%,
+      rgba(11, 36, 71, 0.75) 100%
+    );
   }
 
   /* Quiz card - larger shadow for prominence */
@@ -172,7 +176,7 @@
       0 0 40px -10px hsl(var(--primary) / 0.3);
   }
 
-  /* Section gradients for premium transitions - BRIGHT */
+  /* Section gradients for premium transitions */
   .section-gradient-warm {
     background: linear-gradient(180deg, hsl(var(--section-warm)) 0%, hsl(var(--background)) 100%);
   }
@@ -185,18 +189,11 @@
     background: linear-gradient(180deg, hsl(var(--section-dark)) 0%, hsl(220 30% 15%) 100%);
   }
 
-  .section-gradient-emerald {
-    background: linear-gradient(180deg, hsl(var(--section-emerald)) 0%, hsl(var(--background)) 100%);
-  }
-
-  .section-gradient-sky {
-    background: linear-gradient(180deg, hsl(var(--section-sky)) 0%, hsl(var(--background)) 100%);
-  }
-
   .section-accent {
     background: linear-gradient(180deg, hsl(var(--muted)) 0%, hsl(0 0% 100%) 100%);
   }
 
+  /* CTA gradient for dark sections - navy */
   .cta-gradient {
     background: linear-gradient(135deg, hsl(215 60% 14%) 0%, hsl(215 60% 10%) 100%);
   }
@@ -220,23 +217,17 @@
     @apply font-semibold text-foreground;
   }
 
-  /* Hero text shadow for BRIGHT background - subtle white halo */
-  .hero-text-shadow-light {
-    text-shadow: 0 1px 3px rgba(255, 255, 255, 0.5), 0 2px 6px rgba(255, 255, 255, 0.3);
-  }
-
   /* Hero text shadow for dark background */
   .hero-text-shadow {
-    text-shadow: 0 2px 12px hsl(0 0% 0% / 0.7), 0 4px 24px hsl(0 0% 0% / 0.5);
+    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.5), 0 0 30px rgba(0, 0, 0, 0.3);
   }
 
-  /* Stronger hero text shadow for bright backgrounds */
+  /* Strong hero text shadow */
   .hero-text-shadow-strong {
     text-shadow: 
-      0 1px 2px rgba(0, 0, 0, 1),
-      0 3px 6px rgba(0, 0, 0, 0.95),
-      0 6px 12px rgba(0, 0, 0, 0.8),
-      0 12px 24px rgba(0, 0, 0, 0.6);
+      0 2px 4px rgba(0, 0, 0, 0.8),
+      0 4px 8px rgba(0, 0, 0, 0.6),
+      0 8px 16px rgba(0, 0, 0, 0.4);
   }
 }
 
@@ -318,7 +309,7 @@
 }
 
 .animate-scroll {
-  animation: scroll 20s linear infinite;
+  animation: scroll 30s linear infinite;
 }
 
 .animate-scroll:hover {
@@ -346,24 +337,75 @@
   animation-play-state: paused;
 }
 
-/* Glowing pulse animation for CTA button - EMERALD GREEN */
+/* Glowing pulse animation for CTA button - GOLD */
 @keyframes ctaGlow {
   0%, 100% {
     box-shadow: 
-      0 0 20px rgba(27, 107, 58, 0.4),
-      0 0 40px rgba(27, 107, 58, 0.2),
+      0 4px 20px rgba(212, 146, 11, 0.4),
+      0 0 40px rgba(212, 146, 11, 0.2),
       0 20px 40px -10px rgba(0, 0, 0, 0.4);
   }
   50% {
     box-shadow: 
-      0 0 30px rgba(27, 107, 58, 0.6),
-      0 0 60px rgba(27, 107, 58, 0.4),
+      0 4px 30px rgba(212, 146, 11, 0.6),
+      0 0 60px rgba(212, 146, 11, 0.4),
       0 20px 40px -10px rgba(0, 0, 0, 0.4);
   }
 }
 
 .animate-cta-glow {
   animation: ctaGlow 2s ease-in-out infinite;
+}
+
+/* Section entrance animations */
+.section-animate {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+}
+
+.section-animate.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Watercolor texture background */
+.bg-watercolor {
+  background-image: url('@/assets/bg-watercolor-mountains.webp');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+/* Parallax effect for hero */
+.parallax-bg {
+  background-attachment: fixed;
+  background-size: cover;
+  background-position: center;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .parallax-bg {
+    background-attachment: scroll;
+  }
+}
+
+/* Premium shadow for floating CTA */
+.shadow-premium {
+  box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.15), 0 4px 20px rgba(212, 146, 11, 0.3);
+}
+
+/* Section divider gradient */
+.section-divider {
+  height: 2px;
+  background: linear-gradient(
+    to right,
+    transparent 0%,
+    hsl(var(--border)) 20%,
+    hsl(var(--primary) / 0.3) 50%,
+    hsl(var(--border)) 80%,
+    transparent 100%
+  );
 }
 
 /* Performance optimizations */

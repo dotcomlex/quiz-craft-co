@@ -96,31 +96,42 @@ const ReviewsSection = () => {
   return (
     <section className="py-12 sm:py-16 lg:py-24 bg-gradient-to-br from-[#0B2447] to-[#0A1D3B]">
       <div className="container mx-auto px-4">
-        <div className="text-center mb-10">
-          <span className="inline-block text-primary font-semibold text-sm uppercase tracking-wider mb-3">
+        <motion.div 
+          className="text-center mb-10"
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6 }}
+        >
+          {/* Label - BRIGHT GOLD for visibility on dark */}
+          <span className="inline-block text-highlight font-semibold text-sm uppercase tracking-wider mb-3">
             Customer Reviews
           </span>
           <h2 className="text-xl sm:text-2xl lg:text-4xl font-bold text-white mb-3 sm:mb-4 leading-tight">
-            This Is Why Colorado Homeowners <span className="text-primary">Trust Us</span>
+            This Is Why Colorado Homeowners <span className="text-highlight">Trust Us</span>
           </h2>
           <p className="text-sm sm:text-base text-white/70 max-w-xl mx-auto px-4">
             Real stories from real families who transformed their homes.
           </p>
-        </div>
+        </motion.div>
 
         <div className="relative max-w-5xl mx-auto">
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-5">
             {getVisibleReviews().map((review, index) => (
-              <div
+              <motion.div
                 key={currentIndex + index}
                 className="bg-white rounded-2xl p-5 sm:p-6 shadow-lg border border-border/30 h-full flex flex-col"
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5, delay: index * 0.1 }}
               >
                 <Quote className="w-6 h-6 sm:w-8 sm:h-8 text-primary/20 mb-3 sm:mb-4" />
                 <p className="text-foreground/90 mb-4 sm:mb-5 text-xs sm:text-sm leading-relaxed">"{review.text}"</p>
-                {/* Stars - GOLD color is appropriate for stars */}
+                {/* Stars - GOLD color */}
                 <div className="flex gap-1 mb-3 sm:mb-4">
                   {[...Array(review.rating)].map((_, i) => (
-                    <Star key={i} className="w-3.5 h-3.5 sm:w-4 sm:h-4 fill-highlight text-highlight" />
+                    <Star key={i} className="w-3.5 h-3.5 sm:w-4 sm:h-4 fill-primary text-primary" />
                   ))}
                 </div>
                 <div className="flex items-center gap-2.5 sm:gap-3 pt-3 sm:pt-4 border-t border-border/50 mt-auto">
@@ -146,7 +157,7 @@ const ReviewsSection = () => {
                   </svg>
                   <span>Verified Google Review</span>
                 </div>
-              </div>
+              </motion.div>
             ))}
           </div>
 
@@ -171,7 +182,7 @@ const ReviewsSection = () => {
             </Button>
           </div>
 
-          {/* Inline CTA - EMERALD GREEN */}
+          {/* Inline CTA - GOLD */}
           <div className="flex justify-center mt-8 sm:mt-10">
             <motion.div className="animate-subtle-rock w-full sm:w-auto">
               <Link to="/qualify" className="block">
