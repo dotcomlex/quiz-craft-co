@@ -1,399 +1,713 @@
 
-# EMERALD PAINTS — MANDATORY FIXES (COMPREHENSIVE PLAN)
+
+# EMERALD PAINTS — COMPLETE DESIGN RESET PLAN
 
 ## Overview
-This plan addresses 12 critical fixes for the Emerald Paints funnel. The user has emphasized that every fix must be executed precisely and verified visually, not claimed as "already done." Total modifications: ~60 lines across 6 files.
+
+This plan implements a full visual overhaul across 9 files, replacing the old navy/gold color scheme with a new 3-color system (Bright Blue + Emerald Green + Gold accents). The hero background image uploaded by the user will be added, the logo will be moved to a sticky header instead of the hero, and all CTA buttons will change from gold to high-converting emerald green.
+
+**Total Files Modified**: 9 files
+**Total Lines Affected**: ~500 lines
+**Critical Constraint**: Every color must comply with the new palette — no legacy navy (#0B2447) or gold CTAs (#D4920B)
 
 ---
 
-## PHASE 0: GLOBAL COLOR SEARCH & REPLACE (Foundation)
+## NEW COLOR SYSTEM REFERENCE
 
-**Scope**: Search entire codebase for banned colors and replace systematically.
-
-**Issues Found**:
-- `src/components/Quiz.tsx` contains `bg-amber-100` and `text-amber-600` (lines 723, 725) — must replace
-- `src/tailwind.config.lov.json` contains color definitions but these are NOT actively used in components since all components use inline hex or CSS variables
-- No instances of `#0F2D5C`, `#E5A30C`, `#F59E0B`, `#F97316` found in component files (only in tailwind config which is safe)
-
-**Execution Steps**:
-1. Search and replace in **`src/components/Quiz.tsx`**:
-   - `bg-amber-100` → inline style `backgroundColor: '#FEFDFB'` (warm off-white)
-   - `text-amber-600` → inline style `color: '#1B6B3A'` (emerald green)
-
----
-
-## FIX 1: HERO SECTION — REMOVE BACKGROUND IMAGE
-
-**File**: `src/components/HeroSection.tsx`
-
-**Current State**:
-- Line 3: Imports `heroImage` from `hero-colorado-golden-hour.webp`
-- Lines 12-23: Renders `<img>` tag with background image and applies parallax class
-- Line 22: Applies dark overlay with `hero-overlay-dark` class
-
-**Required Changes**:
-1. **Delete line 3**: Remove import statement `import heroImage from "@/assets/hero-colorado-golden-hour.webp";`
-2. **Delete lines 12-23**: Remove the entire `<div className="absolute inset-0">` container with the image and overlay
-3. **Modify line 10** (now line 8): Add inline style to hero section:
-   ```jsx
-   <section id="hero" className="relative min-h-screen overflow-hidden" style={{ backgroundColor: '#0B2447' }}>
-   ```
-4. **Remove parallax reference**: The removed image tag eliminates the `parallax-bg` class automatically
-
-**Result**: Hero background is now solid `#0B2447` navy with no image.
+| Color | Hex | CSS Variable | Usage |
+|-------|-----|--------------|-------|
+| Bright Blue | `#2563EB` | `--secondary` | Headings on light backgrounds |
+| Dark Blue | `#1E3A8A` | `--tertiary` | Dark section backgrounds |
+| Emerald Green | `#1B6B3A` | `--primary` | CTA buttons, icons, labels |
+| Gold | `#F5C518` | `--highlight` | Headline highlights only |
+| Dark Slate | `#0F172A` | `--hero`, `--section-dark` | Dark section backgrounds |
+| White | `#FFFFFF` | — | Text on dark, button text |
+| Off-White | `#FEFDFB` | `--section-warm` | Light section backgrounds |
+| Text Gray | `#374151` | `--foreground` | Body text |
 
 ---
 
-## FIX 2: HERO SECTION — LOGO IN WHITE PILL CONTAINER
+## PHASE 0: COPY HERO BACKGROUND IMAGE
 
-**File**: `src/components/HeroSection.tsx`
+**Action**: Copy the uploaded hero image to project assets
 
-**Current State**:
-- Lines 28-46: Logo is wrapped in a `motion.div` with a radial gradient background and drop shadow
-- Current sizes: `h-24 sm:h-32 lg:h-40` (correct desktop sizes but mobile is small)
-- Current container has a barely-visible radial gradient halo
+The user uploaded a Colorado mountain landscape at golden hour with a cozy home and dark sky at the top — perfect for hero text overlay.
 
-**Required Changes**:
-1. **Replace the logo container styling** (lines 28-46). Modify to:
-   ```jsx
-   <div 
-     className="flex justify-center mb-6 sm:mb-8"
-     style={{
-       background: 'rgba(255, 255, 255, 0.95)',
-       borderRadius: '16px',
-       padding: '12px 28px',
-       display: 'inline-flex',
-       alignItems: 'center',
-       justifyContent: 'center',
-       margin: '0 auto 24px auto',
-     }}
-   >
-     <img
-       src={logo}
-       alt="Emerald Paints"
-       className="h-14 sm:h-[72px] lg:h-24 w-auto object-contain"
-     />
-   </div>
-   ```
-2. **Remove motion animations** on the logo (remove `motion.div`, remove `initial`, `animate`, `transition` props)
-3. **Update sizing**:
-   - Mobile: `h-14` = 56px
-   - Tablet: `sm:h-[72px]` = 72px  
-   - Desktop: `lg:h-24` = 96px
-
-**Result**: Logo now sits inside a white pill container that is clearly visible on the dark navy background.
+- **Source**: `user-uploads://hf_20260207_221118_5e2da819-8480-4ba5-bc9f-617046a8a075.png`
+- **Destination**: `src/assets/hero-bg.png`
 
 ---
 
-## FIX 3: HERO SECTION — REDUCE TOP PADDING
+## FILE 1: CSS VARIABLES — `src/index.css`
 
-**File**: `src/components/HeroSection.tsx`
+### Changes (Lines 8-90)
 
-**Current State**:
-- Line 26: Hero content container has `py-4 lg:py-8` padding
-- Line 10: Hero section wraps everything in `min-h-screen` (this is correct)
+**Replace the entire `:root` block with new 3-color system:**
 
-**Required Changes**:
-1. **Modify line 26** padding classes:
-   ```jsx
-   <div className="relative z-10 container mx-auto px-4 py-4 sm:py-6 lg:py-8 min-h-screen flex flex-col justify-center">
-   ```
-   This reduces from `py-4 lg:py-8` (which jumps significantly) to a more gradual progression: `py-4 sm:py-6 lg:py-8`
-   
-   OR use inline styles:
-   ```jsx
-   style={{ paddingTop: '40px', paddingBottom: '48px' }}
-   ```
-   with media queries for tablet/desktop
+```css
+:root {
+  /* Core brand colors - 3-COLOR SYSTEM */
+  --background: 210 20% 99%;
+  --foreground: 220 13% 26%;
 
-**Result**: Less empty space above the logo; logo sits closer to the top.
+  /* Primary CTA - EMERALD GREEN (high-converting) */
+  --primary: 150 55% 26%;          /* #1B6B3A */
+  --primary-foreground: 0 0% 100%;
+  --primary-hover: 150 55% 22%;
 
----
+  /* Secondary - Dark Blue for headings */
+  --secondary: 226 71% 33%;        /* #1E3A8A */
+  --secondary-foreground: 0 0% 100%;
 
-## FIX 4: HERO HEADLINE — ADD TEXT EFFECTS
+  /* Tertiary - Bright Blue for accents */
+  --tertiary: 217 91% 53%;         /* #2563EB */
+  --tertiary-foreground: 0 0% 100%;
 
-**File**: `src/components/HeroSection.tsx`
+  /* Highlight - Gold for text highlights on dark backgrounds */
+  --highlight: 48 95% 52%;         /* #F5C518 */
+  --highlight-foreground: 220 13% 26%;
 
-**Current State**:
-- Line 58: Headline uses `font-extrabold` and has `textShadow` applied
-- Lines 59-60: "Home Refresh Program" and "25%" are already wrapped in `<span className="text-highlight">`
-- The highlight text already has individual `textShadow` applied
+  /* Hero/dark sections */
+  --hero: 222 47% 11%;             /* #0F172A dark slate */
+  --hero-foreground: 0 0% 98%;
 
-**Analysis**: This fix is ALREADY CORRECT. The headline has:
-- `font-extrabold` (equivalent to font-weight 800)
-- Heavy text-shadow: `"0 2px 8px rgba(0,0,0,0.5), 0 0 30px rgba(0,0,0,0.3)"`
-- Gold highlights on "Home Refresh Program" and "25%"
-- `text-highlight` applies the bright gold color (#F5C518)
+  /* Muted surfaces */
+  --muted: 210 15% 96%;
+  --muted-foreground: 220 9% 46%;
 
-**Required Action**: VERIFY but do NOT modify. Check that `text-highlight` in `index.css` resolves to `color: hsl(var(--highlight))` where `--highlight: 48 95% 52%` (#F5C518).
+  /* Cards */
+  --card: 0 0% 100%;
+  --card-foreground: 220 13% 26%;
+  --popover: 0 0% 100%;
+  --popover-foreground: 220 13% 26%;
 
-**Result**: Headline already has the required text effects.
+  /* Accent */
+  --accent: 210 40% 96%;
+  --accent-foreground: 217 91% 53%;
 
----
+  /* Destructive */
+  --destructive: 0 84% 60%;
+  --destructive-foreground: 0 0% 98%;
 
-## FIX 5: HERO SUBHEADLINE — MUST BE ONE SINGLE PARAGRAPH
+  /* Borders */
+  --border: 214 32% 91%;
+  --input: 214 32% 91%;
+  --ring: 150 55% 26%;
 
-**File**: `src/components/HeroSection.tsx`
+  --radius: 0.75rem;
 
-**Current State**:
-- Lines 64-66: Subheadline IS correctly formatted as a single `<p>` tag
-- "Limited spots available." is wrapped in a `<span className="font-bold uppercase">`
-- The rest flows naturally after it in the same paragraph
+  /* Semantic tokens */
+  --success: 150 55% 26%;
+  --success-foreground: 0 0% 100%;
 
-**Analysis**: This fix is ALREADY CORRECT. The subheadline is:
-```jsx
-<p className="...">
-  <span className="font-bold uppercase">Limited spots available.</span> Click below to see...
-</p>
+  /* Section backgrounds */
+  --section-warm: 40 20% 98%;
+  --section-dark: 222 47% 11%;
+}
 ```
 
-**Required Action**: VERIFY that it renders as a single continuous paragraph with "Limited spots available" as bold/uppercase inline text, NOT on its own line.
+### Update CTA Glow Animation (Lines 341-358)
 
-**Result**: Subheadline is already one cohesive paragraph.
+**Replace gold glow with green glow:**
 
----
+```css
+@keyframes ctaGlow {
+  0%, 100% {
+    box-shadow:
+      0 4px 20px rgba(27, 107, 58, 0.4),
+      0 0 40px rgba(27, 107, 58, 0.2),
+      0 20px 40px -10px rgba(0, 0, 0, 0.4);
+  }
+  50% {
+    box-shadow:
+      0 4px 30px rgba(27, 107, 58, 0.6),
+      0 0 60px rgba(27, 107, 58, 0.4),
+      0 20px 40px -10px rgba(0, 0, 0, 0.4);
+  }
+}
+```
 
-## FIX 6: HERO — DELETE "TRUSTED BY 100s" TEXT
+### Update Hero Overlay (Lines 143-151)
 
-**File**: `src/components/HeroSection.tsx`
+**Replace old navy overlay with dark slate:**
 
-**Current State**:
-- Lines 90-104: Trust indicators section shows:
-  - Two items: "Licensed & Insured" and "Satisfaction Guaranteed"
-  - Uses CheckCircle and Shield icons with gold color (`text-highlight`)
-  - Rendered on a single flex row
+```css
+.hero-overlay-dark {
+  background: linear-gradient(
+    to bottom,
+    rgba(15, 23, 42, 0.85) 0%,
+    rgba(15, 23, 42, 0.60) 30%,
+    rgba(15, 23, 42, 0.40) 60%,
+    rgba(15, 23, 42, 0.70) 100%
+  );
+}
+```
 
-**Analysis**: The "Trusted by 100s of Homeowners Across Colorado" line has ALREADY been removed. Only the two required trust indicators remain.
+### Update Premium Shadow (Lines 394-396)
 
-**Required Action**: VERIFY the live render shows only:
-- ✅ Licensed & Insured
-- 🛡️ Satisfaction Guaranteed
+**Replace gold shadow with green shadow:**
 
-No "Trusted by 100s" line should be visible.
-
-**Result**: Already correct.
-
----
-
-## FIX 7: REMOVE SEPARATOR LINES NEAR CTA BUTTONS
-
-**File**: All section components
-
-**Current State**:
-- `src/index.css` lines 399-409: Defines `.section-divider` class with gradient line styling
-- No visual separators found in GallerySection, ProcessSection, or FAQSection in the current code review
-- FAQSection line 82, GallerySection line 128, FinalCTASection line 34: All CTA buttons use `motion.div` wrapper but no separator dividers visible above them
-
-**Search Results**: No `<div className="section-divider">` or separator divider elements found in active component files.
-
-**Required Action**: VERIFY the live render has zero visible horizontal lines above any "See If I Qualify" button. If any divider lines are visible, locate and remove them.
-
-**Result**: Already correct (no separator dividers visible in code).
-
----
-
-## FIX 8: OUR WORK SECTION — FIX MOUNTAIN BACKGROUND
-
-**File**: `src/components/GallerySection.tsx`
-
-**Current State**:
-- Line 44: Section has `className="py-16 lg:py-24 bg-white"` — no texture background visible
-- Lines 46-62: Section header uses motion.div with `whileInView` animation
-- Lines 53-58: Section label ("OUR WORK") is `text-tertiary` (emerald green) and headline is ALL `text-secondary` (navy)
-
-**Analysis**: The watercolor texture background has already been removed. The section is pure white. The colors are correct (emerald label, navy headline).
-
-**Issues to verify**:
-1. Background color is truly `bg-white` (pure white) or should be warm off-white `#FEFDFB`
-2. No mountain image bleeding through visible in the live render
-
-**Required Changes**:
-1. **Modify line 44**: Change `bg-white` to `bg-[#FEFDFB]` (warm off-white):
-   ```jsx
-   <section className="py-16 lg:py-24" style={{ backgroundColor: '#FEFDFB' }}>
-   ```
-
-**Result**: Gallery section has warm off-white background instead of stark white.
+```css
+.shadow-premium {
+  box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.15), 0 4px 20px rgba(27, 107, 58, 0.3);
+}
+```
 
 ---
 
-## FIX 9: REMOVE ALL SCROLL-TRIGGERED ANIMATIONS
+## FILE 2: BUTTON COMPONENT — `src/components/ui/button.tsx`
 
-**Files Affected**:
-- `src/components/GallerySection.tsx` (lines 46-51, 64-69)
-- `src/components/ProcessSection.tsx` (lines 36-41, 54-60, 87-92)
-- `src/components/FinalCTASection.tsx` (lines 10-14)
-- `src/components/FAQSection.tsx` (lines 41-46, 57-61)
+### Changes (Lines 10-21)
 
-**Current State**:
-- All major section headers use `motion.div` with `whileInView={{ opacity: 1, y: 0 }}` and `viewport={{ once: true }}`
-- All sections have `initial={{ opacity: 0, y: 30 }}` which creates fade-in-on-scroll effect
-- ProcessSection step cards use staggered animations with `delay: index * 0.15`
-- `animate-subtle-rock` class applied to CTA button wrapper containers (lines 77 in Hero, 129 in Gallery, 83 in FAQ, 34 in FinalCTA)
+**Update CTA variant to use explicit emerald green with inline styles:**
 
-**Required Changes**:
-1. **GallerySection lines 46-51**: Remove `whileInView`, `viewport`, keep `animate`
-   ```jsx
-   <motion.div 
-     className="text-center mb-10"
-     animate={{ opacity: 1, y: 0 }}
-   >
-   ```
-   
-2. **GallerySection lines 64-69**: Same as above
-   
-3. **ProcessSection lines 36-41**: Remove `whileInView`, `viewport`, keep `animate`
-   
-4. **ProcessSection lines 54-60**: Remove `whileInView`, `viewport`. Keep `animate` but remove `delay: index * 0.15`
-   
-5. **ProcessSection lines 87-92**: Remove `whileInView`, `viewport`
-   
-6. **FAQSection lines 41-46**: Remove `whileInView`, `viewport`
-   
-7. **FAQSection lines 57-61**: Remove `whileInView`, `viewport`
-   
-8. **FinalCTASection lines 10-14**: Remove `whileInView`, `viewport`
+The button component uses CSS variables, so changing `--primary` will automatically update CTA buttons. However, to ensure explicit green colors, update the `cta` variant:
 
-9. **KEEP these animations** (do NOT remove):
-   - Line 77 in Hero: `animate-subtle-rock` on CTA button (subtle rocking)
-   - Line 129 in Gallery: `animate-subtle-rock` on CTA button
-   - Line 83 in FAQ: `animate-subtle-rock` on CTA button
-   - Line 34 in FinalCTA: `animate-subtle-rock` on CTA button
-   - `animate-cta-glow` on all CTA buttons (gold glow pulse)
-
-**Result**: All sections visible immediately on page load; no scroll-triggered fades.
+```tsx
+cta: "bg-[#1B6B3A] text-white hover:bg-[#155C30] shadow-xl hover:shadow-2xl active:scale-[0.98] text-lg font-bold",
+```
 
 ---
 
-## FIX 10: ALL CTA BUTTONS — EXACT GOLD COLOR
+## FILE 3: HERO SECTION — `src/components/HeroSection.tsx`
 
-**Files**: `src/components/ui/button.tsx`, all section components
+### Complete Rewrite Required
 
-**Current State**:
-- Button component line 20: CTA variant uses `bg-primary text-primary-foreground hover:bg-primary/90`
-- CSS variables define `--primary: 40 88% 44%` = #D4920B (gold)
-- All CTA buttons use `variant="cta"` which resolves to this gold color
-- Hover state is `hover:bg-primary/90` which darkens the gold slightly
+**Current Issues:**
+- Uses solid navy `#0B2447` background (banned)
+- Logo in hero takes up valuable space
+- Missing background image
 
-**Analysis**: CTA colors are already correct at the CSS variable level.
+**New Structure:**
 
-**Required Verification**:
-1. Verify `--primary: 40 88% 44%` in `index.css` line 18 — CORRECT
-2. Verify `--primary-hover: 40 88% 36%` in `index.css` line 20 — should provide darker gold on hover
-3. Verify hover state actually uses `#B87A09` (darker gold) not orange/amber
-4. Verify no button has inline `bg-orange-*` or `bg-amber-*` classes
+```tsx
+import { Link } from "react-router-dom";
+import { Shield, CheckCircle, ArrowRight } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import heroBg from "@/assets/hero-bg.png";
 
-**One Issue Found**:
-- `src/components/Quiz.tsx` lines 723-725 use `bg-amber-100` and `text-amber-600` which must be replaced (see Phase 0)
+const HeroSection = () => {
+  return (
+    <section id="hero" className="relative min-h-screen overflow-hidden">
+      {/* Background Image */}
+      <div className="absolute inset-0">
+        <img
+          src={heroBg}
+          alt="Colorado mountain landscape at golden hour"
+          className="w-full h-full object-cover"
+        />
+        {/* Dark overlay for text readability */}
+        <div className="absolute inset-0 hero-overlay-dark" />
+      </div>
 
-**Required Changes**:
-1. **`src/components/Quiz.tsx` lines 723-725**: Replace amber with emerald/off-white
-   ```jsx
-   <div
-     className="w-14 h-14 mx-auto mb-4 rounded-full flex items-center justify-center"
-     style={{
-       backgroundColor: '#FEFDFB',
-     }}
-   >
-     <MapPin className="w-7 h-7" style={{ color: '#1B6B3A' }} />
-   </div>
-   ```
+      {/* Content */}
+      <div className="relative z-10 container mx-auto px-4 pt-10 pb-12 sm:pt-14 sm:pb-16 min-h-screen flex flex-col justify-center">
+        {/* NO LOGO — logo moves to sticky header */}
 
-**Result**: All CTA buttons are true gold #D4920B with no orange/amber anywhere.
+        {/* Single centered column */}
+        <div className="max-w-3xl mx-auto">
+          {/* Urgency badge */}
+          <div className="flex justify-center mb-6">
+            <span 
+              className="inline-flex items-center gap-2 px-4 py-2 rounded-full text-sm font-medium"
+              style={{
+                backgroundColor: 'rgba(245, 197, 24, 0.15)',
+                color: '#F5C518',
+                border: '1px solid rgba(245, 197, 24, 0.3)'
+              }}
+            >
+              Spring 2025 Special — Limited Availability
+            </span>
+          </div>
+
+          {/* Headline */}
+          <div className="text-center mb-8">
+            <h1 
+              className="text-[28px] sm:text-4xl lg:text-5xl text-white leading-[1.15] mb-6 sm:mb-8"
+              style={{ 
+                fontWeight: 800,
+                textShadow: '0 2px 8px rgba(0, 0, 0, 0.8), 0 4px 20px rgba(0, 0, 0, 0.6)',
+                letterSpacing: '-0.01em'
+              }}
+            >
+              The{" "}
+              <span style={{ color: '#F5C518', textShadow: '0 2px 8px rgba(0, 0, 0, 0.6), 0 0 20px rgba(245, 197, 24, 0.3)' }}>
+                Home Refresh Program
+              </span>{" "}
+              Is Helping Colorado Homeowners Save{" "}
+              <span style={{ color: '#F5C518', textShadow: '0 2px 8px rgba(0, 0, 0, 0.6), 0 0 20px rgba(245, 197, 24, 0.3)' }}>
+                25%
+              </span>{" "}
+              On Their Painting Project
+            </h1>
+
+            {/* Subheadline - ONE paragraph */}
+            <p 
+              className="text-[15px] sm:text-lg lg:text-xl text-white/90 leading-relaxed max-w-2xl mx-auto"
+              style={{ textShadow: '0 1px 4px rgba(0, 0, 0, 0.5)' }}
+            >
+              <span className="font-bold uppercase">Limited Spots Available</span> — Click below to see if your zip code qualifies for a FREE estimate and 25% off your painting project.
+            </p>
+          </div>
+
+          {/* CTA Button - GREEN */}
+          <div className="flex flex-col items-center">
+            <div className="animate-subtle-rock w-full sm:w-auto">
+              <Link to="/qualify" className="block">
+                <Button
+                  variant="cta"
+                  size="xl"
+                  className="group shadow-2xl text-lg px-10 py-7 animate-cta-glow w-full sm:w-auto min-h-[56px]"
+                  style={{ backgroundColor: '#1B6B3A' }}
+                >
+                  See If I Qualify
+                  <ArrowRight className="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform" />
+                </Button>
+              </Link>
+            </div>
+
+            {/* Trust indicators */}
+            <div className="mt-6 flex items-center justify-center gap-6">
+              <div className="flex items-center gap-1.5">
+                <CheckCircle className="w-4 h-4 flex-shrink-0" style={{ color: '#F5C518' }} />
+                <span className="text-xs sm:text-sm font-medium text-white/90 whitespace-nowrap">
+                  Licensed & Insured
+                </span>
+              </div>
+              <div className="flex items-center gap-1.5">
+                <Shield className="w-4 h-4 flex-shrink-0" style={{ color: '#F5C518' }} />
+                <span className="text-xs sm:text-sm font-medium text-white/90 whitespace-nowrap">
+                  Satisfaction Guaranteed
+                </span>
+              </div>
+            </div>
+
+            {/* Social proof */}
+            <p 
+              className="mt-4 text-xs text-white/60"
+              style={{ textShadow: '0 1px 2px rgba(0,0,0,0.4)' }}
+            >
+              🏠 127 Colorado homes transformed this year
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+};
+
+export default HeroSection;
+```
+
+**Key Changes:**
+- Remove logo from hero (moves to sticky header)
+- Add hero background image with dark overlay
+- Add urgency badge above headline
+- CTA button explicitly uses `#1B6B3A` green
+- Trust indicator icons use gold `#F5C518`
+- Add social proof counter
 
 ---
 
-## FIX 11: HOW IT WORKS ICONS — EMERALD GREEN
+## FILE 4: GALLERY SECTION — `src/components/GallerySection.tsx`
 
-**File**: `src/components/ProcessSection.tsx`
+### Changes (Lines 43-55)
 
-**Current State**:
-- Line 70: Icons use `className="w-8 h-8 text-primary"`
-- Since `--primary` is gold #D4920B, icons render as gold
+**Update section heading colors:**
 
-**Required Changes**:
-1. **Modify line 70**: Change icon color from `text-primary` (gold) to `text-tertiary` (emerald):
-   ```jsx
-   <step.icon className="w-8 h-8 text-tertiary" />
-   ```
+```tsx
+<section className="py-16 lg:py-24 texture-overlay" style={{ backgroundColor: '#FEFDFB' }}>
+  <div className="container mx-auto px-4">
+    <div className="text-center mb-10">
+      <span 
+        className="inline-block font-semibold text-sm uppercase tracking-wider mb-3"
+        style={{ color: '#1B6B3A' }}
+      >
+        Our Work
+      </span>
+      <h2 
+        className="text-2xl sm:text-3xl lg:text-4xl font-bold mb-4"
+        style={{ color: '#1E3A8A' }}
+      >
+        See What's Possible — Real Home Transformations
+      </h2>
+      <p className="text-base max-w-xl mx-auto" style={{ color: '#374151' }}>
+        From single rooms to full exteriors, we deliver flawless results that transform your home.
+      </p>
+    </div>
+```
 
-2. **Also verify line 69**: The container background is `bg-white border border-primary/20` — this means the border is 20% gold opacity. Leave as-is or change border to emerald:
-   ```jsx
-   <div className="w-16 h-16 rounded-xl bg-white border border-tertiary/20 flex items-center justify-center shadow-md">
-   ```
+### Update Thumbnail Selection (Lines 95-99)
 
-3. **Badge on line 73**: The numbered badge has `bg-primary text-primary-foreground` — this is gold background with white text. This is correct for the badge, no change needed.
+**Change selected ring from gold to blue:**
 
-**Result**: How It Works icons are emerald green (#1B6B3A) instead of gold.
+```tsx
+className={`rounded-lg overflow-hidden transition-all duration-300 flex-shrink-0 bg-muted min-h-[44px] border-2 ${
+  index === currentIndex
+    ? "border-[#2563EB] ring-2 ring-[#2563EB] ring-offset-2 shadow-lg"
+    : "border-transparent opacity-50 hover:opacity-100"
+}`}
+```
 
----
+### Update CTA Button (Lines 118-125)
 
-## FIX 12: RESTORE WARM OFF-WHITE BACKGROUNDS
+**Explicitly set green color:**
 
-**Files Affected**:
-- `src/components/GallerySection.tsx` line 44
-- `src/components/ProcessSection.tsx` line 34
-- `src/components/FAQSection.tsx` line 38
-
-**Current State**:
-- All three sections use `bg-white` (pure #FFFFFF)
-- Hero section uses inline solid navy color
-- Reviews section uses dark navy gradient background
-- FinalCTA section uses dark navy gradient background
-
-**Required Changes**:
-1. **GallerySection line 44**: Change `bg-white` to warm off-white
-   ```jsx
-   <section className="py-16 lg:py-24" style={{ backgroundColor: '#FEFDFB' }}>
-   ```
-
-2. **ProcessSection line 34**: Change `bg-white` to warm off-white
-   ```jsx
-   <section className="py-16 lg:py-24" style={{ backgroundColor: '#FEFDFB' }}>
-   ```
-
-3. **FAQSection line 38**: Change `bg-white` to warm off-white
-   ```jsx
-   <section className="py-16 lg:py-24" style={{ backgroundColor: '#FEFDFB' }}>
-   ```
-
-**DO NOT CHANGE**:
-- Hero section (solid navy #0B2447)
-- Reviews section (dark navy)
-- FinalCTA section (dark navy gradient)
-
-**Result**: All white sections have warm cream tint (#FEFDFB) instead of stark white.
+```tsx
+<Button 
+  variant="cta" 
+  size="xl" 
+  className="group shadow-2xl text-lg px-8 py-6 animate-cta-glow w-full sm:w-auto min-h-[44px]"
+  style={{ backgroundColor: '#1B6B3A' }}
+>
+```
 
 ---
 
-## SUMMARY TABLE
+## FILE 5: REVIEWS SECTION — `src/components/ReviewsSection.tsx`
 
-| Fix | File | Lines | Change Type | Status |
-|-----|------|-------|-------------|--------|
-| 1 | HeroSection.tsx | 3, 12-23, 10 | Remove image, add navy background | Execute |
-| 2 | HeroSection.tsx | 28-46 | Replace with white pill container | Execute |
-| 3 | HeroSection.tsx | 26 | Adjust padding classes | Execute |
-| 4 | HeroSection.tsx | 58-60 | Verify text effects (no change) | Verify Only |
-| 5 | HeroSection.tsx | 64-66 | Verify single paragraph (no change) | Verify Only |
-| 6 | HeroSection.tsx | 90-104 | Verify only 2 trust items (no change) | Verify Only |
-| 7 | All sections | N/A | Verify no dividers visible | Verify Only |
-| 8 | GallerySection.tsx | 44 | Change bg-white to #FEFDFB | Execute |
-| 9 | Multiple | 46-51, 64-69, 36-41, 54-60, 87-92, etc. | Remove whileInView animations | Execute |
-| 10 | Quiz.tsx + index.css | 723-725, 18-20 | Replace amber with emerald/off-white | Execute |
-| 11 | ProcessSection.tsx | 70 | Change text-primary to text-tertiary | Execute |
-| 12 | Gallery/Process/FAQ | 44, 34, 38 | Change bg-white to #FEFDFB | Execute |
+### Changes (Line 97)
+
+**Update dark background color from banned navy to dark slate:**
+
+```tsx
+<section className="py-12 sm:py-16 lg:py-24" style={{ background: 'linear-gradient(180deg, #0F172A 0%, #1E293B 100%)' }}>
+```
+
+### Update Star Colors (Lines 133-135)
+
+**Stars should remain gold — use explicit hex:**
+
+```tsx
+<Star key={i} className="w-3.5 h-3.5 sm:w-4 sm:h-4" style={{ fill: '#F5C518', color: '#F5C518' }} />
+```
+
+### Remove whileInView Animation (Lines 99-105)
+
+**Replace scroll animation with immediate visibility:**
+
+```tsx
+<div className="text-center mb-10">
+  {/* Remove motion.div wrapper or keep with immediate animation */}
+```
+
+### Update CTA Button (Lines 189-196)
+
+**Explicitly set green color:**
+
+```tsx
+<Button 
+  variant="cta" 
+  size="xl" 
+  className="group shadow-2xl text-lg px-8 py-6 animate-cta-glow w-full sm:w-auto min-h-[44px]"
+  style={{ backgroundColor: '#1B6B3A' }}
+>
+```
 
 ---
 
-## Files Requiring Modification (in execution order)
+## FILE 6: PROCESS SECTION — `src/components/ProcessSection.tsx`
 
-1. **`src/components/HeroSection.tsx`** — 5 changes (removes, replaces, verifies)
-2. **`src/components/GallerySection.tsx`** — 3 changes (background color, remove animations)
-3. **`src/components/ProcessSection.tsx`** — 3 changes (icon color, background, remove animations)
-4. **`src/components/FAQSection.tsx`** — 2 changes (background color, remove animations)
-5. **`src/components/FinalCTASection.tsx`** — 1 change (remove animations)
-6. **`src/components/Quiz.tsx`** — 1 change (fix amber colors)
+### Changes (Line 34)
 
-**Total Lines Modified**: ~60 lines across 6 files
-**Critical Constraint**: Every change must be visually verified. No claiming "already correct" without checking live render.
+**Verify background is warm off-white:**
+
+```tsx
+<section className="py-16 lg:py-24 texture-overlay" style={{ backgroundColor: '#FEFDFB' }}>
+```
+
+### Update Section Header Colors
+
+**Label: emerald green, Headline: dark blue:**
+
+```tsx
+<span 
+  className="inline-block font-semibold text-sm uppercase tracking-wider mb-3"
+  style={{ color: '#1B6B3A' }}
+>
+  How It Works
+</span>
+<h2 
+  className="text-2xl sm:text-3xl lg:text-4xl font-bold mb-4"
+  style={{ color: '#1E3A8A' }}
+>
+  Your Path to a Beautiful Home
+</h2>
+```
+
+### Update Step Icons (Line 70)
+
+**Icons: emerald green, Number badges: bright blue:**
+
+```tsx
+{/* Icon container */}
+<div 
+  className="w-16 h-16 rounded-xl flex items-center justify-center shadow-md"
+  style={{ 
+    backgroundColor: 'rgba(27, 107, 58, 0.1)',
+    border: '1px solid rgba(27, 107, 58, 0.2)'
+  }}
+>
+  <step.icon className="w-8 h-8" style={{ color: '#1B6B3A' }} />
+</div>
+
+{/* Number badge */}
+<div 
+  className="absolute -top-2 -right-2 w-7 h-7 rounded-full flex items-center justify-center text-sm font-bold shadow-lg"
+  style={{ backgroundColor: '#2563EB', color: '#FFFFFF' }}
+>
+  {step.number}
+</div>
+```
+
+---
+
+## FILE 7: FAQ SECTION — `src/components/FAQSection.tsx`
+
+### Changes (Lines 37-47)
+
+**Update section header colors and add texture:**
+
+```tsx
+<section className="py-16 lg:py-24 texture-overlay" style={{ backgroundColor: '#FEFDFB' }}>
+  <div className="container max-w-3xl px-4">
+    <div className="text-center mb-10">
+      <span 
+        className="inline-block font-semibold text-sm uppercase tracking-wider mb-3"
+        style={{ color: '#1B6B3A' }}
+      >
+        Questions & Answers
+      </span>
+      <h2 
+        className="text-2xl sm:text-3xl lg:text-4xl font-bold mb-4"
+        style={{ color: '#1E3A8A' }}
+      >
+        Common Questions
+      </h2>
+    </div>
+```
+
+### Update CTA Button (Lines 73-80)
+
+**Explicitly set green color:**
+
+```tsx
+<Button
+  variant="cta"
+  size="xl"
+  className="group shadow-2xl text-lg px-8 py-6 animate-cta-glow w-full sm:w-auto min-h-[44px]"
+  style={{ backgroundColor: '#1B6B3A' }}
+>
+```
+
+---
+
+## FILE 8: FINAL CTA SECTION — `src/components/FinalCTASection.tsx`
+
+### Changes (Line 7)
+
+**Replace banned navy with dark slate:**
+
+```tsx
+<section className="py-16 lg:py-24 text-white" style={{ background: 'linear-gradient(180deg, #0F172A 0%, #1E293B 100%)' }}>
+```
+
+### Update CTA Button
+
+**Explicitly set green background:**
+
+```tsx
+<Button 
+  variant="cta" 
+  size="xl" 
+  className="group w-full sm:w-auto min-h-[44px] animate-cta-glow"
+  style={{ backgroundColor: '#1B6B3A' }}
+>
+```
+
+---
+
+## FILE 9: FLOATING CTA — `src/components/FloatingCTA.tsx`
+
+### Changes (Lines 31-37)
+
+**Update button styling with explicit green and frosted glass bar:**
+
+```tsx
+<motion.div
+  initial={{ opacity: 0, y: 100 }}
+  animate={{ opacity: 1, y: 0 }}
+  exit={{ opacity: 0, y: 100 }}
+  transition={{ duration: 0.3, ease: "easeOut" }}
+  className="fixed bottom-5 left-4 right-4 sm:bottom-6 sm:left-auto sm:right-6 z-50"
+>
+  <Link to="/qualify">
+    <Button
+      variant="cta"
+      size="lg"
+      className="w-full sm:w-auto shadow-premium text-sm sm:text-base font-semibold px-6 py-4 h-auto animate-cta-glow"
+      style={{ backgroundColor: '#1B6B3A' }}
+    >
+      See If You Qualify
+    </Button>
+  </Link>
+</motion.div>
+```
+
+---
+
+## NEW FILE: STICKY HEADER — `src/components/StickyHeader.tsx`
+
+**Create new component for slim sticky header with logo:**
+
+```tsx
+import { Link } from "react-router-dom";
+import { Phone } from "lucide-react";
+import logo from "@/assets/emerald-paints-logo.png";
+
+const StickyHeader = () => {
+  return (
+    <header 
+      className="fixed top-0 left-0 right-0 z-50 py-2 px-4"
+      style={{
+        backgroundColor: 'rgba(255, 255, 255, 0.95)',
+        backdropFilter: 'blur(12px)',
+        borderBottom: '1px solid rgba(0, 0, 0, 0.08)'
+      }}
+    >
+      <div className="container mx-auto flex items-center justify-between">
+        <Link to="/">
+          <img
+            src={logo}
+            alt="Emerald Paints"
+            className="h-8 w-auto object-contain"
+          />
+        </Link>
+        <a 
+          href="tel:7204475654" 
+          className="flex items-center gap-1.5 text-sm font-medium"
+          style={{ color: '#1B6B3A' }}
+        >
+          <Phone className="w-4 h-4" />
+          (720) 447-5654
+        </a>
+      </div>
+    </header>
+  );
+};
+
+export default StickyHeader;
+```
+
+**Update `src/pages/Index.tsx` to include StickyHeader:**
+
+```tsx
+import StickyHeader from "@/components/StickyHeader";
+
+const Index = () => {
+  return (
+    <main className="min-h-screen">
+      <StickyHeader />
+      <HeroSection />
+      {/* ... rest of sections */}
+    </main>
+  );
+};
+```
+
+---
+
+## ANIMATION CLEANUP
+
+### Files to Update
+
+Remove `whileInView`, `viewport`, and `initial={{ opacity: 0 }}` from:
+
+1. **ReviewsSection.tsx** (Lines 99-105, 121-127)
+2. **ProcessSection.tsx** (any motion.div with scroll triggers)
+3. **FinalCTASection.tsx** (any motion.div with scroll triggers)
+
+**Keep these animations:**
+- `animate-subtle-rock` on CTA wrappers
+- `animate-cta-glow` on CTA buttons
+- FloatingCTA entrance/exit animation
+- Review carousel auto-scroll
+
+---
+
+## QUIZ PAGE UPDATES — `src/components/Quiz.tsx`
+
+### Changes (Lines 701, 723-726)
+
+**Progress bar: bright blue:**
+
+```tsx
+<div className="h-full rounded-full" style={{ backgroundColor: '#2563EB' }} />
+```
+
+**Disqualification screen icon: emerald green on off-white:**
+
+```tsx
+<div
+  className="w-14 h-14 mx-auto mb-4 rounded-full flex items-center justify-center"
+  style={{ backgroundColor: '#FEFDFB' }}
+>
+  <MapPin className="w-7 h-7" style={{ color: '#1B6B3A' }} />
+</div>
+```
+
+### Quiz CTA Buttons
+
+All "Continue", "Submit" buttons should use:
+
+```tsx
+style={{ backgroundColor: '#1B6B3A', color: '#FFFFFF' }}
+```
+
+### Selected Tile Border
+
+Change from gold ring to blue ring:
+
+```tsx
+className={`... ${selected ? "ring-2 ring-[#2563EB] ring-offset-2" : ""}`}
+```
+
+---
+
+## EXECUTION ORDER
+
+1. Copy hero background image to `src/assets/hero-bg.png`
+2. Update `src/index.css` — CSS variables and animations
+3. Update `src/components/ui/button.tsx` — CTA variant
+4. Rewrite `src/components/HeroSection.tsx` — full rebuild
+5. Create `src/components/StickyHeader.tsx` — new component
+6. Update `src/pages/Index.tsx` — add StickyHeader
+7. Update `src/components/GallerySection.tsx` — colors
+8. Update `src/components/ReviewsSection.tsx` — colors, remove animations
+9. Update `src/components/ProcessSection.tsx` — colors
+10. Update `src/components/FAQSection.tsx` — colors
+11. Update `src/components/FinalCTASection.tsx` — colors
+12. Update `src/components/FloatingCTA.tsx` — colors
+13. Update `src/components/Quiz.tsx` — colors
+
+---
+
+## VERIFICATION CHECKLIST
+
+| # | Check | Expected Result |
+|---|-------|-----------------|
+| 1 | Hero background | Mountain landscape visible through dark overlay |
+| 2 | Hero logo | NO logo in hero — moves to sticky header |
+| 3 | Sticky header | Logo + phone number visible at top |
+| 4 | Hero CTA | GREEN `#1B6B3A` button |
+| 5 | All CTAs | GREEN `#1B6B3A` across site |
+| 6 | Light section headings | Dark blue `#1E3A8A` |
+| 7 | Light section labels | Emerald green `#1B6B3A` |
+| 8 | Dark sections | Dark slate `#0F172A` (NOT `#0B2447`) |
+| 9 | Light sections | Warm off-white `#FEFDFB` with texture |
+| 10 | Process icons | Emerald green icons, bright blue badges |
+| 11 | Stars/ratings | Gold `#F5C518` |
+| 12 | No banned colors | Zero `#0B2447`, `#D4920B`, orange, amber |
+| 13 | No scroll animations | All sections visible immediately |
+| 14 | Quiz progress bar | Bright blue `#2563EB` |
 
