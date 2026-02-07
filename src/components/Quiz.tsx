@@ -576,9 +576,10 @@ const Quiz = ({ onStart }: QuizProps) => {
                 initial={{ scale: 0 }}
                 animate={{ scale: 1 }}
                 transition={{ type: "spring", stiffness: 200, damping: 15 }}
-                className="w-14 h-14 mx-auto mb-4 rounded-full bg-blue-100 flex items-center justify-center"
+                className="w-14 h-14 mx-auto mb-4 rounded-full flex items-center justify-center"
+                style={{ backgroundColor: 'rgba(27, 107, 58, 0.1)' }}
               >
-                <Calendar className="w-7 h-7 text-blue-600" />
+                <Calendar className="w-7 h-7" style={{ color: '#1B6B3A' }} />
               </motion.div>
 
               <h3 className="text-base sm:text-lg font-semibold text-foreground mb-2 leading-snug">

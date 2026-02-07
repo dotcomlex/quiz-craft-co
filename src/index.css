@@ -15,8 +15,8 @@
     --primary-foreground: 0 0% 100%;
     --primary-hover: 150 55% 22%;
 
-    /* Secondary - Dark Blue for headings */
-    --secondary: 226 71% 33%;
+    /* Secondary - Near-black for headings on light backgrounds */
+    --secondary: 215 28% 17%;
     --secondary-foreground: 0 0% 100%;
 
     /* Tertiary - Bright Blue for accents */

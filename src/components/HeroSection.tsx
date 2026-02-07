@@ -18,29 +18,13 @@ const HeroSection = () => {
       </div>
 
       {/* Content */}
-      <div className="relative z-10 container mx-auto px-4 pt-16 pb-12 sm:pt-20 sm:pb-16 min-h-screen flex flex-col justify-center">
-        {/* NO LOGO — logo moves to sticky header */}
-
-        {/* Single centered column */}
-        <div className="max-w-3xl mx-auto">
-          {/* Urgency badge */}
-          <div className="flex justify-center mb-6">
-            <span 
-              className="inline-flex items-center gap-2 px-4 py-2 rounded-full text-sm font-medium"
-              style={{
-                backgroundColor: 'rgba(245, 197, 24, 0.15)',
-                color: '#F5C518',
-                border: '1px solid rgba(245, 197, 24, 0.3)'
-              }}
-            >
-              Spring 2025 Special — Limited Availability
-            </span>
-          </div>
-
+      <div className="relative z-10 container mx-auto px-3 pt-10 pb-12 sm:pt-14 sm:pb-16 min-h-screen flex flex-col justify-center items-center text-center">
+        {/* Single centered column - no max-width restriction */}
+        <div className="w-full max-w-2xl mx-auto">
           {/* Headline */}
           <div className="text-center mb-8">
             <h1 
-              className="text-[28px] sm:text-4xl lg:text-5xl text-white leading-[1.15] mb-6 sm:mb-8"
+              className="text-[26px] sm:text-4xl lg:text-5xl text-white leading-[1.15] mb-6 sm:mb-8"
               style={{ 
                 fontWeight: 800,
                 textShadow: '0 2px 8px rgba(0, 0, 0, 0.8), 0 4px 20px rgba(0, 0, 0, 0.6)',
@@ -58,12 +42,18 @@ const HeroSection = () => {
               On Their Painting Project
             </h1>
 
-            {/* Subheadline - ONE paragraph */}
+            {/* Subheadline - strong text shadow */}
             <p 
-              className="text-[15px] sm:text-lg lg:text-xl text-white/90 leading-relaxed max-w-2xl mx-auto"
-              style={{ textShadow: '0 1px 4px rgba(0, 0, 0, 0.5)' }}
+              className="text-[15px] sm:text-lg lg:text-xl text-white/90 leading-relaxed max-w-xl mx-auto px-1"
+              style={{ 
+                textShadow: '0 2px 4px rgba(0,0,0,0.8), 0 4px 8px rgba(0,0,0,0.6), 0 8px 16px rgba(0,0,0,0.4)',
+                fontWeight: 500
+              }}
             >
-              <span className="font-bold uppercase">Limited Spots Available</span> — Click below to see if your zip code qualifies for a FREE estimate and 25% off your painting project.
+              <span style={{ color: '#F5C518', fontWeight: 700, textTransform: 'uppercase' }}>
+                Limited Spots Available
+              </span>
+              {" "} — Check below to see if your zip code qualifies for a FREE estimate and 25% off your painting project.
             </p>
           </div>
 
@@ -76,7 +66,7 @@ const HeroSection = () => {
                   size="xl"
                   className="group shadow-2xl text-lg px-10 py-7 animate-cta-glow w-full sm:w-auto min-h-[56px]"
                 >
-                  See If I Qualify
+                  Check My Eligibility
                   <ArrowRight className="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform" />
                 </Button>
               </Link>
@@ -97,14 +87,6 @@ const HeroSection = () => {
                 </span>
               </div>
             </div>
-
-            {/* Social proof */}
-            <p 
-              className="mt-4 text-xs text-white/60"
-              style={{ textShadow: '0 1px 2px rgba(0,0,0,0.4)' }}
-            >
-              🏠 127 Colorado homes transformed this year
-            </p>
           </div>
         </div>
       </div>

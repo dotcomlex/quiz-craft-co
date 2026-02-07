@@ -34,7 +34,7 @@ const faqs = [
 
 const FAQSection = () => {
   return (
-    <section className="py-16 lg:py-24 texture-overlay" style={{ backgroundColor: '#FEFDFB' }}>
+    <section className="py-12 lg:py-20 texture-overlay" style={{ backgroundColor: '#FEFDFB' }}>
       <div className="container max-w-3xl px-4">
         {/* Header */}
         <div className="text-center mb-10">
@@ -46,7 +46,7 @@ const FAQSection = () => {
           </span>
           <h2 
             className="text-2xl sm:text-3xl lg:text-4xl font-bold mb-4"
-            style={{ color: '#1E3A8A' }}
+            style={{ color: '#1E293B' }}
           >
             Common Questions
           </h2>
@@ -61,9 +61,9 @@ const FAQSection = () => {
                 value={`item-${index}`}
                 className="bg-card rounded-xl shadow-sm border border-border px-5 transition-shadow hover:shadow-md"
               >
-                <AccordionTrigger 
+              <AccordionTrigger 
                   className="text-left text-base font-medium hover:no-underline py-4"
-                  style={{ color: '#1E3A8A' }}
+                  style={{ color: '#1E293B' }}
                 >
                   {faq.question}
                 </AccordionTrigger>
@@ -84,7 +84,7 @@ const FAQSection = () => {
                 size="xl"
                 className="group shadow-2xl text-lg px-8 py-6 animate-cta-glow w-full sm:w-auto min-h-[44px]"
               >
-                See If I Qualify Now
+                Check My Eligibility
                 <ArrowRight className="ml-2 h-5 w-5 transition-transform group-hover:translate-x-1" />
               </Button>
             </Link>
