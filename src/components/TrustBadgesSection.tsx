@@ -17,8 +17,8 @@ const TrustBadgesSection = () => {
   const allBadges = [...badges, ...badges];
 
   return (
-    <section className="py-6 bg-muted/80 border-y border-border overflow-hidden">
-      <p className="text-center text-xs text-muted-foreground uppercase tracking-widest mb-4 font-medium">
+    <section className="py-6 bg-white border-y border-border overflow-hidden">
+      <p className="text-center text-xs text-secondary uppercase tracking-widest mb-4 font-medium">
         Trusted & Certified
       </p>
       <div className="flex w-max animate-scroll">
@@ -36,7 +36,7 @@ const TrustBadgesSection = () => {
                 decoding="async"
               />
             ) : (
-              <span className="text-sm sm:text-base font-semibold text-muted-foreground/70 hover:text-muted-foreground transition-colors duration-300 whitespace-nowrap">
+              <span className="text-sm sm:text-base font-semibold text-secondary/60 hover:text-secondary transition-colors duration-300 whitespace-nowrap">
                 {badge.label}
               </span>
             )}

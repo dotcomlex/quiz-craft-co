@@ -1,7 +1,6 @@
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { Star, ChevronLeft, ChevronRight, Quote, ArrowRight } from "lucide-react";
-import heroImage from "@/assets/hero-emerald-house.webp";
 import { Button } from "@/components/ui/button";
 import { motion } from "framer-motion";
 import avatar1 from "@/assets/avatar-1.jpg";
@@ -95,25 +94,17 @@ const ReviewsSection = () => {
   const getVisibleReviews = () => reviews.slice(currentIndex, currentIndex + visibleCount);
 
   return (
-    <section className="py-12 sm:py-16 lg:py-24 relative overflow-hidden">
-      {/* Background image with overlay */}
-      <div className="absolute inset-0">
-        <img 
-          src={heroImage} 
-          alt="" 
-          className="w-full h-full object-cover"
-          loading="lazy"
-        />
-        <div className="absolute inset-0 bg-black/75" />
-      </div>
-      
-      <div className="relative z-10 container mx-auto px-4">
+    <section className="py-12 sm:py-16 lg:py-24 bg-gradient-to-br from-[#0B2447] to-[#0A1D3B]">
+      <div className="container mx-auto px-4">
         <div className="text-center mb-10">
+          <span className="inline-block text-primary font-semibold text-sm uppercase tracking-wider mb-3">
+            Customer Reviews
+          </span>
           <h2 className="text-xl sm:text-2xl lg:text-4xl font-bold text-white mb-3 sm:mb-4 leading-tight">
-            This Is Why Colorado Homeowners <span className="text-primary">Trust Us With Their Home</span>
+            This Is Why Colorado Homeowners <span className="text-primary">Trust Us</span>
           </h2>
           <p className="text-sm sm:text-base text-white/70 max-w-xl mx-auto px-4">
-            Real stories from real families who transformed their homes and their lives.
+            Real stories from real families who transformed their homes.
           </p>
         </div>
 
@@ -126,9 +117,10 @@ const ReviewsSection = () => {
               >
                 <Quote className="w-6 h-6 sm:w-8 sm:h-8 text-primary/20 mb-3 sm:mb-4" />
                 <p className="text-foreground/90 mb-4 sm:mb-5 text-xs sm:text-sm leading-relaxed">"{review.text}"</p>
+                {/* Stars - GOLD color is appropriate for stars */}
                 <div className="flex gap-1 mb-3 sm:mb-4">
                   {[...Array(review.rating)].map((_, i) => (
-                    <Star key={i} className="w-3.5 h-3.5 sm:w-4 sm:h-4 fill-primary text-primary" />
+                    <Star key={i} className="w-3.5 h-3.5 sm:w-4 sm:h-4 fill-highlight text-highlight" />
                   ))}
                 </div>
                 <div className="flex items-center gap-2.5 sm:gap-3 pt-3 sm:pt-4 border-t border-border/50 mt-auto">
@@ -140,7 +132,7 @@ const ReviewsSection = () => {
                     decoding="async"
                   />
                   <div>
-                    <p className="font-semibold text-foreground text-xs sm:text-sm">{review.name}</p>
+                    <p className="font-semibold text-secondary text-xs sm:text-sm">{review.name}</p>
                     <p className="text-[10px] sm:text-xs text-muted-foreground">{review.location}</p>
                   </div>
                 </div>
@@ -164,7 +156,7 @@ const ReviewsSection = () => {
               size="icon"
               onClick={prevSlide}
               disabled={currentIndex === 0}
-              className="w-11 h-11 sm:w-11 sm:h-11 rounded-full min-h-[44px]"
+              className="w-11 h-11 sm:w-11 sm:h-11 rounded-full min-h-[44px] bg-white/10 border-white/30 text-white hover:bg-white/20"
             >
               <ChevronLeft className="w-4 h-4 sm:w-5 sm:h-5" />
             </Button>
@@ -173,13 +165,13 @@ const ReviewsSection = () => {
               size="icon"
               onClick={nextSlide}
               disabled={currentIndex >= maxIndex}
-              className="w-11 h-11 sm:w-11 sm:h-11 rounded-full min-h-[44px]"
+              className="w-11 h-11 sm:w-11 sm:h-11 rounded-full min-h-[44px] bg-white/10 border-white/30 text-white hover:bg-white/20"
             >
               <ChevronRight className="w-4 h-4 sm:w-5 sm:h-5" />
             </Button>
           </div>
 
-          {/* Inline CTA - matches hero button style */}
+          {/* Inline CTA - EMERALD GREEN */}
           <div className="flex justify-center mt-8 sm:mt-10">
             <motion.div className="animate-subtle-rock w-full sm:w-auto">
               <Link to="/qualify" className="block">

@@ -9,32 +9,28 @@ const ReviewsSection = lazy(() => import("@/components/ReviewsSection"));
 const ProcessSection = lazy(() => import("@/components/ProcessSection"));
 const FAQSection = lazy(() => import("@/components/FAQSection"));
 const FinalCTASection = lazy(() => import("@/components/FinalCTASection"));
-const Footer = lazy(() => import("@/components/Footer"));
 
 const Index = () => {
   return (
     <main className="min-h-screen">
       <HeroSection />
-      <Suspense fallback={<div className="h-24 bg-muted/50" />}>
+      <Suspense fallback={<div className="h-24 bg-white" />}>
         <TrustBadgesSection />
       </Suspense>
-      <Suspense fallback={<div className="h-96 bg-muted" />}>
+      <Suspense fallback={<div className="h-96 bg-white" />}>
         <GallerySection />
       </Suspense>
-      <Suspense fallback={<div className="h-96 section-gradient-dark" />}>
+      <Suspense fallback={<div className="h-96 bg-secondary" />}>
         <ReviewsSection />
       </Suspense>
-      <Suspense fallback={<div className="h-64 section-gradient-dark" />}>
+      <Suspense fallback={<div className="h-64 bg-white" />}>
         <ProcessSection />
       </Suspense>
-      <Suspense fallback={<div className="h-64 bg-muted/50" />}>
+      <Suspense fallback={<div className="h-64 bg-white" />}>
         <FAQSection />
       </Suspense>
-      <Suspense fallback={<div className="h-64 section-gradient-dark" />}>
+      <Suspense fallback={<div className="h-64 bg-secondary" />}>
         <FinalCTASection />
-      </Suspense>
-      <Suspense fallback={null}>
-        <Footer />
       </Suspense>
       <FloatingCTA />
     </main>
