@@ -19,7 +19,7 @@ const HeroSection = () => {
       </div>
 
       {/* Content */}
-      <div className="relative z-10 container mx-auto px-3 pt-8 pb-16 sm:pt-12 sm:pb-20 flex flex-col items-center text-center">
+      <div className="relative z-10 container mx-auto px-3 pt-4 pb-16 sm:pt-6 sm:pb-20 flex flex-col items-center text-center">
         {/* Single centered column - no max-width restriction */}
         <div className="w-full max-w-2xl mx-auto">
           {/* Logo + Headline */}
@@ -28,7 +28,7 @@ const HeroSection = () => {
             <img 
               src={emeraldLogo}
               alt="Emerald Paints"
-              className="h-36 sm:h-44 lg:h-52 w-auto mx-auto mb-4"
+              className="h-36 sm:h-44 lg:h-52 w-auto mx-auto mb-2"
               style={{ filter: 'brightness(1.1)' }}
             />
             
@@ -59,7 +59,7 @@ const HeroSection = () => {
                 fontWeight: 600
               }}
             >
-              <span style={{ color: '#F5C518', fontWeight: 700, textTransform: 'uppercase' }}>
+              <span style={{ color: '#FFFFFF', fontWeight: 700, textTransform: 'uppercase' }}>
                 Limited Spots Available
               </span>
               {" "} — Homeowners across Colorado are taking advantage. Click below to see if you qualify for a FREE estimate and 25% off.
