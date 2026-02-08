@@ -1,5 +1,5 @@
 import { MessageSquare, CalendarCheck, FileText, Paintbrush } from "lucide-react";
-import finishedHome from "@/assets/finished-colorado-home.webp";
+import paintersAction from "@/assets/painters-action-shot.webp";
 
 const ProcessSection = () => {
   const steps = [
@@ -7,13 +7,13 @@ const ProcessSection = () => {
       icon: MessageSquare,
       number: "1",
       title: "Answer Quick Questions",
-      description: "Tell us about your painting project so we can prepare the right estimate.",
+      description: "Tell us about your project so we can check your availability and prepare your estimate.",
     },
     {
       icon: CalendarCheck,
       number: "2",
       title: "Free In-Home Estimate",
-      description: "Jose comes to your home to walk through the project, discuss colors, and answer questions.",
+      description: "If you qualify, we'll schedule a 100% free in-home estimate to walk through your project and discuss colors.",
     },
     {
       icon: FileText,
@@ -87,12 +87,12 @@ const ProcessSection = () => {
           </div>
         </div>
 
-        {/* Finished home image */}
+        {/* Painters action shot */}
         <div className="max-w-4xl mx-auto mt-12">
           <img
-            src={finishedHome}
-            alt="Beautiful finished Colorado home with fresh paint"
-            className="w-full aspect-square object-cover rounded-2xl shadow-xl"
+            src={paintersAction}
+            alt="Professional painters actively working on a Colorado home"
+            className="w-full aspect-video object-cover rounded-2xl shadow-xl"
             loading="lazy"
             decoding="async"
           />
