@@ -6,7 +6,7 @@ import emeraldLogo from "@/assets/emerald-logo-white.png";
 
 const HeroSection = () => {
   return (
-    <section id="hero" className="relative min-h-screen overflow-hidden">
+    <section id="hero" className="relative overflow-hidden">
       {/* Background Image */}
       <div className="absolute inset-0">
         <img
@@ -19,7 +19,7 @@ const HeroSection = () => {
       </div>
 
       {/* Content */}
-      <div className="relative z-10 container mx-auto px-3 pt-8 pb-2 sm:pt-12 sm:pb-4 min-h-screen flex flex-col items-center text-center">
+      <div className="relative z-10 container mx-auto px-3 pt-8 pb-8 sm:pt-12 sm:pb-12 flex flex-col items-center text-center">
         {/* Single centered column - no max-width restriction */}
         <div className="w-full max-w-2xl mx-auto">
           {/* Logo + Headline */}
