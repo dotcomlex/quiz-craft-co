@@ -28,7 +28,7 @@ const HeroSection = () => {
             <img 
               src={emeraldLogo}
               alt="Emerald Paints"
-              className="h-28 sm:h-32 lg:h-36 w-auto mx-auto mb-4"
+              className="h-36 sm:h-44 lg:h-52 w-auto mx-auto mb-4"
               style={{ filter: 'brightness(1.1)' }}
             />
             
