@@ -1,19 +1,16 @@
 
 
 ## Summary
-Make the hero section feel more spacious and less cramped by increasing vertical spacing between elements and improving line-height for better readability.
+Reduce the dead space above the logo and below it to bring the headline higher up on mobile.
 
 ---
 
-## Current Spacing Issues
+## Current Spacing Values
 
-| Element | Current | Issue |
-|---------|---------|-------|
-| Top padding | `pt-4` (16px) | Too tight at top |
-| Logo bottom margin | `mb-1` (4px) | Almost no gap to headline |
-| Headline line-height | `leading-[1.15]` | Lines feel squeezed together |
-| Headline bottom margin | `mb-6` (24px) | Could use more breathing room |
-| Content wrapper margin | `mb-4` (16px) | Minimal gap before CTA |
+| Element | Current Value | Location |
+|---------|---------------|----------|
+| Top padding | `pt-6` (24px) | Line 22 |
+| Logo bottom margin | `mb-4` (16px) | Line 31 |
 
 ---
 
@@ -21,76 +18,32 @@ Make the hero section feel more spacious and less cramped by increasing vertical
 
 **File**: `src/components/HeroSection.tsx`
 
-### 1. Increase top padding (Line 22)
-`pt-4` → `pt-6` (16px → 24px)
+### 1. Reduce top padding
+Line 22: `pt-6` → `pt-4` (24px → 16px)
 
-### 2. Add more space below logo (Line 31)
-`mb-1` → `mb-4` (4px → 16px)
-
-### 3. Increase headline line-height (Line 36)
-`leading-[1.15]` → `leading-[1.25]` (more breathing room between lines)
-
-### 4. Increase space below headline (Line 36)
-`mb-6` → `mb-8` (24px → 32px)
-
-### 5. Increase content wrapper bottom margin (Line 26)
-`mb-4` → `mb-6` (16px → 24px)
+### 2. Reduce logo bottom margin
+Line 31: `mb-4` → `mb-2` (16px → 8px)
 
 ---
 
-## Visual Comparison
+## Visual Impact
 
 ```text
-BEFORE (cramped):
+BEFORE:
 ┌─────────────────────────┐
-│ [LOGO]                  │  ← 4px gap
-│ Ready To Transform Your │
-│ Home? The Home Refresh  │  ← Tight 1.15 line-height
-│ Program Is Giving...    │
-│ 25% Off Any Painting    │
-│ Project                 │  ← 24px gap
-│ LIMITED SPOTS...        │
-│                         │
-│ [  CHECK ELIGIBILITY  ] │
-└─────────────────────────┘
-
-AFTER (breathing room):
-┌─────────────────────────┐
-│                         │  ← More top padding
-│ [LOGO]                  │
+│                         │  ← 24px top padding
+│       [LOGO]            │
 │                         │  ← 16px gap
-│ Ready To Transform Your │
-│                         │
-│ Home? The Home Refresh  │  ← 1.25 line-height
-│                         │
-│ Program Is Giving...    │
-│                         │
-│ 25% Off Any Painting    │
-│ Project                 │
-│                         │  ← 32px gap
-│ LIMITED SPOTS...        │
-│                         │
-│ [  CHECK ELIGIBILITY  ] │
-└─────────────────────────┘
+│  Ready To Transform...  │
+
+AFTER:
+┌─────────────────────────┐
+│       [LOGO]            │  ← 16px top padding
+│                         │  ← 8px gap
+│  Ready To Transform...  │
 ```
 
----
-
-## Specific Code Changes
-
-```text
-Line 22: pt-4 → pt-6
-Line 26: mb-4 → mb-6
-Line 31: mb-1 → mb-4
-Line 36: leading-[1.15] → leading-[1.25], mb-6 → mb-8
-```
-
----
-
-## Alternative: Reduce font size instead
-If you'd prefer to keep the current spacing but reduce density:
-- Reduce headline from `text-[24px]` to `text-[22px]`
-- This naturally creates more white space per line
+This removes 16px from the total vertical space above the headline.
 
 ---
 
