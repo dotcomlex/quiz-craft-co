@@ -19,7 +19,7 @@ const HeroSection = () => {
       </div>
 
       {/* Content */}
-      <div className="relative z-10 container mx-auto px-2 pt-4 pb-16 sm:pt-6 sm:pb-20 flex flex-col items-center text-center">
+      <div className="relative z-10 px-3 pt-4 pb-16 sm:pt-6 sm:pb-20 flex flex-col items-center text-center">
         {/* Single centered column - extended width for less wrapping */}
         <div className="w-full max-w-4xl mx-auto">
           {/* Logo + Headline */}
