@@ -48,7 +48,7 @@ const HeroSection = () => {
               <span style={{ color: '#F5C518', textShadow: '0 2px 8px rgba(0, 0, 0, 0.6), 0 0 20px rgba(245, 197, 24, 0.3)' }}>
                 25%
               </span>{" "}
-              On Their Painting Project
+              On Any Painting Project
             </h1>
 
             {/* Subheadline - strong text shadow */}
