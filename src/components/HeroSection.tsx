@@ -19,7 +19,7 @@ const HeroSection = () => {
       </div>
 
       {/* Content */}
-      <div className="relative z-10 container mx-auto px-3 pt-10 pb-12 sm:pt-14 sm:pb-16 min-h-screen flex flex-col justify-center items-center text-center">
+      <div className="relative z-10 container mx-auto px-3 pt-6 pb-12 sm:pt-8 sm:pb-16 min-h-screen flex flex-col justify-center items-center text-center">
         {/* Single centered column - no max-width restriction */}
         <div className="w-full max-w-2xl mx-auto">
           {/* Logo + Headline */}
@@ -28,7 +28,7 @@ const HeroSection = () => {
             <img 
               src={emeraldLogo}
               alt="Emerald Paints"
-              className="h-20 sm:h-24 lg:h-28 w-auto mx-auto mb-8"
+              className="h-28 sm:h-32 lg:h-36 w-auto mx-auto mb-8"
               style={{ filter: 'brightness(1.1)' }}
             />
             
@@ -53,10 +53,12 @@ const HeroSection = () => {
 
             {/* Subheadline - strong text shadow */}
             <p 
-              className="text-[15px] sm:text-lg lg:text-xl text-white/90 leading-relaxed max-w-xl mx-auto px-1"
+              className="text-[15px] sm:text-lg lg:text-xl text-white leading-relaxed max-w-xl mx-auto px-4 py-3 rounded-xl"
               style={{ 
-                textShadow: '0 2px 4px rgba(0,0,0,0.8), 0 4px 8px rgba(0,0,0,0.6), 0 8px 16px rgba(0,0,0,0.4)',
-                fontWeight: 500
+                textShadow: '0 2px 4px rgba(0,0,0,0.9), 0 4px 12px rgba(0,0,0,0.7)',
+                fontWeight: 500,
+                backgroundColor: 'rgba(0, 0, 0, 0.45)',
+                backdropFilter: 'blur(4px)'
               }}
             >
               <span style={{ color: '#F5C518', fontWeight: 700, textTransform: 'uppercase' }}>
