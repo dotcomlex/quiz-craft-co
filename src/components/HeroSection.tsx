@@ -19,16 +19,16 @@ const HeroSection = () => {
       </div>
 
       {/* Content */}
-      <div className="relative z-10 container mx-auto px-3 pt-6 pb-12 sm:pt-8 sm:pb-16 min-h-screen flex flex-col justify-center items-center text-center">
+      <div className="relative z-10 container mx-auto px-3 pt-8 pb-8 sm:pt-12 sm:pb-12 min-h-screen flex flex-col items-center text-center">
         {/* Single centered column - no max-width restriction */}
         <div className="w-full max-w-2xl mx-auto">
           {/* Logo + Headline */}
-          <div className="text-center mb-8">
+          <div className="text-center mb-4">
             {/* White Emerald Paints Logo - scaled up */}
             <img 
               src={emeraldLogo}
               alt="Emerald Paints"
-              className="h-28 sm:h-32 lg:h-36 w-auto mx-auto mb-8"
+              className="h-28 sm:h-32 lg:h-36 w-auto mx-auto mb-4"
               style={{ filter: 'brightness(1.1)' }}
             />
             
