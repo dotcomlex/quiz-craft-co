@@ -7,7 +7,7 @@ const ProcessSection = () => {
       icon: MessageSquare,
       number: "1",
       title: "Answer Quick Questions",
-      description: "Tell us about your project so we can check your availability and prepare your estimate.",
+      description: "Tell us about your project so we can check your eligibility and prepare your estimate.",
     },
     {
       icon: CalendarCheck,
