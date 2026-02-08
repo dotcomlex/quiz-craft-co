@@ -2,7 +2,6 @@ import { useState } from "react";
 import Quiz from "@/components/Quiz";
 import { Shield } from "lucide-react";
 import GridBackground from "@/components/ui/grid-background";
-import emeraldLogo from "@/assets/emerald-logo-white.png";
 
 const QualifyPage = () => {
   const [quizStarted, setQuizStarted] = useState(false);
@@ -27,15 +26,7 @@ const QualifyPage = () => {
               {/* Header - HIDES when quiz starts */}
               {!quizStarted && (
                 <>
-                  {/* Logo - elegant sizing with proper spacing */}
-                  <img 
-                    src={emeraldLogo}
-                    alt="Emerald Paints"
-                    className="h-8 sm:h-10 w-auto mx-auto mb-6"
-                    style={{ filter: 'brightness(1.1)' }}
-                  />
-
-                  <h1 
+                  <h1
                     className="text-[28px] sm:text-3xl font-extrabold text-white mb-3 leading-tight"
                     style={{ textShadow: '0 2px 4px rgba(0,0,0,0.5)' }}
                   >
