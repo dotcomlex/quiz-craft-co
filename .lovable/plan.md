@@ -1,64 +1,44 @@
 
+
 ## Problem
-The headline and subheadline are currently center-aligned, which causes awkward text wrapping on mobile. Left-aligning them will create a cleaner, more professional look with better readability.
+The headline at 26px is wrapping across 5 lines on mobile, making it feel cramped and less impactful.
 
-## Current State
-- Line 22: Container has `text-center` and `items-center`
-- Line 26: Inner wrapper has `text-center`
-- Line 56: Subheadline has `mx-auto` which centers it
+## Options
 
-## Solution
-Change the text alignment to left for both the headline and subheadline while keeping the logo centered, then center the CTA button.
+### Option A: Reduce Text Size (Recommended)
+Reduce the headline from 26px to 22px on mobile. This will allow more words per line and reduce wrapping to approximately 3-4 lines.
+
+**Change:**
+```text
+text-[26px] → text-[22px]
+```
+
+### Option B: Shorten the Headline
+Keep the size but make the copy shorter:
+- Current: "The Home Refresh Program Is Helping Colorado Homeowners Save 25% On Their Painting Project"
+- Shorter: "Colorado Homeowners Are Saving 25% On Their Painting Project"
+
+## Recommended Solution
+I recommend **Option A** - reducing the text size to 22px. This keeps your full message while fitting better on mobile screens.
 
 ## Implementation
 
 **File to Modify**: `src/components/HeroSection.tsx`
 
-### Change 1: Update inner wrapper alignment (Line 26)
+### Change: Reduce headline text size (Line 36)
 
 **Current:**
-```tsx
-<div className="text-center mb-4">
-```
-
-**New:**
-```tsx
-<div className="text-left mb-4">
-```
-
-### Change 2: Keep logo centered (Line 31)
-
-The logo already has `mx-auto` so it will stay centered. No change needed.
-
-### Change 3: Update headline alignment (Line 36)
-
-**Current:**
-```tsx
-className="text-[26px] sm:text-4xl lg:text-5xl text-white leading-[1.15] mb-6 sm:mb-8"
-```
-
-**New:**
 ```tsx
 className="text-[26px] sm:text-4xl lg:text-5xl text-white leading-[1.15] mb-6 sm:mb-8 text-left"
 ```
 
-### Change 4: Update subheadline alignment (Line 56)
-
-**Current:**
-```tsx
-className="text-[14px] sm:text-base lg:text-lg text-white leading-relaxed max-w-xl mx-auto px-1"
-```
-
 **New:**
 ```tsx
-className="text-[14px] sm:text-base lg:text-lg text-white leading-relaxed max-w-xl px-1"
+className="text-[22px] sm:text-4xl lg:text-5xl text-white leading-[1.15] mb-6 sm:mb-8 text-left"
 ```
 
-Removes `mx-auto` so the subheadline aligns left with the headline.
+## Expected Result
+- Headline will fit in approximately 3-4 lines instead of 5
+- Desktop sizes remain unchanged (36px/48px)
+- Text remains readable and impactful
 
-## Verification
-- Logo remains centered at the top
-- Headline text flows left-to-right with natural line breaks
-- Subheadline aligns left under the headline
-- CTA button remains centered
-- Overall layout looks cleaner with less awkward wrapping
