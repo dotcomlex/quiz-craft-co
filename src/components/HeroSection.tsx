@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import { Shield, CheckCircle, ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import heroBg from "@/assets/hero-bg.png";
+import emeraldLogo from "@/assets/emerald-logo-white.png";
 
 const HeroSection = () => {
   return (
@@ -21,8 +22,16 @@ const HeroSection = () => {
       <div className="relative z-10 container mx-auto px-3 pt-10 pb-12 sm:pt-14 sm:pb-16 min-h-screen flex flex-col justify-center items-center text-center">
         {/* Single centered column - no max-width restriction */}
         <div className="w-full max-w-2xl mx-auto">
-          {/* Headline */}
+          {/* Logo + Headline */}
           <div className="text-center mb-8">
+            {/* White Emerald Paints Logo - scaled up */}
+            <img 
+              src={emeraldLogo}
+              alt="Emerald Paints"
+              className="h-12 sm:h-14 lg:h-16 w-auto mx-auto mb-6"
+              style={{ filter: 'brightness(1.1)' }}
+            />
+            
             <h1 
               className="text-[26px] sm:text-4xl lg:text-5xl text-white leading-[1.15] mb-6 sm:mb-8"
               style={{ 
@@ -53,7 +62,7 @@ const HeroSection = () => {
               <span style={{ color: '#F5C518', fontWeight: 700, textTransform: 'uppercase' }}>
                 Limited Spots Available
               </span>
-              {" "} — Check below to see if your zip code qualifies for a FREE estimate and 25% off your painting project.
+              {" "} — Homeowners across Colorado are taking advantage. Click below to see if you qualify for a FREE estimate and 25% off.
             </p>
           </div>
 
