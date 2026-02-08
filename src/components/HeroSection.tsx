@@ -40,15 +40,15 @@ const HeroSection = () => {
                 letterSpacing: '-0.01em'
               }}
             >
-              Ready to give your home a stunning makeover? With the{" "}
+              Ready To Transform Your Home? The{" "}
               <span style={{ color: '#F5C518', textShadow: '0 2px 8px rgba(0, 0, 0, 0.6), 0 0 20px rgba(245, 197, 24, 0.3)' }}>
                 Home Refresh Program
               </span>{" "}
-              You Can Now Save{" "}
+              Is Giving Colorado Homeowners{" "}
               <span style={{ color: '#F5C518', textShadow: '0 2px 8px rgba(0, 0, 0, 0.6), 0 0 20px rgba(245, 197, 24, 0.3)' }}>
                 25%
               </span>{" "}
-              on Any Painting Project
+              Off Any Painting Project
             </h1>
 
             {/* Subheadline - strong text shadow */}
