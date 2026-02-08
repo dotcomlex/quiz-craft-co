@@ -2,6 +2,7 @@ import { useState } from "react";
 import Quiz from "@/components/Quiz";
 import { Shield } from "lucide-react";
 import GridBackground from "@/components/ui/grid-background";
+import emeraldLogo from "@/assets/emerald-logo-white.png";
 
 const QualifyPage = () => {
   const [quizStarted, setQuizStarted] = useState(false);
@@ -26,26 +27,44 @@ const QualifyPage = () => {
               {/* Header - HIDES when quiz starts */}
               {!quizStarted && (
                 <>
+                  {/* Logo - elegant sizing with proper spacing */}
+                  <img 
+                    src={emeraldLogo}
+                    alt="Emerald Paints"
+                    className="h-8 sm:h-10 w-auto mx-auto mb-6"
+                    style={{ filter: 'brightness(1.1)' }}
+                  />
+
+                  {/* Pre-headline question */}
+                  <p 
+                    className="text-sm sm:text-base text-white/80 uppercase tracking-widest mb-3 font-medium"
+                    style={{ textShadow: '0 1px 2px rgba(0,0,0,0.5)' }}
+                  >
+                    Quick Question — Is Your Zip Code Eligible?
+                  </p>
+
+                  {/* Main headline */}
                   <h1 
-                    className="text-[28px] sm:text-3xl font-extrabold text-white mb-3 leading-tight"
+                    className="text-[22px] sm:text-3xl font-extrabold text-white mb-4 leading-tight"
                     style={{ textShadow: '0 2px 4px rgba(0,0,0,0.5)' }}
                   >
-                    See If You Qualify for the
-                  </h1>
-                  <h2 
-                    className="text-[28px] sm:text-3xl font-extrabold mb-4 leading-tight"
-                    style={{ 
+                    This New Program Is Helping Colorado Homeowners Save{" "}
+                    <span style={{ 
                       color: '#F5C518',
-                      textShadow: '0 0 20px rgba(245, 197, 24, 0.5), 0 0 40px rgba(245, 197, 24, 0.3), 0 2px 4px rgba(0,0,0,0.3)'
-                    }}
-                  >
-                    Home Refresh Program
-                  </h2>
+                      textShadow: '0 0 20px rgba(245, 197, 24, 0.5), 0 0 40px rgba(245, 197, 24, 0.3)'
+                    }}>
+                      25%
+                    </span>{" "}
+                    On Their Painting Project
+                  </h1>
+
+                  {/* Subheadline - drives action */}
                   <p 
-                    className="text-sm text-white/60 tracking-wide"
+                    className="text-sm text-white/70 leading-relaxed max-w-md mx-auto"
                     style={{ textShadow: '0 1px 2px rgba(0,0,0,0.3)' }}
                   >
-                    Takes less than 30 seconds
+                    <span style={{ color: '#F5C518', fontWeight: 600 }}>Limited Spots Available</span>
+                    {" "}— Homeowners across Colorado are taking advantage. Click below to see if you qualify for a FREE estimate and 25% off.
                   </p>
                 </>
               )}
