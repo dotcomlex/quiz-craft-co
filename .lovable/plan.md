@@ -1,68 +1,64 @@
 
-
 ## Problem
-1. There's too much space above and below the logo, pushing the headline down and making the spacing look uneven
-2. The "Limited Spots Available" text is currently gold (#F5C518) but should be white
+The headline and subheadline are currently center-aligned, which causes awkward text wrapping on mobile. Left-aligning them will create a cleaner, more professional look with better readability.
 
 ## Current State
-Looking at the HeroSection.tsx:
-- Line 22: Container has `pt-8` (32px) top padding on mobile, `sm:pt-12` (48px) on larger screens
-- Line 31: Logo has `mb-4` (16px) margin-bottom
-- Line 62: "Limited Spots Available" uses `color: '#F5C518'` (gold)
+- Line 22: Container has `text-center` and `items-center`
+- Line 26: Inner wrapper has `text-center`
+- Line 56: Subheadline has `mx-auto` which centers it
 
 ## Solution
-1. **Reduce top padding** on the main container to bring the logo up
-2. **Reduce logo bottom margin** from `mb-4` to `mb-2` for tighter spacing with headline
-3. **Change "Limited Spots Available" color** from gold to white
+Change the text alignment to left for both the headline and subheadline while keeping the logo centered, then center the CTA button.
 
 ## Implementation
 
 **File to Modify**: `src/components/HeroSection.tsx`
 
-### Change 1: Reduce container top padding (Line 22)
+### Change 1: Update inner wrapper alignment (Line 26)
 
 **Current:**
 ```tsx
-<div className="relative z-10 container mx-auto px-3 pt-8 pb-16 sm:pt-12 sm:pb-20 flex flex-col items-center text-center">
+<div className="text-center mb-4">
 ```
 
 **New:**
 ```tsx
-<div className="relative z-10 container mx-auto px-3 pt-4 pb-16 sm:pt-6 sm:pb-20 flex flex-col items-center text-center">
+<div className="text-left mb-4">
 ```
 
-- Mobile: `pt-8` (32px) → `pt-4` (16px)
-- Desktop: `sm:pt-12` (48px) → `sm:pt-6` (24px)
+### Change 2: Keep logo centered (Line 31)
 
-### Change 2: Reduce logo bottom margin (Line 31)
+The logo already has `mx-auto` so it will stay centered. No change needed.
+
+### Change 3: Update headline alignment (Line 36)
 
 **Current:**
 ```tsx
-className="h-36 sm:h-44 lg:h-52 w-auto mx-auto mb-4"
+className="text-[26px] sm:text-4xl lg:text-5xl text-white leading-[1.15] mb-6 sm:mb-8"
 ```
 
 **New:**
 ```tsx
-className="h-36 sm:h-44 lg:h-52 w-auto mx-auto mb-2"
+className="text-[26px] sm:text-4xl lg:text-5xl text-white leading-[1.15] mb-6 sm:mb-8 text-left"
 ```
 
-- Reduces gap between logo and headline from 16px to 8px
-
-### Change 3: Change "Limited Spots Available" to white (Line 62)
+### Change 4: Update subheadline alignment (Line 56)
 
 **Current:**
 ```tsx
-<span style={{ color: '#F5C518', fontWeight: 700, textTransform: 'uppercase' }}>
+className="text-[14px] sm:text-base lg:text-lg text-white leading-relaxed max-w-xl mx-auto px-1"
 ```
 
 **New:**
 ```tsx
-<span style={{ color: '#FFFFFF', fontWeight: 700, textTransform: 'uppercase' }}>
+className="text-[14px] sm:text-base lg:text-lg text-white leading-relaxed max-w-xl px-1"
 ```
+
+Removes `mx-auto` so the subheadline aligns left with the headline.
 
 ## Verification
-- Logo should sit higher on the page with less empty space above it
-- Headline should be closer to the logo for a more cohesive look
-- "LIMITED SPOTS AVAILABLE" will appear in white instead of gold
-- Overall hero section will look more balanced and uniform
-
+- Logo remains centered at the top
+- Headline text flows left-to-right with natural line breaks
+- Subheadline aligns left under the headline
+- CTA button remains centered
+- Overall layout looks cleaner with less awkward wrapping
