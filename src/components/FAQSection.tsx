@@ -8,12 +8,22 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion";
 
-// Only 4 essential FAQs for cold traffic conversion
+// 6 FAQs for comprehensive coverage
 const faqs = [
   {
     question: "What does the free estimate include?",
     answer:
-      "Jose comes to your home, walks through the project with you, assesses surface conditions, discusses color options, and provides a detailed quote with no hidden fees. It's completely free, no pressure, and no obligation.",
+      "We come to your home, walk through every detail of the project with you, assess surface conditions, help you explore color and finish options, and give you a clear, detailed quote with no hidden fees. It's completely free, no pressure, and no obligation.",
+  },
+  {
+    question: "What services do you offer?",
+    answer:
+      "We handle it all. Interior painting, exterior painting, commercial painting, deck and fence staining, and more. Whether it's one accent wall, your entire home, or a commercial property, we've got you covered.",
+  },
+  {
+    question: "Can you help me pick colors and finishes?",
+    answer:
+      "Absolutely. Choosing the right color can feel overwhelming, and that's exactly why we walk you through it. We help you pick colors, sheens, and finishes that match your style, your lighting, and your home's architecture. You'll never feel like you're guessing.",
   },
   {
     question: "Are you licensed and insured?",
@@ -23,12 +33,12 @@ const faqs = [
   {
     question: "What areas do you serve?",
     answer:
-      "We serve Denver and all surrounding areas including Aurora, Lakewood, Arvada, Westminster, Thornton, Littleton, Centennial, Commerce City, Brighton, and more. Enter your zip code in our form to confirm coverage.",
+      "We serve Denver, Colorado Springs, and all surrounding areas including Aurora, Lakewood, Arvada, Westminster, Thornton, Littleton, Centennial, Commerce City, Brighton, and more. Enter your zip code in our form to confirm coverage.",
   },
   {
     question: "How long does a typical paint job take?",
     answer:
-      "It depends on the scope. A single room can be done in a day. A full interior usually takes 3 to 5 days. Full exteriors typically take 3 to 7 days depending on size and prep work needed. Jose will give you a clear timeline during the estimate.",
+      "It depends on the scope. A single room can usually be done in a day. A full interior typically takes 3 to 5 days. Exteriors run about 3 to 7 days depending on size and prep work. We'll give you a clear timeline during the estimate so there are no surprises.",
   },
 ];
 
