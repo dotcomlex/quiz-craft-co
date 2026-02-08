@@ -1,22 +1,19 @@
 
 
 ## Summary
-Reduce headline wrapping by minimizing padding and removing width constraints to allow the text to extend closer to the screen edges on mobile.
+Make the hero section feel more spacious and less cramped by increasing vertical spacing between elements and improving line-height for better readability.
 
 ---
 
-## Current Layout Analysis
+## Current Spacing Issues
 
-Looking at your screenshot and the code, here are all the width constraints affecting the headline:
-
-| Constraint | Current Value | Effect |
-|------------|---------------|--------|
-| Tailwind container padding | 1.5rem (24px) | Adds 24px on each side |
-| Content div `px-2` | 0.5rem (8px) | Adds 8px on each side |
-| `max-w-4xl` | 896px | Caps width (not an issue on mobile) |
-| Subheadline `max-w-xl` + `px-1` | 576px + 4px | Only affects subheadline |
-
-**Total padding on each side: ~32px** - that's 64px of horizontal space lost on mobile
+| Element | Current | Issue |
+|---------|---------|-------|
+| Top padding | `pt-4` (16px) | Too tight at top |
+| Logo bottom margin | `mb-1` (4px) | Almost no gap to headline |
+| Headline line-height | `leading-[1.15]` | Lines feel squeezed together |
+| Headline bottom margin | `mb-6` (24px) | Could use more breathing room |
+| Content wrapper margin | `mb-4` (16px) | Minimal gap before CTA |
 
 ---
 
@@ -24,59 +21,76 @@ Looking at your screenshot and the code, here are all the width constraints affe
 
 **File**: `src/components/HeroSection.tsx`
 
-### 1. Remove container class to eliminate built-in 24px padding
-Line 22: Remove `container` class or override its padding
+### 1. Increase top padding (Line 22)
+`pt-4` → `pt-6` (16px → 24px)
 
-### 2. Use minimal padding directly
-Replace `container mx-auto px-2` with just `px-3` (12px each side - enough to not touch edges)
+### 2. Add more space below logo (Line 31)
+`mb-1` → `mb-4` (4px → 16px)
 
-### 3. Reduce headline font size slightly (optional fallback)
-If still wrapping too much, reduce from `text-[24px]` to `text-[22px]`
+### 3. Increase headline line-height (Line 36)
+`leading-[1.15]` → `leading-[1.25]` (more breathing room between lines)
+
+### 4. Increase space below headline (Line 36)
+`mb-6` → `mb-8` (24px → 32px)
+
+### 5. Increase content wrapper bottom margin (Line 26)
+`mb-4` → `mb-6` (16px → 24px)
 
 ---
 
-## Implementation
+## Visual Comparison
 
 ```text
-Line 22 change:
-BEFORE: className="relative z-10 container mx-auto px-2 pt-4 pb-16..."
-AFTER:  className="relative z-10 px-3 pt-4 pb-16..."
+BEFORE (cramped):
+┌─────────────────────────┐
+│ [LOGO]                  │  ← 4px gap
+│ Ready To Transform Your │
+│ Home? The Home Refresh  │  ← Tight 1.15 line-height
+│ Program Is Giving...    │
+│ 25% Off Any Painting    │
+│ Project                 │  ← 24px gap
+│ LIMITED SPOTS...        │
+│                         │
+│ [  CHECK ELIGIBILITY  ] │
+└─────────────────────────┘
 
-This removes ~40px of total horizontal padding (24px container + 8px px-2 = 32px per side → 12px per side)
+AFTER (breathing room):
+┌─────────────────────────┐
+│                         │  ← More top padding
+│ [LOGO]                  │
+│                         │  ← 16px gap
+│ Ready To Transform Your │
+│                         │
+│ Home? The Home Refresh  │  ← 1.25 line-height
+│                         │
+│ Program Is Giving...    │
+│                         │
+│ 25% Off Any Painting    │
+│ Project                 │
+│                         │  ← 32px gap
+│ LIMITED SPOTS...        │
+│                         │
+│ [  CHECK ELIGIBILITY  ] │
+└─────────────────────────┘
 ```
 
 ---
 
-## Visual Impact
+## Specific Code Changes
 
 ```text
-BEFORE (~32px padding each side):
-┌────────────────────────────────────────────┐
-│         Ready To Transform Your            │
-│         Home? The Home Refresh             │
-│         Program Is Giving Colorado         │
-│         Homeowners 25% Off Any             │
-│         Painting Project                   │
-└────────────────────────────────────────────┘
-
-AFTER (~12px padding each side):
-┌────────────────────────────────────────────┐
-│  Ready To Transform Your Home? The         │
-│  Home Refresh Program Is Giving            │
-│  Colorado Homeowners 25% Off Any           │
-│  Painting Project                          │
-└────────────────────────────────────────────┘
+Line 22: pt-4 → pt-6
+Line 26: mb-4 → mb-6
+Line 31: mb-1 → mb-4
+Line 36: leading-[1.15] → leading-[1.25], mb-6 → mb-8
 ```
-
-Gains approximately 40 extra pixels of horizontal space for text, significantly reducing line breaks.
 
 ---
 
-## Alternative: Font Size Reduction
-
-If layout changes alone aren't enough:
+## Alternative: Reduce font size instead
+If you'd prefer to keep the current spacing but reduce density:
 - Reduce headline from `text-[24px]` to `text-[22px]`
-- This provides ~8% more characters per line
+- This naturally creates more white space per line
 
 ---
 
