@@ -1,10 +1,23 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Quiz from "@/components/Quiz";
 import { Shield } from "lucide-react";
 import GridBackground from "@/components/ui/grid-background";
 
 const QualifyPage = () => {
   const [quizStarted, setQuizStarted] = useState(false);
+  const [liveCount, setLiveCount] = useState(87);
+
+  // Dynamic counter effect - fluctuates realistically
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setLiveCount(prev => {
+        const change = Math.random() > 0.5 ? 1 : -1;
+        const newVal = prev + change;
+        return Math.max(45, Math.min(120, newVal)); // Keep between 45-120
+      });
+    }, 3000);
+    return () => clearInterval(interval);
+  }, []);
 
   return (
     <div className="min-h-screen relative">
@@ -21,6 +34,20 @@ const QualifyPage = () => {
         {/* Quiz Container */}
         <main className="flex-1 flex items-center justify-center px-4 py-4 sm:py-8">
           <div className="w-full max-w-lg">
+            {/* Live counter - ALWAYS visible */}
+            <div className="flex justify-center mb-4">
+              <div 
+                className="inline-flex items-center gap-2 px-4 py-2 rounded-full text-white text-sm font-semibold"
+                style={{ backgroundColor: '#DC2626' }}
+              >
+                <span className="relative flex h-2 w-2">
+                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-white opacity-75"></span>
+                  <span className="relative inline-flex rounded-full h-2 w-2 bg-white"></span>
+                </span>
+                <span>{liveCount} people checking eligibility</span>
+              </div>
+            </div>
+
             {/* Progress Text */}
             <div className="text-center mb-4">
               {/* Header - HIDES when quiz starts */}
