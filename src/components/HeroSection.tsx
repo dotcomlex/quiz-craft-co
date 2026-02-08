@@ -19,21 +19,21 @@ const HeroSection = () => {
       </div>
 
       {/* Content */}
-      <div className="relative z-10 px-3 pt-4 pb-16 sm:pt-6 sm:pb-20 flex flex-col items-center text-center">
+      <div className="relative z-10 px-3 pt-6 pb-16 sm:pt-8 sm:pb-20 flex flex-col items-center text-center">
         {/* Single centered column - extended width for less wrapping */}
         <div className="w-full max-w-4xl mx-auto">
           {/* Logo + Headline */}
-          <div className="text-left mb-4">
+          <div className="text-left mb-6">
             {/* White Emerald Paints Logo - scaled up */}
             <img 
               src={emeraldLogo}
               alt="Emerald Paints"
-              className="h-36 sm:h-44 lg:h-52 w-auto mx-auto mb-1"
+              className="h-36 sm:h-44 lg:h-52 w-auto mx-auto mb-4"
               style={{ filter: 'brightness(1.1)' }}
             />
             
             <h1 
-              className="text-[24px] sm:text-4xl lg:text-5xl text-white leading-[1.15] mb-6 sm:mb-8 text-left"
+              className="text-[24px] sm:text-4xl lg:text-5xl text-white leading-[1.25] mb-8 sm:mb-10 text-left"
               style={{ 
                 fontWeight: 800,
                 textShadow: '0 2px 8px rgba(0, 0, 0, 0.8), 0 4px 20px rgba(0, 0, 0, 0.6)',
