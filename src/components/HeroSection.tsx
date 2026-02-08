@@ -23,7 +23,7 @@ const HeroSection = () => {
         {/* Single centered column - no max-width restriction */}
         <div className="w-full max-w-2xl mx-auto">
           {/* Logo + Headline */}
-          <div className="text-center mb-4">
+          <div className="text-left mb-4">
             {/* White Emerald Paints Logo - scaled up */}
             <img 
               src={emeraldLogo}
@@ -33,7 +33,7 @@ const HeroSection = () => {
             />
             
             <h1 
-              className="text-[26px] sm:text-4xl lg:text-5xl text-white leading-[1.15] mb-6 sm:mb-8"
+              className="text-[26px] sm:text-4xl lg:text-5xl text-white leading-[1.15] mb-6 sm:mb-8 text-left"
               style={{ 
                 fontWeight: 800,
                 textShadow: '0 2px 8px rgba(0, 0, 0, 0.8), 0 4px 20px rgba(0, 0, 0, 0.6)',
@@ -53,7 +53,7 @@ const HeroSection = () => {
 
             {/* Subheadline - strong text shadow */}
             <p 
-              className="text-[14px] sm:text-base lg:text-lg text-white leading-relaxed max-w-xl mx-auto px-1"
+              className="text-[14px] sm:text-base lg:text-lg text-white leading-relaxed max-w-xl px-1"
               style={{ 
                 textShadow: '0 1px 2px rgba(0,0,0,1), 0 2px 4px rgba(0,0,0,0.95), 0 4px 8px rgba(0,0,0,0.9), 0 8px 16px rgba(0,0,0,0.8), 0 0 40px rgba(0,0,0,0.7)',
                 fontWeight: 600
