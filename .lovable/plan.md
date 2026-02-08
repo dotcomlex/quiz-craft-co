@@ -1,62 +1,82 @@
 
 
 ## Summary
-Reduce headline text wrapping by extending content closer to the screen edges on mobile, while maintaining readability.
+Reduce headline wrapping by minimizing padding and removing width constraints to allow the text to extend closer to the screen edges on mobile.
 
 ---
 
-## Changes
+## Current Layout Analysis
+
+Looking at your screenshot and the code, here are all the width constraints affecting the headline:
+
+| Constraint | Current Value | Effect |
+|------------|---------------|--------|
+| Tailwind container padding | 1.5rem (24px) | Adds 24px on each side |
+| Content div `px-2` | 0.5rem (8px) | Adds 8px on each side |
+| `max-w-4xl` | 896px | Caps width (not an issue on mobile) |
+| Subheadline `max-w-xl` + `px-1` | 576px + 4px | Only affects subheadline |
+
+**Total padding on each side: ~32px** - that's 64px of horizontal space lost on mobile
+
+---
+
+## Recommended Changes
 
 **File**: `src/components/HeroSection.tsx`
 
-### Option A: Reduce max-width constraint (Recommended)
-Remove or increase the `max-w-2xl` (672px) on line 24 to allow the headline to extend further right.
+### 1. Remove container class to eliminate built-in 24px padding
+Line 22: Remove `container` class or override its padding
 
-**Current**: `max-w-2xl` limits content width
-**Change to**: `max-w-3xl` (768px) or remove entirely
+### 2. Use minimal padding directly
+Replace `container mx-auto px-2` with just `px-3` (12px each side - enough to not touch edges)
 
-### Option B: Reduce container padding
-Change `px-3` to `px-2` on line 22 to give ~4 more pixels on each side.
-
-### Option C: Combination approach (Best results)
-1. Change line 22: `px-3` → `px-2` (tighter container padding)
-2. Change line 24: `max-w-2xl` → remove constraint or use `max-w-3xl`
-3. Optionally reduce headline `text-[24px]` to `text-[22px]` if still wrapping
+### 3. Reduce headline font size slightly (optional fallback)
+If still wrapping too much, reduce from `text-[24px]` to `text-[22px]`
 
 ---
 
-## Recommended Implementation
+## Implementation
 
 ```text
-Line 22: px-3 → px-2 (saves ~8px total width)
-Line 24: max-w-2xl → max-w-4xl (or remove)
-```
+Line 22 change:
+BEFORE: className="relative z-10 container mx-auto px-2 pt-4 pb-16..."
+AFTER:  className="relative z-10 px-3 pt-4 pb-16..."
 
-This combination will:
-- Allow headline text to extend closer to the right edge
-- Reduce line wrapping by utilizing more horizontal space
-- Maintain proper spacing without text touching screen edges
+This removes ~40px of total horizontal padding (24px container + 8px px-2 = 32px per side → 12px per side)
+```
 
 ---
 
 ## Visual Impact
 
 ```text
-BEFORE (px-3, max-w-2xl):
-┌─────────────────────────────────────────┐
-│   Ready To Transform Your Home? The     │
-│   Home Refresh Program Is Giving        │
-│   Colorado Homeowners 25% Off Any       │
-│   Painting Project                      │
-└─────────────────────────────────────────┘
+BEFORE (~32px padding each side):
+┌────────────────────────────────────────────┐
+│         Ready To Transform Your            │
+│         Home? The Home Refresh             │
+│         Program Is Giving Colorado         │
+│         Homeowners 25% Off Any             │
+│         Painting Project                   │
+└────────────────────────────────────────────┘
 
-AFTER (px-2, no max-w):
-┌─────────────────────────────────────────┐
-│  Ready To Transform Your Home? The      │
-│  Home Refresh Program Is Giving Colorado│
-│  Homeowners 25% Off Any Painting Project│
-└─────────────────────────────────────────┘
+AFTER (~12px padding each side):
+┌────────────────────────────────────────────┐
+│  Ready To Transform Your Home? The         │
+│  Home Refresh Program Is Giving            │
+│  Colorado Homeowners 25% Off Any           │
+│  Painting Project                          │
+└────────────────────────────────────────────┘
 ```
+
+Gains approximately 40 extra pixels of horizontal space for text, significantly reducing line breaks.
+
+---
+
+## Alternative: Font Size Reduction
+
+If layout changes alone aren't enough:
+- Reduce headline from `text-[24px]` to `text-[22px]`
+- This provides ~8% more characters per line
 
 ---
 
