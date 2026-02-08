@@ -12,16 +12,28 @@ import galleryPainting5 from "@/assets/gallery-painting-5.webp";
 import galleryPainting6 from "@/assets/gallery-painting-6.webp";
 import galleryPainting7 from "@/assets/gallery-painting-7.webp";
 import galleryPainting8 from "@/assets/gallery-painting-8.webp";
+import galleryExteriorDarkGray from "@/assets/gallery-exterior-dark-gray.webp";
+import galleryExteriorSageGreen from "@/assets/gallery-exterior-sage-green.webp";
+import galleryDeckStaining from "@/assets/gallery-deck-staining.webp";
+import galleryCraftsmanPorch from "@/assets/gallery-craftsman-porch.webp";
+import galleryExteriorNeutral from "@/assets/gallery-exterior-neutral.webp";
+import galleryInteriorHallway from "@/assets/gallery-interior-hallway.webp";
 
 const GallerySection = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
 
   const projects = [
+    { image: galleryExteriorDarkGray, alt: "Exterior home transformation with dark gray siding and yellow accent door" },
     { image: galleryPainting1, alt: "Kitchen painting transformation with fresh colors" },
+    { image: galleryDeckStaining, alt: "Deck and fence staining transformation from weathered gray to rich cedar" },
     { image: galleryPainting2, alt: "Interior living room painting before and after" },
+    { image: galleryCraftsmanPorch, alt: "Craftsman home porch and exterior painting restoration" },
     { image: galleryPainting3, alt: "Kitchen walls fresh paint makeover" },
+    { image: galleryExteriorSageGreen, alt: "Ranch home exterior painting with sage green and navy blue door" },
     { image: galleryPainting4, alt: "Bedroom accent wall painting" },
+    { image: galleryInteriorHallway, alt: "Interior hallway painting transformation with white walls and coral accent" },
     { image: galleryPainting5, alt: "Exterior home painting transformation" },
+    { image: galleryExteriorNeutral, alt: "Two-story home exterior painting in modern neutral tones" },
     { image: galleryPainting6, alt: "Bathroom painting refresh" },
     { image: galleryPainting7, alt: "Deck and fence staining before and after" },
     { image: galleryPainting8, alt: "Exterior trim and siding painting" },
