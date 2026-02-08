@@ -18,7 +18,7 @@ const faqs = [
   {
     question: "What services do you offer?",
     answer:
-      "We handle it all. Interior painting, exterior painting, commercial painting, deck and fence staining, and more. Whether it's one accent wall, your entire home, or a commercial property, we've got you covered.",
+      "We handle it all. Interior painting, exterior painting, commercial painting, deck and fence staining, and more. Whether it's your home or a commercial property, we've got you covered.",
   },
   {
     question: "Can you help me pick colors and finishes?",
