@@ -1,39 +1,33 @@
 
-## Problem
-The logo section and the trust indicators (Licensed & Insured / Satisfaction Guaranteed) are too close together. There's insufficient visual separation between the main hero messaging and the trust badges at the bottom.
 
-## Root Cause
-The trust indicators container at line 85 has only `mt-6` (24px) margin-top, which creates a tight spacing that makes the section feel cramped on mobile devices.
+## Problem
+The hero section needs more bottom padding to create more space between the trust indicators and the next section below ("TRUSTED & CERTIFIED"). Currently the bottom padding is `pb-8` (32px) on mobile and `sm:pb-12` (48px) on larger screens - not enough separation.
 
 ## Solution
-Increase the margin-top on the trust indicators container to create more breathing room between:
-1. The CTA button and the trust indicators
-2. The logo/headline messaging and the trust indicators
-
-This visual separation will help the page feel less cluttered and improves the mobile viewing experience.
+Increase the bottom padding on the hero content container to add more breathing room at the bottom of the entire hero section.
 
 ## Implementation
 
 **File to Modify**: `src/components/HeroSection.tsx`
 
-**Change**: Line 85 - Increase margin-top on trust indicators
+**Change**: Line 22 - Increase bottom padding
 
 **Current:**
 ```tsx
-<div className="mt-6 flex items-center justify-center gap-6">
+<div className="relative z-10 container mx-auto px-3 pt-8 pb-8 sm:pt-12 sm:pb-12 flex flex-col items-center text-center">
 ```
 
 **New:**
 ```tsx
-<div className="mt-8 sm:mt-10 flex items-center justify-center gap-6">
+<div className="relative z-10 container mx-auto px-3 pt-8 pb-16 sm:pt-12 sm:pb-20 flex flex-col items-center text-center">
 ```
 
 **Details:**
-- Increase from `mt-6` (24px) to `mt-8` (32px) on mobile
-- Add `sm:mt-10` (40px) on tablet and larger screens
-- This creates better visual hierarchy and breathing room between the main call-to-action and the trust indicators
+- Increase `pb-8` (32px) to `pb-16` (64px) on mobile
+- Increase `sm:pb-12` (48px) to `sm:pb-20` (80px) on larger screens
+- This adds roughly 40px more space at the bottom of the hero section
 
 ## Verification
-- Trust indicators should have noticeably more space below the CTA button
-- The "logo section" and "trust badge row" should feel like distinct visual groups
-- The layout should feel spacious without looking stretched on mobile (375–428px)
+- Trust indicators will have noticeably more space below them before the next section starts
+- The hero section background will extend further down, creating a clear visual break between sections
+
