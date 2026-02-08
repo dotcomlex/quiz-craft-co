@@ -82,7 +82,7 @@ const HeroSection = () => {
             </div>
 
             {/* Trust indicators */}
-            <div className="mt-8 sm:mt-10 flex items-center justify-center gap-6">
+            <div className="mt-10 sm:mt-12 flex items-center justify-center gap-6">
               <div className="flex items-center gap-1.5">
                 <CheckCircle className="w-4 h-4 flex-shrink-0" style={{ color: '#F5C518' }} />
                 <span className="text-xs sm:text-sm font-medium text-white/90 whitespace-nowrap">
