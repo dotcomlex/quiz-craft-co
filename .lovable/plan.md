@@ -1,40 +1,78 @@
 
-## FIX: REMOVE EXCESSIVE BOTTOM PADDING IN HERO SECTION
+## Goal
+Remove the “dead space” at the bottom of the Hero. Right now, the Hero is forced to be viewport-height even when the content is much shorter, which creates an unavoidable empty area below the trust indicators.
 
-### Problem
-The hero section now has too much bottom padding (`pb-8 sm:pb-12`) which pushes the trust indicators down with a large gap below them. Since we removed `justify-center` and aligned everything to the top, the bottom padding is no longer needed to maintain spacing.
+## Root cause (confirmed in code)
+In `src/components/HeroSection.tsx` there are **two** `min-h-screen` declarations:
 
-### Solution
-Reduce bottom padding to minimal value so the section ends right after the trust indicators.
+1) On the `<section>`:
+```tsx
+<section id="hero" className="relative min-h-screen overflow-hidden">
+```
 
-**File to Modify**: `src/components/HeroSection.tsx`
+2) On the content container:
+```tsx
+<div className="... min-h-screen flex flex-col items-center text-center">
+```
+
+Even after reducing `pb-*`, `min-h-screen` keeps the hero at least 100vh, so the empty space remains.
+
+## Fix strategy
+Stop forcing the hero to be full viewport height. Let it size to its content, with intentional top/bottom padding only.
+
+This will immediately remove the large bottom gap without needing to “fight” spacing utilities.
 
 ---
 
-### CHANGE: REDUCE BOTTOM PADDING
+## Implementation steps
 
-**Line 22 - Current:**
-```tsx
-className="relative z-10 container mx-auto px-3 pt-8 pb-8 sm:pt-12 sm:pb-12 min-h-screen flex flex-col items-center text-center"
-```
+### 1) Remove `min-h-screen` from the hero section wrapper
+**File:** `src/components/HeroSection.tsx`
 
-**New:**
-```tsx
-className="relative z-10 container mx-auto px-3 pt-8 pb-2 sm:pt-12 sm:pb-4 min-h-screen flex flex-col items-center text-center"
-```
+**Change:**
+- From:
+  ```tsx
+  <section id="hero" className="relative min-h-screen overflow-hidden">
+  ```
+- To:
+  ```tsx
+  <section id="hero" className="relative overflow-hidden">
+  ```
 
-**Changes:**
-- Reduce `pb-8` to `pb-2` (mobile) - from 32px to 8px bottom padding
-- Reduce `sm:pb-12` to `sm:pb-4` (tablet+) - from 48px to 16px bottom padding
+### 2) Remove `min-h-screen` from the hero content container
+**File:** `src/components/HeroSection.tsx`
 
-This will eliminate the excessive white space below the trust indicators while maintaining minimal padding for clean spacing.
+**Change:**
+- From:
+  ```tsx
+  <div className="relative z-10 container mx-auto px-3 pt-8 pb-2 sm:pt-12 sm:pb-4 min-h-screen flex flex-col items-center text-center">
+  ```
+- To:
+  ```tsx
+  <div className="relative z-10 container mx-auto px-3 pt-8 pb-2 sm:pt-12 sm:pb-4 flex flex-col items-center text-center">
+  ```
+
+### 3) (Optional, only if you still want a “hero feel” without huge empty space)
+If the hero becomes “too short” on some devices, add a modest minimum height instead of full screen:
+- Add on the `<section>`:
+  ```tsx
+  className="relative overflow-hidden min-h-[520px] sm:min-h-[600px]"
+  ```
+This keeps a strong hero presence while avoiding giant blank space on taller phones.
+
+I will only apply this optional step if the hero looks cramped after removing `min-h-screen`.
 
 ---
 
-### VERIFICATION
+## Verification checklist (what you should see)
+- The hero background image ends shortly after the trust indicators.
+- No large empty area below the trust row.
+- Spacing above the logo and between elements remains as currently tuned.
+- On mobile (375–428px), the hero feels tight and conversion-focused.
 
-| Check | Expected |
-|-------|----------|
-| Hero bottom space | Minimal gap below trust indicators, no excessive white space |
-| Logo position | Still tight at top |
-| Overall hero height | More compact, fits better on mobile viewport |
+---
+
+## Technical notes (why padding changes alone didn’t work)
+As long as `min-h-screen` exists on the hero container, **there will always be leftover vertical space** whenever the content height is less than the viewport height. Reducing bottom padding can’t remove that forced height, it can only slightly change where within that 100vh block the content sits.
+
+Removing `min-h-screen` is the correct structural fix.
