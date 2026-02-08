@@ -53,12 +53,10 @@ const HeroSection = () => {
 
             {/* Subheadline - strong text shadow */}
             <p 
-              className="text-[15px] sm:text-lg lg:text-xl text-white leading-relaxed max-w-xl mx-auto px-4 py-3 rounded-xl"
+              className="text-[15px] sm:text-lg lg:text-xl text-white leading-relaxed max-w-xl mx-auto px-1"
               style={{ 
-                textShadow: '0 2px 4px rgba(0,0,0,0.9), 0 4px 12px rgba(0,0,0,0.7)',
-                fontWeight: 500,
-                backgroundColor: 'rgba(0, 0, 0, 0.45)',
-                backdropFilter: 'blur(4px)'
+                textShadow: '0 1px 2px rgba(0,0,0,1), 0 2px 4px rgba(0,0,0,0.95), 0 4px 8px rgba(0,0,0,0.9), 0 8px 16px rgba(0,0,0,0.8), 0 0 40px rgba(0,0,0,0.7)',
+                fontWeight: 600
               }}
             >
               <span style={{ color: '#F5C518', fontWeight: 700, textTransform: 'uppercase' }}>
