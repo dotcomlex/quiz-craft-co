@@ -1,116 +1,76 @@
 
 
-# EMERALD PAINTS — ROUND 5 UPDATES PLAN
+# FIX: REVERT QUIZ PAGE + IMPROVE PROCESS SECTION FLOW
 
 ## Overview
 
-This plan implements 5 key updates:
-1. Quiz page headline rewrite with news-style qualifying angle + logo placement
-2. Process section language updates (remove "Jose" → use "We/We'll") 
-3. Process section step descriptions updated for qualification angle
-4. Replace finished home image with painters action shot (AI-generated)
-5. Copy white Emerald Paints logo and place elegantly above quiz headline
+I made changes to the wrong page. The quiz page headline needs to be reverted back to its original simpler style, and the Process section step descriptions need to flow better.
 
-**Files to Modify**: 3 files
-**New Assets**: 2 images (logo + action shot)
+**Good news:** The HeroSection (homepage) already has the correct news-style headline with the qualifying angle.
+
+**Files to Modify**: 2 files
 
 ---
 
-## UPDATE 1: QUIZ PAGE — NEWS-STYLE HEADLINE OPTIONS
+## FIX 1: REVERT QUIZ PAGE HEADLINE
 
 ### File: `src/pages/QualifyPage.tsx`
 
-Here are 3 headline options with qualifying/news angle:
+Revert the header section back to the simpler original style:
 
-**OPTION A (Recommended):**
+**Current (WRONG - too busy):**
 ```
 Quick Question — Is Your Zip Code Eligible?
-
 This New Program Is Helping Colorado Homeowners Save 25% On Their Painting Project
+Limited Spots Available — Homeowners across Colorado are taking advantage...
 ```
 
-**OPTION B:**
-```
-Could Your Home Qualify?
-
-Colorado's Home Refresh Program Is Saving Homeowners 25% On Professional Painting
-```
-
-**OPTION C:**
-```
-Breaking: Limited Spots Available
-
-The Home Refresh Program Is Helping Colorado Homeowners Save 25% On Their Painting
-```
-
-### Proposed Implementation (Option A):
-
+**Revert back to:**
 ```tsx
-{/* Logo - elegant sizing with proper spacing */}
-<img 
-  src={emeraldLogo}
-  alt="Emerald Paints"
-  className="h-8 sm:h-10 w-auto mx-auto mb-6"
-  style={{ filter: 'brightness(1.1)' }}
-/>
+{!quizStarted && (
+  <>
+    {/* Logo - keep this, it looks good */}
+    <img 
+      src={emeraldLogo}
+      alt="Emerald Paints"
+      className="h-8 sm:h-10 w-auto mx-auto mb-6"
+      style={{ filter: 'brightness(1.1)' }}
+    />
 
-{/* Pre-headline question */}
-<p 
-  className="text-sm sm:text-base text-white/80 uppercase tracking-widest mb-3 font-medium"
-  style={{ textShadow: '0 1px 2px rgba(0,0,0,0.5)' }}
->
-  Quick Question — Is Your Zip Code Eligible?
-</p>
-
-{/* Main headline */}
-<h1 
-  className="text-[24px] sm:text-3xl font-extrabold text-white mb-3 leading-tight"
-  style={{ textShadow: '0 2px 4px rgba(0,0,0,0.5)' }}
->
-  This New Program Is Helping Colorado Homeowners Save{" "}
-  <span style={{ 
-    color: '#F5C518',
-    textShadow: '0 0 20px rgba(245, 197, 24, 0.5), 0 0 40px rgba(245, 197, 24, 0.3)'
-  }}>
-    25%
-  </span>{" "}
-  On Their Painting Project
-</h1>
+    <h1 
+      className="text-[28px] sm:text-3xl font-extrabold text-white mb-3 leading-tight"
+      style={{ textShadow: '0 2px 4px rgba(0,0,0,0.5)' }}
+    >
+      See If You Qualify for the
+    </h1>
+    <h2 
+      className="text-[28px] sm:text-3xl font-extrabold mb-4 leading-tight"
+      style={{ 
+        color: '#F5C518',
+        textShadow: '0 0 20px rgba(245, 197, 24, 0.5), 0 0 40px rgba(245, 197, 24, 0.3), 0 2px 4px rgba(0,0,0,0.3)'
+      }}
+    >
+      Home Refresh Program
+    </h2>
+    <p 
+      className="text-sm text-white/60 tracking-wide"
+      style={{ textShadow: '0 1px 2px rgba(0,0,0,0.3)' }}
+    >
+      Takes less than 30 seconds
+    </p>
+  </>
+)}
 ```
 
-### Subheadline — Updated for Action:
-
-```tsx
-<p 
-  className="text-sm text-white/70 leading-relaxed max-w-md mx-auto"
-  style={{ textShadow: '0 1px 2px rgba(0,0,0,0.3)' }}
->
-  <span style={{ color: '#F5C518', fontWeight: 600 }}>Limited Spots Available</span>
-  {" "} — Homeowners across Colorado are taking advantage. Click below to see if you qualify for a FREE estimate and 25% off.
-</p>
-```
+**Note:** Keep the logo — that was a good addition. Just revert the headline and subheadline back to the simpler original.
 
 ---
 
-## UPDATE 2: WHITE LOGO PLACEMENT
-
-### Copy Logo Asset:
-- **Source**: `user-uploads://ChatGPT_Image_Feb_8_2026_01_43_44_PM.png`
-- **Destination**: `src/assets/emerald-logo-white.png`
-
-### Logo Styling:
-- Height: `h-8` on mobile, `h-10` on larger screens
-- Margin bottom: `mb-6` (24px) — enough breathing room without pushing content down
-- Centered with `mx-auto`
-- White PNG displays naturally on dark `#020617` background
-
----
-
-## UPDATE 3: PROCESS SECTION — LANGUAGE UPDATES
+## FIX 2: PROCESS SECTION — BETTER FLOW
 
 ### File: `src/components/ProcessSection.tsx`
 
-**Replace "Jose" references with "We/We'll"** and update for qualification angle:
+The current step descriptions are awkward. Here's improved copy that flows naturally:
 
 ```tsx
 const steps = [
@@ -118,7 +78,7 @@ const steps = [
     icon: MessageSquare,
     number: "1",
     title: "Answer Quick Questions",
-    description: "Tell us about your project so we can check your availability and prepare your estimate.",
+    description: "Tell us about your project so we can check your eligibility and prepare your estimate.",
   },
   {
     icon: CalendarCheck,
@@ -141,63 +101,19 @@ const steps = [
 ];
 ```
 
-**Key changes:**
-- Step 1: Added "check your availability" to reinforce qualifying angle
-- Step 2: Changed "Jose comes" → "If you qualify, we'll schedule" — emphasizes conditional benefit
-- Steps 3-4: Already use "we" — no changes needed
+**Key change:**
+- Step 1: Changed "check your availability" → "check your eligibility" — this flows better with the qualifying angle and makes more sense
+
+Steps 2-4 are already good. No mentions of "Jose" remain.
 
 ---
 
-## UPDATE 4: REPLACE IMAGE WITH PAINTERS ACTION SHOT
-
-### Generate AI Image:
-
-**Prompt**: "Professional residential painters team of 2-3 people actively painting the exterior of a Colorado home, realistic photography style, painters on ladders with brushes and rollers, sunny day, warm lighting, high quality, no text overlays, horizontal 16:9 aspect ratio"
-
-### Save to: `src/assets/painters-action-shot.webp`
-
-### Update ProcessSection.tsx:
-
-```tsx
-import paintersAction from "@/assets/painters-action-shot.webp";
-
-// In the JSX (replace finishedHome):
-<div className="max-w-4xl mx-auto mt-12">
-  <img
-    src={paintersAction}
-    alt="Professional painters actively working on a Colorado home"
-    className="w-full aspect-video object-cover rounded-2xl shadow-xl"
-    loading="lazy"
-    decoding="async"
-  />
-</div>
-```
-
-**Key changes:**
-- Changed from `aspect-square` to `aspect-video` (16:9) for action shots
-- Shows painters actively working (the process)
-- Realistic look, not AI/stock feeling
-
----
-
-## SUMMARY TABLE
+## SUMMARY
 
 | # | File | Change |
 |---|------|--------|
-| 1 | `src/assets/emerald-logo-white.png` | NEW - Copy white logo |
-| 2 | `src/assets/painters-action-shot.webp` | NEW - AI generate action shot |
-| 3 | `src/pages/QualifyPage.tsx` | Add logo + rewrite headline + update subheadline |
-| 4 | `src/components/ProcessSection.tsx` | Update step descriptions (remove Jose, add qualifying) |
-| 5 | `src/components/ProcessSection.tsx` | Replace image with action shot |
-
----
-
-## EXECUTION ORDER
-
-1. Copy white Emerald Paints logo to assets
-2. Generate painters action shot via AI
-3. Update QualifyPage.tsx with logo + new headline/subheadline
-4. Update ProcessSection.tsx with new step descriptions + action shot image
+| 1 | `src/pages/QualifyPage.tsx` | Revert headline back to simple "See If You Qualify for the Home Refresh Program" style |
+| 2 | `src/components/ProcessSection.tsx` | Step 1: "availability" → "eligibility" |
 
 ---
 
@@ -205,12 +121,11 @@ import paintersAction from "@/assets/painters-action-shot.webp";
 
 | # | Check | Expected |
 |---|-------|----------|
-| 1 | Quiz page logo | White Emerald Paints logo centered above headline, h-8/h-10, mb-6 spacing |
-| 2 | Quiz pre-headline | "Quick Question — Is Your Zip Code Eligible?" in uppercase tracking-widest |
-| 3 | Quiz headline | News-style, "25%" in gold with glow |
-| 4 | Quiz subheadline | "Limited Spots Available" gold + "Homeowners are taking advantage" |
-| 5 | Process step 1 | "...check your availability and prepare your estimate" |
-| 6 | Process step 2 | "If you qualify, we'll schedule..." (no Jose) |
-| 7 | Process image | Painters action shot, aspect-video, realistic look |
-| 8 | Mobile spacing | Logo doesn't push content down too much |
+| 1 | Homepage headline | "The Home Refresh Program Is Helping Colorado Homeowners Save 25%..." (already correct) |
+| 2 | Homepage subheadline | "Limited Spots Available — Check below..." (already correct) |
+| 3 | Quiz page headline | "See If You Qualify for the Home Refresh Program" (simple, gold glow) |
+| 4 | Quiz page subheadline | "Takes less than 30 seconds" (simple) |
+| 5 | Quiz page logo | White Emerald Paints logo above headline (keep this) |
+| 6 | Process step 1 | "...check your eligibility and prepare your estimate" |
+| 7 | No "Jose" mentions | All steps use "we/we'll" |
 
