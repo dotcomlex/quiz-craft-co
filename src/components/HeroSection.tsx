@@ -19,7 +19,7 @@ const HeroSection = () => {
       </div>
 
       {/* Content */}
-      <div className="relative z-10 px-3 pt-6 pb-16 sm:pt-8 sm:pb-20 flex flex-col items-center text-center">
+      <div className="relative z-10 px-3 pt-4 pb-16 sm:pt-8 sm:pb-20 flex flex-col items-center text-center">
         {/* Single centered column - extended width for less wrapping */}
         <div className="w-full max-w-4xl mx-auto">
           {/* Logo + Headline */}
@@ -28,7 +28,7 @@ const HeroSection = () => {
             <img 
               src={emeraldLogo}
               alt="Emerald Paints"
-              className="h-36 sm:h-44 lg:h-52 w-auto mx-auto mb-4"
+              className="h-36 sm:h-44 lg:h-52 w-auto mx-auto mb-2"
               style={{ filter: 'brightness(1.1)' }}
             />
             
