@@ -1,78 +1,39 @@
 
-## Goal
-Remove the “dead space” at the bottom of the Hero. Right now, the Hero is forced to be viewport-height even when the content is much shorter, which creates an unavoidable empty area below the trust indicators.
+## Problem
+The logo section and the trust indicators (Licensed & Insured / Satisfaction Guaranteed) are too close together. There's insufficient visual separation between the main hero messaging and the trust badges at the bottom.
 
-## Root cause (confirmed in code)
-In `src/components/HeroSection.tsx` there are **two** `min-h-screen` declarations:
+## Root Cause
+The trust indicators container at line 85 has only `mt-6` (24px) margin-top, which creates a tight spacing that makes the section feel cramped on mobile devices.
 
-1) On the `<section>`:
+## Solution
+Increase the margin-top on the trust indicators container to create more breathing room between:
+1. The CTA button and the trust indicators
+2. The logo/headline messaging and the trust indicators
+
+This visual separation will help the page feel less cluttered and improves the mobile viewing experience.
+
+## Implementation
+
+**File to Modify**: `src/components/HeroSection.tsx`
+
+**Change**: Line 85 - Increase margin-top on trust indicators
+
+**Current:**
 ```tsx
-<section id="hero" className="relative min-h-screen overflow-hidden">
+<div className="mt-6 flex items-center justify-center gap-6">
 ```
 
-2) On the content container:
+**New:**
 ```tsx
-<div className="... min-h-screen flex flex-col items-center text-center">
+<div className="mt-8 sm:mt-10 flex items-center justify-center gap-6">
 ```
 
-Even after reducing `pb-*`, `min-h-screen` keeps the hero at least 100vh, so the empty space remains.
+**Details:**
+- Increase from `mt-6` (24px) to `mt-8` (32px) on mobile
+- Add `sm:mt-10` (40px) on tablet and larger screens
+- This creates better visual hierarchy and breathing room between the main call-to-action and the trust indicators
 
-## Fix strategy
-Stop forcing the hero to be full viewport height. Let it size to its content, with intentional top/bottom padding only.
-
-This will immediately remove the large bottom gap without needing to “fight” spacing utilities.
-
----
-
-## Implementation steps
-
-### 1) Remove `min-h-screen` from the hero section wrapper
-**File:** `src/components/HeroSection.tsx`
-
-**Change:**
-- From:
-  ```tsx
-  <section id="hero" className="relative min-h-screen overflow-hidden">
-  ```
-- To:
-  ```tsx
-  <section id="hero" className="relative overflow-hidden">
-  ```
-
-### 2) Remove `min-h-screen` from the hero content container
-**File:** `src/components/HeroSection.tsx`
-
-**Change:**
-- From:
-  ```tsx
-  <div className="relative z-10 container mx-auto px-3 pt-8 pb-2 sm:pt-12 sm:pb-4 min-h-screen flex flex-col items-center text-center">
-  ```
-- To:
-  ```tsx
-  <div className="relative z-10 container mx-auto px-3 pt-8 pb-2 sm:pt-12 sm:pb-4 flex flex-col items-center text-center">
-  ```
-
-### 3) (Optional, only if you still want a “hero feel” without huge empty space)
-If the hero becomes “too short” on some devices, add a modest minimum height instead of full screen:
-- Add on the `<section>`:
-  ```tsx
-  className="relative overflow-hidden min-h-[520px] sm:min-h-[600px]"
-  ```
-This keeps a strong hero presence while avoiding giant blank space on taller phones.
-
-I will only apply this optional step if the hero looks cramped after removing `min-h-screen`.
-
----
-
-## Verification checklist (what you should see)
-- The hero background image ends shortly after the trust indicators.
-- No large empty area below the trust row.
-- Spacing above the logo and between elements remains as currently tuned.
-- On mobile (375–428px), the hero feels tight and conversion-focused.
-
----
-
-## Technical notes (why padding changes alone didn’t work)
-As long as `min-h-screen` exists on the hero container, **there will always be leftover vertical space** whenever the content height is less than the viewport height. Reducing bottom padding can’t remove that forced height, it can only slightly change where within that 100vh block the content sits.
-
-Removing `min-h-screen` is the correct structural fix.
+## Verification
+- Trust indicators should have noticeably more space below the CTA button
+- The "logo section" and "trust badge row" should feel like distinct visual groups
+- The layout should feel spacious without looking stretched on mobile (375–428px)
