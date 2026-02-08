@@ -1,53 +1,65 @@
 
 
 ## Summary
-Update the FAQ section with 6 new questions and replace the BBB logo with the new transparent-background version.
+Reduce headline text wrapping by extending content closer to the screen edges on mobile, while maintaining readability.
 
 ---
 
 ## Changes
 
-### 1. Replace BBB Logo
-**File**: Copy new logo and update import
+**File**: `src/components/HeroSection.tsx`
 
-- Copy `user-uploads://image-17.png` to `src/assets/logo-bbb.png` (replacing the existing file)
-- The TrustBadgesSection already imports from this path, so no code changes needed there
+### Option A: Reduce max-width constraint (Recommended)
+Remove or increase the `max-w-2xl` (672px) on line 24 to allow the headline to extend further right.
 
-### 2. Update FAQ Content
-**File**: `src/components/FAQSection.tsx`
+**Current**: `max-w-2xl` limits content width
+**Change to**: `max-w-3xl` (768px) or remove entirely
 
-Replace the current 4 FAQs (lines 12-33) with the new 6 FAQs:
+### Option B: Reduce container padding
+Change `px-3` to `px-2` on line 22 to give ~4 more pixels on each side.
 
-| # | Question | Answer |
-|---|----------|--------|
-| 1 | What does the free estimate include? | We come to your home, walk through every detail of the project with you, assess surface conditions, help you explore color and finish options, and give you a clear, detailed quote with no hidden fees. It's completely free, no pressure, and no obligation. |
-| 2 | What services do you offer? | We handle it all. Interior painting, exterior painting, commercial painting, deck and fence staining, and more. Whether it's one accent wall, your entire home, or a commercial property, we've got you covered. |
-| 3 | Can you help me pick colors and finishes? | Absolutely. Choosing the right color can feel overwhelming, and that's exactly why we walk you through it. We help you pick colors, sheens, and finishes that match your style, your lighting, and your home's architecture. You'll never feel like you're guessing. |
-| 4 | Are you licensed and insured? | Yes. Emerald Paints is fully licensed and insured in Colorado, including liability and workers' compensation. Your home and property are completely protected. |
-| 5 | What areas do you serve? | We serve Denver, Colorado Springs, and all surrounding areas including Aurora, Lakewood, Arvada, Westminster, Thornton, Littleton, Centennial, Commerce City, Brighton, and more. Enter your zip code in our form to confirm coverage. |
-| 6 | How long does a typical paint job take? | It depends on the scope. A single room can usually be done in a day. A full interior typically takes 3 to 5 days. Exteriors run about 3 to 7 days depending on size and prep work. We'll give you a clear timeline during the estimate so there are no surprises. |
-
-Also update the comment on line 11 to reflect 6 FAQs instead of 4.
+### Option C: Combination approach (Best results)
+1. Change line 22: `px-3` → `px-2` (tighter container padding)
+2. Change line 24: `max-w-2xl` → remove constraint or use `max-w-3xl`
+3. Optionally reduce headline `text-[24px]` to `text-[22px]` if still wrapping
 
 ---
 
-## Technical Details
+## Recommended Implementation
 
 ```text
-FAQSection.tsx changes:
-┌─────────────────────────────────────────────────────────────┐
-│ Lines 11-33: Replace faqs array                             │
-│ - Change from 4 FAQs to 6 FAQs                              │
-│ - Update comment: "6 FAQs for comprehensive coverage"       │
-│ - New questions added:                                      │
-│   • "What services do you offer?"                           │
-│   • "Can you help me pick colors and finishes?"             │
-└─────────────────────────────────────────────────────────────┘
+Line 22: px-3 → px-2 (saves ~8px total width)
+Line 24: max-w-2xl → max-w-4xl (or remove)
+```
+
+This combination will:
+- Allow headline text to extend closer to the right edge
+- Reduce line wrapping by utilizing more horizontal space
+- Maintain proper spacing without text touching screen edges
+
+---
+
+## Visual Impact
+
+```text
+BEFORE (px-3, max-w-2xl):
+┌─────────────────────────────────────────┐
+│   Ready To Transform Your Home? The     │
+│   Home Refresh Program Is Giving        │
+│   Colorado Homeowners 25% Off Any       │
+│   Painting Project                      │
+└─────────────────────────────────────────┘
+
+AFTER (px-2, no max-w):
+┌─────────────────────────────────────────┐
+│  Ready To Transform Your Home? The      │
+│  Home Refresh Program Is Giving Colorado│
+│  Homeowners 25% Off Any Painting Project│
+└─────────────────────────────────────────┘
 ```
 
 ---
 
 ## Files Modified
-- `src/assets/logo-bbb.png` (replaced with new transparent logo)
-- `src/components/FAQSection.tsx` (updated FAQ content)
+- `src/components/HeroSection.tsx`
 
