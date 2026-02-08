@@ -19,7 +19,7 @@ const HeroSection = () => {
       </div>
 
       {/* Content */}
-      <div className="relative z-10 px-3 pt-4 pb-16 sm:pt-8 sm:pb-20 flex flex-col items-center text-center">
+      <div className="relative z-10 px-3 pt-2 pb-16 sm:pt-8 sm:pb-20 flex flex-col items-center text-center">
         {/* Single centered column - extended width for less wrapping */}
         <div className="w-full max-w-4xl mx-auto">
           {/* Logo + Headline */}
@@ -28,12 +28,12 @@ const HeroSection = () => {
             <img 
               src={emeraldLogo}
               alt="Emerald Paints"
-              className="h-36 sm:h-44 lg:h-52 w-auto mx-auto mb-2"
+              className="h-28 sm:h-40 lg:h-52 w-auto mx-auto mb-1"
               style={{ filter: 'brightness(1.1)' }}
             />
             
             <h1 
-              className="text-[24px] sm:text-4xl lg:text-5xl text-white leading-[1.25] mb-8 sm:mb-10 text-left"
+              className="text-[24px] sm:text-4xl lg:text-5xl text-white leading-[1.25] mb-6 sm:mb-10 text-left"
               style={{ 
                 fontWeight: 800,
                 textShadow: '0 2px 8px rgba(0, 0, 0, 0.8), 0 4px 20px rgba(0, 0, 0, 0.6)',
@@ -82,7 +82,7 @@ const HeroSection = () => {
             </div>
 
             {/* Trust indicators */}
-            <div className="mt-10 sm:mt-12 flex items-center justify-center gap-6">
+            <div className="mt-8 sm:mt-12 flex items-center justify-center gap-6">
               <div className="flex items-center gap-1.5">
                 <CheckCircle className="w-4 h-4 flex-shrink-0" style={{ color: '#F5C518' }} />
                 <span className="text-xs sm:text-sm font-medium text-white/90 whitespace-nowrap">
