@@ -1,33 +1,36 @@
 
 
 ## Problem
-The hero section needs more bottom padding to create more space between the trust indicators and the next section below ("TRUSTED & CERTIFIED"). Currently the bottom padding is `pb-8` (32px) on mobile and `sm:pb-12` (48px) on larger screens - not enough separation.
+The Emerald Paints logo in the hero section needs to be bigger. Currently it's set to:
+- `h-28` (112px) on mobile
+- `sm:h-32` (128px) on tablet
+- `lg:h-36` (144px) on desktop
 
 ## Solution
-Increase the bottom padding on the hero content container to add more breathing room at the bottom of the entire hero section.
+Increase the logo height values across all breakpoints to make it more prominent.
 
 ## Implementation
 
 **File to Modify**: `src/components/HeroSection.tsx`
 
-**Change**: Line 22 - Increase bottom padding
+**Change**: Line 31 - Increase logo height
 
 **Current:**
 ```tsx
-<div className="relative z-10 container mx-auto px-3 pt-8 pb-8 sm:pt-12 sm:pb-12 flex flex-col items-center text-center">
+className="h-28 sm:h-32 lg:h-36 w-auto mx-auto mb-4"
 ```
 
 **New:**
 ```tsx
-<div className="relative z-10 container mx-auto px-3 pt-8 pb-16 sm:pt-12 sm:pb-20 flex flex-col items-center text-center">
+className="h-36 sm:h-44 lg:h-52 w-auto mx-auto mb-4"
 ```
 
-**Details:**
-- Increase `pb-8` (32px) to `pb-16` (64px) on mobile
-- Increase `sm:pb-12` (48px) to `sm:pb-20` (80px) on larger screens
-- This adds roughly 40px more space at the bottom of the hero section
+**Size Increase Details:**
+- Mobile: `h-28` (112px) → `h-36` (144px) — **+32px**
+- Tablet: `sm:h-32` (128px) → `sm:h-44` (176px) — **+48px**
+- Desktop: `lg:h-36` (144px) → `lg:h-52` (208px) — **+64px**
 
 ## Verification
-- Trust indicators will have noticeably more space below them before the next section starts
-- The hero section background will extend further down, creating a clear visual break between sections
+- Logo should appear noticeably larger on all screen sizes
+- Logo should remain centered and properly spaced from the headline below
 
