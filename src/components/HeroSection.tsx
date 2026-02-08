@@ -33,7 +33,7 @@ const HeroSection = () => {
             />
             
             <h1 
-              className="text-[26px] sm:text-4xl lg:text-5xl text-white leading-[1.15] mb-6 sm:mb-8 text-left"
+              className="text-[22px] sm:text-4xl lg:text-5xl text-white leading-[1.15] mb-6 sm:mb-8 text-left"
               style={{ 
                 fontWeight: 800,
                 textShadow: '0 2px 8px rgba(0, 0, 0, 0.8), 0 4px 20px rgba(0, 0, 0, 0.6)',
