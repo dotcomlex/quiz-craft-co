@@ -329,7 +329,8 @@ const Quiz = ({ onStart }: QuizProps) => {
           className={`w-5 h-5 transition-colors duration-200 ${
             selected ? "text-primary-foreground" : accentColor
           }`}
-          fill={selected ? "currentColor" : "none"}
+          fill="currentColor"
+          fillOpacity={selected ? 1 : 0.2}
           strokeWidth={2}
         />
       </div>
