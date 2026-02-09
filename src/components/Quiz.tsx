@@ -278,7 +278,7 @@ const Quiz = ({ onStart }: QuizProps) => {
       (window as any).fbq("track", "Lead");
     }
 
-    const webhookUrl = "REPLACE_WITH_GHL_WEBHOOK_URL";
+    const webhookUrl = "https://services.leadconnectorhq.com/hooks/gqml80NALQtheUniO6V6/webhook-trigger/c88e230e-96fa-49c5-b51b-87d735313936";
 
     fetch(webhookUrl, {
       method: "POST",
