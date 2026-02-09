@@ -144,11 +144,15 @@
   .quiz-card-glass {
     background: linear-gradient(
       180deg, 
-      hsl(0 0% 100% / 0.95) 0%, 
-      hsl(220 14% 98% / 0.9) 100%
+      hsl(0 0% 100% / 0.98) 0%, 
+      hsl(220 14% 98% / 0.95) 100%
     );
     backdrop-filter: blur(12px);
     -webkit-backdrop-filter: blur(12px);
+    box-shadow: 
+      0 25px 80px -12px rgba(0, 0, 0, 0.25),
+      0 12px 40px -8px rgba(0, 0, 0, 0.15),
+      0 0 0 1px rgba(27, 107, 58, 0.15);
   }
 
   .shadow-quiz {

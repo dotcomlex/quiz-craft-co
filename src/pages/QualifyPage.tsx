@@ -66,8 +66,8 @@ const QualifyPage = () => {
                   <h2 
                     className="text-[28px] sm:text-3xl font-extrabold mb-2 leading-tight"
                     style={{ 
-                      color: '#B8960B',
-                      textShadow: '0 1px 2px rgba(0,0,0,0.3), 0 0 0 1px rgba(0,0,0,0.05)'
+                      color: '#1e293b',
+                      textShadow: '0 2px 4px rgba(0,0,0,0.1)'
                     }}
                   >
                     Home Refresh Program
