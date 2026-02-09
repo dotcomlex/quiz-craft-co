@@ -212,7 +212,7 @@ const Quiz = ({ onStart }: QuizProps) => {
       case "1-3-months":
         return "1 to 2 months";
       case "not-sure":
-        return "3 to 4 months";
+        return "Not sure";
       default:
         return "";
     }
@@ -329,6 +329,8 @@ const Quiz = ({ onStart }: QuizProps) => {
           className={`w-5 h-5 transition-colors duration-200 ${
             selected ? "text-primary-foreground" : accentColor
           }`}
+          fill={selected ? "currentColor" : "none"}
+          strokeWidth={2}
         />
       </div>
 
@@ -358,7 +360,7 @@ const Quiz = ({ onStart }: QuizProps) => {
   return (
     <div className="w-full max-w-lg">
       {/* Quiz Card - EMERALD GREEN border */}
-      <div className="quiz-card-glass rounded-2xl shadow-quiz-glow p-5 sm:p-6 w-full border border-primary/20">
+      <div className="quiz-card-glass rounded-2xl shadow-2xl p-5 sm:p-6 w-full border-2 border-primary/30">
         {/* Progress Dots - Inside card - EMERALD GREEN */}
         {!isSubmitted && !isDisqualified && !timelineDisqualified && (
           <div className="flex justify-center gap-2 mb-4">
@@ -460,7 +462,7 @@ const Quiz = ({ onStart }: QuizProps) => {
                   />
                   <OptionCard
                     icon={Clock}
-                    label="3 to 4 Months"
+                    label="Not sure"
                     selected={data.timeline === "not-sure"}
                     onClick={() => handleTileSelect("timeline", "not-sure")}
                     accentColor="text-muted-foreground"
