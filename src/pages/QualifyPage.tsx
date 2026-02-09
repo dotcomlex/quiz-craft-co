@@ -21,8 +21,11 @@ const QualifyPage = () => {
 
   return (
     <div className="min-h-screen relative">
-      {/* Background - Darker slate for contrast */}
-      <div className="fixed inset-0 z-0" style={{ backgroundColor: '#020617' }} />
+      {/* Background - Watercolor mountains */}
+      <div 
+        className="fixed inset-0 z-0 bg-cover bg-center bg-no-repeat"
+        style={{ backgroundImage: 'url(/src/assets/bg-watercolor-mountains.webp)' }}
+      />
       
       {/* Grid + Emerald Glow overlay */}
       <div className="fixed inset-0 z-0">
@@ -54,8 +57,8 @@ const QualifyPage = () => {
               {!quizStarted && (
                 <>
                   <h1
-                    className="text-[28px] sm:text-3xl font-extrabold text-white mb-3 leading-tight"
-                    style={{ textShadow: '0 2px 4px rgba(0,0,0,0.5)' }}
+                    className="text-[28px] sm:text-3xl font-extrabold mb-3 leading-tight"
+                    style={{ color: '#1e293b', textShadow: '0 1px 3px rgba(255,255,255,0.5)' }}
                   >
                     See If You Qualify for the
                   </h1>
@@ -63,14 +66,14 @@ const QualifyPage = () => {
                     className="text-[28px] sm:text-3xl font-extrabold mb-4 leading-tight"
                     style={{ 
                       color: '#F5C518',
-                      textShadow: '0 0 20px rgba(245, 197, 24, 0.5), 0 0 40px rgba(245, 197, 24, 0.3), 0 2px 4px rgba(0,0,0,0.3)'
+                      textShadow: '0 0 20px rgba(245, 197, 24, 0.6), 0 2px 4px rgba(0,0,0,0.4)'
                     }}
                   >
                     Home Refresh Program
                   </h2>
                   <p 
-                    className="text-sm text-white/60 tracking-wide"
-                    style={{ textShadow: '0 1px 2px rgba(0,0,0,0.3)' }}
+                    className="text-sm tracking-wide"
+                    style={{ color: '#64748b' }}
                   >
                     Takes less than 30 seconds
                   </p>
@@ -87,14 +90,14 @@ const QualifyPage = () => {
         <footer 
           className="w-full py-4 px-4"
           style={{ 
-            backgroundColor: 'rgba(255,255,255,0.05)', 
-            borderTop: '1px solid rgba(255,255,255,0.1)' 
+            backgroundColor: 'rgba(0,0,0,0.05)', 
+            borderTop: '1px solid rgba(0,0,0,0.1)' 
           }}
         >
           <div className="container mx-auto">
             <div 
               className="flex items-center justify-center gap-2 text-xs"
-              style={{ color: 'rgba(255,255,255,0.5)' }}
+              style={{ color: 'rgba(0,0,0,0.5)' }}
             >
               <Shield className="w-3.5 h-3.5" style={{ color: '#1B6B3A' }} />
               Your information is secure and will only be used to contact you

@@ -197,7 +197,7 @@ const Quiz = ({ onStart }: QuizProps) => {
       case "both":
         return "Both interior & exterior";
       case "not-sure":
-        return "Not sure yet";
+        return "Other";
       default:
         return "";
     }
@@ -206,13 +206,13 @@ const Quiz = ({ onStart }: QuizProps) => {
   const getTimelineLabel = (timeline: string): string => {
     switch (timeline) {
       case "asap":
-        return "Right away";
+        return "ASAP";
       case "30-days":
         return "Within 30 days";
       case "1-3-months":
-        return "1 to 3 months";
+        return "1 to 2 months";
       case "not-sure":
-        return "Not sure yet";
+        return "3 to 4 months";
       default:
         return "";
     }
@@ -411,7 +411,7 @@ const Quiz = ({ onStart }: QuizProps) => {
                 />
                 <OptionCard
                   icon={HelpCircle}
-                  label="Not Sure Yet"
+                  label="Other"
                   selected={data.projectType === "not-sure"}
                   onClick={() => handleTileSelect("projectType", "not-sure")}
                   accentColor="text-muted-foreground"
@@ -439,7 +439,7 @@ const Quiz = ({ onStart }: QuizProps) => {
                 <div className="grid grid-cols-2 gap-2 sm:gap-3 mb-4">
                   <OptionCard
                     icon={Zap}
-                    label="Right Away"
+                    label="ASAP"
                     selected={data.timeline === "asap"}
                     onClick={() => handleTileSelect("timeline", "asap")}
                     accentColor="text-red-600"
@@ -453,14 +453,14 @@ const Quiz = ({ onStart }: QuizProps) => {
                   />
                   <OptionCard
                     icon={CalendarClock}
-                    label="1 to 3 Months"
+                    label="1 to 2 Months"
                     selected={data.timeline === "1-3-months"}
                     onClick={() => handleTileSelect("timeline", "1-3-months")}
                     accentColor="text-primary"
                   />
                   <OptionCard
                     icon={Clock}
-                    label="Not Sure Yet"
+                    label="3 to 4 Months"
                     selected={data.timeline === "not-sure"}
                     onClick={() => handleTileSelect("timeline", "not-sure")}
                     accentColor="text-muted-foreground"
