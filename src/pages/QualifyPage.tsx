@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import Quiz from "@/components/Quiz";
 import { Shield } from "lucide-react";
 import GridBackground from "@/components/ui/grid-background";
+import watercolorBg from "@/assets/bg-watercolor-mountains.webp";
 
 const QualifyPage = () => {
   const [quizStarted, setQuizStarted] = useState(false);
@@ -24,7 +25,7 @@ const QualifyPage = () => {
       {/* Background - Watercolor mountains */}
       <div 
         className="fixed inset-0 z-0 bg-cover bg-center bg-no-repeat"
-        style={{ backgroundImage: 'url(/src/assets/bg-watercolor-mountains.webp)' }}
+        style={{ backgroundImage: `url(${watercolorBg})` }}
       />
       
       {/* Grid + Emerald Glow overlay */}
