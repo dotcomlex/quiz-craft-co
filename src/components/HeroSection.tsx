@@ -6,7 +6,7 @@ import emeraldLogo from "@/assets/emerald-logo-white.png";
 
 const HeroSection = () => {
   return (
-    <section id="hero" className="relative overflow-hidden">
+    <section id="hero" className="relative overflow-hidden lg:min-h-[85vh]">
       {/* Background Image */}
       <div className="absolute inset-0">
         <img
@@ -19,11 +19,11 @@ const HeroSection = () => {
       </div>
 
       {/* Content */}
-      <div className="relative z-10 px-3 pt-2 pb-16 sm:pt-8 sm:pb-20 flex flex-col items-center text-center">
+      <div className="relative z-10 px-3 pt-2 pb-16 sm:pt-8 sm:pb-20 lg:pt-20 lg:pb-32 flex flex-col items-center text-center">
         {/* Single centered column - extended width for less wrapping */}
         <div className="w-full max-w-4xl mx-auto">
           {/* Logo + Headline */}
-          <div className="text-left mb-6">
+          <div className="text-left lg:text-center mb-6">
             {/* White Emerald Paints Logo - scaled up */}
             <img 
               src={emeraldLogo}
@@ -33,7 +33,7 @@ const HeroSection = () => {
             />
             
             <h1 
-              className="text-[24px] sm:text-4xl lg:text-5xl text-white leading-[1.25] mb-6 sm:mb-10 text-left"
+              className="text-[24px] sm:text-4xl lg:text-5xl xl:text-6xl text-white leading-[1.25] mb-6 sm:mb-10 text-left lg:text-center lg:max-w-4xl lg:mx-auto"
               style={{ 
                 fontWeight: 800,
                 textShadow: '0 2px 8px rgba(0, 0, 0, 0.8), 0 4px 20px rgba(0, 0, 0, 0.6)',
@@ -51,7 +51,7 @@ const HeroSection = () => {
 
             {/* Subheadline - strong text shadow */}
             <p 
-              className="text-[14px] sm:text-base lg:text-lg text-white leading-relaxed max-w-xl px-1"
+              className="text-[14px] sm:text-base lg:text-lg text-white leading-relaxed max-w-xl lg:max-w-2xl px-1 lg:px-0 lg:mx-auto lg:text-center"
               style={{ 
                 textShadow: '0 1px 2px rgba(0,0,0,1), 0 2px 4px rgba(0,0,0,0.95), 0 4px 8px rgba(0,0,0,0.9), 0 8px 16px rgba(0,0,0,0.8), 0 0 40px rgba(0,0,0,0.7)',
                 fontWeight: 600
@@ -82,14 +82,14 @@ const HeroSection = () => {
             {/* Trust indicators */}
             <div className="mt-8 sm:mt-12 flex items-center justify-center gap-6">
               <div className="flex items-center gap-1.5">
-                <CheckCircle className="w-4 h-4 flex-shrink-0" style={{ color: '#F5C518' }} />
-                <span className="text-xs sm:text-sm font-medium text-white/90 whitespace-nowrap">
+                <CheckCircle className="w-4 h-4 lg:w-5 lg:h-5 flex-shrink-0" style={{ color: '#F5C518' }} />
+                <span className="text-xs sm:text-sm lg:text-base font-medium text-white/90 whitespace-nowrap">
                   Licensed & Insured
                 </span>
               </div>
               <div className="flex items-center gap-1.5">
-                <Shield className="w-4 h-4 flex-shrink-0" style={{ color: '#F5C518' }} />
-                <span className="text-xs sm:text-sm font-medium text-white/90 whitespace-nowrap">
+                <Shield className="w-4 h-4 lg:w-5 lg:h-5 flex-shrink-0" style={{ color: '#F5C518' }} />
+                <span className="text-xs sm:text-sm lg:text-base font-medium text-white/90 whitespace-nowrap">
                   Satisfaction Guaranteed
                 </span>
               </div>
