@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import { Shield, CheckCircle, ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import heroBg from "@/assets/hero-bg.png";
+import heroBg from "@/assets/hero-mountain-new.webp";
 import emeraldLogo from "@/assets/emerald-logo-white.png";
 
 const HeroSection = () => {
