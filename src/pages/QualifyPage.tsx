@@ -58,16 +58,16 @@ const QualifyPage = () => {
               {!quizStarted && (
                 <>
                   <h1
-                    className="text-[28px] sm:text-3xl font-extrabold mb-3 leading-tight"
+                    className="text-[28px] sm:text-3xl font-extrabold mb-1 leading-tight"
                     style={{ color: '#1e293b', textShadow: '0 1px 3px rgba(255,255,255,0.5)' }}
                   >
                     See If You Qualify for the
                   </h1>
                   <h2 
-                    className="text-[28px] sm:text-3xl font-extrabold mb-4 leading-tight"
+                    className="text-[28px] sm:text-3xl font-extrabold mb-2 leading-tight"
                     style={{ 
-                      color: '#F5C518',
-                      textShadow: '0 0 20px rgba(245, 197, 24, 0.6), 0 2px 4px rgba(0,0,0,0.4)'
+                      color: '#B8960B',
+                      textShadow: '0 1px 2px rgba(0,0,0,0.3), 0 0 0 1px rgba(0,0,0,0.05)'
                     }}
                   >
                     Home Refresh Program
